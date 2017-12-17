@@ -1,0 +1,25 @@
+{
+  "name": "lono",
+  "version": "1.0.0",
+  "description": "Feed reader web application",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabesoft/lono.git"
+  },
+  "keywords": [
+    "feed",
+    "blog",
+    "reader",
+    "post"
+  ],
+  "author": "Gabriel Adomnicai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabesoft/lono/issues"
+  },
+  "homepage": "https://github.com/gabesoft/lono#readme"
+}
