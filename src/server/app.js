@@ -1,5 +1,3 @@
-// @flow
-
 import Koa from 'koa';
 
 const app = new Koa();
@@ -20,6 +18,7 @@ const x: number = 45;
 
 console.log(pt, x);
 // end flow sample
+
 
 app.use(async ctx => {
   ctx.body = 'Hello World from KOA';
