@@ -1,27 +1,29 @@
 import Koa from 'koa';
+import Router from 'koa-router';
+import path from 'path';
+import send from 'koa-send';
+import serve from 'koa-static';
 
 const app = new Koa();
+const router = new Router();
+const root = 'public'; //TODO: use build/public for the public directory
 
-// flow sample TODO: remove
-type Point2d = {
-  x: number,
-  y: number
-};
+router.get('/users', (ctx, res) => {
+  ctx.body = 'This is the user profile page';
+});
 
-const pt: Point2d = {
-  x: 1,
-  y: 2
-};
+router.get('/feeds', (ctx, res) => {
+  ctx.body = 'This is the feeds page';
+});
 
+app.use(serve(root));
 
-const x: number = 45;
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
-console.log(pt, x);
-// end flow sample
-
-
-app.use(async ctx => {
-  ctx.body = 'Hello World from KOA';
+app.use(async (ctx, next) => {
+  await send(ctx, 'index.html', { root });
 });
 
 app.listen(3000, '127.0.0.1', 1024, () => console.log('Server listening on port 3000'));

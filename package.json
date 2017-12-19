@@ -24,6 +24,9 @@
   "homepage": "https://github.com/gabesoft/lono#readme",
   "dependencies": {
     "koa": "^2.4.1",
+    "koa-router": "^7.3.0",
+    "koa-send": "^4.1.2",
+    "koa-static": "^4.0.2",
     "material-components-web": "^0.27.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
