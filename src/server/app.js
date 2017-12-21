@@ -6,7 +6,7 @@ import serve from 'koa-static';
 
 const app = new Koa();
 const router = new Router();
-const root = 'public'; //TODO: use build/public for the public directory
+const root = 'build/public';
 
 router.get('/users', (ctx, res) => {
   ctx.body = 'This is the user profile page';
