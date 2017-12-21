@@ -1,13 +1,19 @@
 PATH := $(PATH):node_modules/.bin
 PUBLIC := build/public
 
-all_js_files := $(shell ag src -g js)
 srv_source_files := $(shell ag src/server -g js)
 srv_build_files  := $(srv_source_files:src/%.js=build/%.mjs)
+
+cli_source_files := $(shell ag src/client -g js)
+cli_build_files  := $(cli_source_files:src/%.js=build/%.js)
 
 build/%.mjs: src/%.js
 	@mkdir -p $(dir $@)
 	@flow-remove-types -p -m -a -o $@ $<
+
+build/%.js: src/%.js .babelrc
+	@mkdir -p $(dir $@)
+	@babel $< -o $@
 
 # Run the application server
 run: build
@@ -35,7 +41,7 @@ css-watch:
 	@ag src -g scss | entr -r sh -c "$(MAKE) css"
 
 # Build all source files
-build: $(srv_build_files)
+build: $(srv_build_files) $(cli_build_files)
 
 # Clean build files
 clean:

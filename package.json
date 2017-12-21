@@ -33,9 +33,12 @@
     "rmwc": "0.0.1-rc11"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
     "flow-bin": "^0.60.1",
     "flow-remove-types": "^1.2.3",
     "flow-typed": "^2.2.3",
-    "node-sass": "^4.7.2"
+    "node-sass": "^4.7.2",
+    "webpack": "^3.10.0"
   }
 }
