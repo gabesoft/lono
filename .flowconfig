@@ -3,10 +3,19 @@
 .*/build/.*
 
 [include]
-*.js
+./src/*.js
+./src/*.jsx
+./src/*.mjs
 
 [libs]
 flow-typed
 
 [options]
 all=true
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
+module.file_ext=.mjs
+module.name_mapper='^/\(.*\)$' -> '<PROJECT_ROOT>/\1'
+module.name_mapper='^client/\(.*\)$' -> '<PROJECT_ROOT>/src/client/\1'
+module.name_mapper='^server/\(.*\)$' -> '<PROJECT_ROOT>/src/server/\1'

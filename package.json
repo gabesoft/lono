@@ -39,6 +39,8 @@
     "flow-remove-types": "^1.2.3",
     "flow-typed": "^2.2.3",
     "node-sass": "^4.7.2",
-    "webpack": "^3.10.0"
+    "rfresh": "0.0.25",
+    "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.1"
   }
 }

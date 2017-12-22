@@ -16,7 +16,11 @@
     <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-96x96.png" sizes="96x96" />
 
+    <link rel="stylesheet" href="%PUBLIC_URL%/mdc.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="%PUBLIC_URL%/app.css" type="text/css" media="screen" />
+
+    <!-- TODO for dev only, remove in prod -->
+    <script type="text/javascript" src="http://localhost:3001/rfresh-client.js"></script>
 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -38,6 +42,7 @@
       Press Me
     </button>
     <div id="root"></div>
+    <script type="text/javascript" src="%PUBLIC_URL%/vendor.js"></script>
     <script type="text/javascript" src="%PUBLIC_URL%/index.js"></script>
   </body>
 </html>
