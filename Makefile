@@ -6,7 +6,7 @@ srv_build_files  := $(srv_source_files:src/%.js=build/%.mjs)
 
 cli_source_files := $(shell ag src/client -g js)
 cli_build_files  := $(cli_source_files:src/%.js=build/%.js)
-cli_build_entry  := build/public/index.js
+cli_build_output := build/public/index.js build/public/vendor.js
 
 scss_files := $(shell ag src/client -g scss)
 css_files  := $(scss_files:src/client/%.scss=build/public/%.css)
@@ -15,17 +15,14 @@ css_files  := $(scss_files:src/client/%.scss=build/public/%.css)
 all: build-srv build-cli css public
 
 
-# Build individual server files
 build/%.mjs: src/%.js
 	@mkdir -p $(dir $@)
 	flow-remove-types -p -m -a -o $@ $<
 
-# Build individual client files
 build/%.js: src/%.js
 	@mkdir -p $(dir $@)
 	babel $< -o $@
 
-# Build individual scss files
 build/public/%.css: src/client/%.scss
 	node-sass --include-path node_modules -o $(dir $@) $<
 
@@ -66,15 +63,22 @@ css-watch:
 
 
 # Build client source files
-build-cli: $(cli_build_entry)
+build-cli: $(cli_build_output)
+
+$(cli_build_output): $(cli_build_files)
+	webpack
+
+# Build client source files and show analysis
+analyze-cli: export SHOW_ANALYSIS=true
+analyze-cli: build-cli
 
 # Build client sources on file changes
 build-cli-watch:
-	@ag src/client -g js | entr -r sh -c "$(MAKE) build-cli"
+	@ag src/client -g js | entr -r sh -c "$(MAKE) $(cli_build_files)"
 
-# Build the client javascript bundle
-$(cli_build_entry): $(cli_build_files)
-	webpack
+# Start webpack in watch mode
+webpack-watch:
+	webpack --watch
 
 
 # Check JavaScript files for type errors
@@ -97,6 +101,17 @@ clean:
 # Install npm dependencies
 setup:
 	@npm install . -d
+
+
+# Run all processes needed for development
+dev: all
+	@sh -c "$(MAKE) run-watch & \
+				  $(MAKE) build-cli-watch & \
+				  $(MAKE) webpack-watch & \
+				  $(MAKE) css-watch & \
+				  $(MAKE) rfresh & \
+				  $(MAKE) flow-watch & \
+				  wait"
 
 
 .PHONY: run run-watch clean flow flow-watch flow-typed setup

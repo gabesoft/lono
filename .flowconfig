@@ -1,6 +1,7 @@
 [ignore]
 .*/node_modules/.*
 .*/build/.*
+.*/webpack.config.js
 
 [include]
 ./src/*.js

@@ -1,4 +1,39 @@
 body {
-  background-color: #555;
-  color: lightblue;
+  background-color: grey;
+  color: black;
+}
+
+.style-sections {
+  section {
+    padding: 5px 10px;
+    margin: 5px 0;
+  }
+
+  .header {
+    background-color: #aaa;
+  }
+
+  .typography {
+    background-color: #bbb;
+
+    span {
+      display: block;
+    }
+  }
+
+  .buttons {
+    background-color: #ddd;
+
+    button {
+      margin: 0 2px;
+    }
+  }
+
+  .cards {
+    background-color: #ccc;
+  }
+
+  .menus {
+    background-color: #eee;
+  }
 }
