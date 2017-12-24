@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+
 import {
   Button,
   Card,
@@ -20,11 +21,11 @@ import {
 
 type State = {
   menuIsOpen: boolean
-}
+};
 
 type Props = {};
 
-export default class Header extends Component<Props, State> {
+export default class Header extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -100,14 +101,14 @@ export default class Header extends Component<Props, State> {
           <MenuAnchor>
             <Button
               raised
-              onClick={evt => this.setState({'menuIsOpen': !this.state.menuIsOpen})}
+              onClick={() => this.setState({'menuIsOpen': !this.state.menuIsOpen})}
             >
               Open Menu
             </Button>
 
             <Menu
               open={this.state.menuIsOpen}
-              onClose={evt => this.setState({menuIsOpen: false})}
+              onClose={() => this.setState({menuIsOpen: false})}
             >
               <MenuItem>Cookies</MenuItem>
               <MenuItem>Pizza</MenuItem>

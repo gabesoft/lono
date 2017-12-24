@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import Koa from 'koa';
 import Router from 'koa-router';
 import path from 'path';
@@ -7,6 +9,7 @@ import serve from 'koa-static';
 const app = new Koa();
 const router = new Router();
 const root = 'build/public';
+const port = 3000;
 
 router.get('/users', (ctx, res) => {
   ctx.body = 'This is the user profile page';
@@ -26,4 +29,4 @@ app.use(async (ctx, next) => {
   await send(ctx, 'index.html', { root });
 });
 
-app.listen(3000, '127.0.0.1', 1024, () => console.log('Server listening on port 3000'));
+app.listen(port, '127.0.0.1', 1024, () => console.info(`Server listening on port ${port}`));

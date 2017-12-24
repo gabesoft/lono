@@ -1,5 +1,7 @@
-PATH := $(PATH):node_modules/.bin
-PUBLIC := build/public
+PUBLIC	:= build/public
+BIN			:= node_modules/.bin
+PATH		:= $(PATH):$(BIN)
+ESLINT  := $(BIN)/eslint
 
 srv_source_files := $(shell ag src/server -g js)
 srv_build_files  := $(srv_source_files:src/%.js=build/%.mjs)
@@ -94,6 +96,22 @@ flow-typed:
 	@flow-typed install
 
 
+# Run eslint
+eslint:
+	@$(ESLINT) src
+
+# Run eslint on JavaScript file changes
+eslint-watch:
+	@ag src -g js | entr -r sh -c "$(MAKE) eslint"
+
+
+# Run sass-lint
+sass-lint:
+	@sass-lint -q -v -s scss src/**/*.scss
+
+sass-lint-watch:
+	@ag src -g scss | entr -r sh -c "$(MAKE) sass-lint"
+
 # Clean build files
 clean:
 	@$(RM) -r build
@@ -111,6 +129,8 @@ dev: all
 				  $(MAKE) css-watch & \
 				  $(MAKE) rfresh & \
 				  $(MAKE) flow-watch & \
+				  $(MAKE) eslint-watch & \
+					$(MAKE) sass-lint-watch & \
 				  wait"
 
 
