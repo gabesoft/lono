@@ -43,13 +43,10 @@ module.exports = {
   },
 
   rules: {
-    // FIXME: this rule causes a crash in eslint in files containing flow
-    // generic types
-    "no-unused-vars": 0,
-
     // Unresolved imports are caught by flow
     "import/no-unresolved": 0,
 
+    // Useless rule which does not observe the flowtype settings
     "flowtype/no-types-missing-file-annotation": 0
   }
 };

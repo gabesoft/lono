@@ -30,11 +30,12 @@
     "material-components-web": "^0.27.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "rmwc": "0.0.1-rc11"
+    "react-router-dom": "^4.2.2",
+    "rmwc": "0.0.1-rc12"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.3",
+    "babel-eslint": "^8.1.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.14.0",
     "eslint-plugin-flowtype": "^2.40.1",

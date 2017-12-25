@@ -2,7 +2,6 @@
 
 import Koa from 'koa';
 import Router from 'koa-router';
-import path from 'path';
 import send from 'koa-send';
 import serve from 'koa-static';
 
@@ -11,11 +10,11 @@ const router = new Router();
 const root = 'build/public';
 const port = 3000;
 
-router.get('/users', (ctx, res) => {
+router.get('/users', (ctx) => {
   ctx.body = 'This is the user profile page';
 });
 
-router.get('/feeds', (ctx, res) => {
+router.get('/feeds', (ctx) => {
   ctx.body = 'This is the feeds page';
 });
 
@@ -25,7 +24,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.use(async (ctx, next) => {
+app.use(async (ctx) => {
   await send(ctx, 'index.html', { root });
 });
 

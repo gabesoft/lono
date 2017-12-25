@@ -25,7 +25,7 @@ type State = {
 
 type Props = {};
 
-export default class Header extends React.Component<Props, State> {
+export default class Styles extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {

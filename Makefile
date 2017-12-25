@@ -16,6 +16,8 @@ css_files  := $(scss_files:src/client/%.scss=build/public/%.css)
 # Compile all files
 all: build-srv build-cli css public
 
+# Setup dependencies and compile all files
+all-dev: setup flow-typed all
 
 build/%.mjs: src/%.js
 	@mkdir -p $(dir $@)
@@ -45,11 +47,10 @@ run-watch:
 rfresh:
 	@rfresh -p 3001 -r "/::/$(PUBLIC)/" -s 300
 
-
 # Build all public files
 public: public-dir
-	@cp public/*.{png,ico,json} $(PUBLIC)/
-	@sed "s.%PUBLIC_URL%.." public/index.html > $(PUBLIC)/index.html
+	@cp public/icons/*.{png,ico} $(PUBLIC)/
+	@cp public/*.{html,json} $(PUBLIC)/
 
 # Create the public directory
 public-dir:
