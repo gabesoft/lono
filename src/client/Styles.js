@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import icon from 'client/Icons';
+
 import {
   Button,
   Card,
@@ -68,20 +70,39 @@ export default class Styles extends React.Component<Props, State> {
         <GridCell span="12">
           <section className="buttons">
             <Button>Default</Button>
+
             <Button raised>Raised</Button>
+            <Button raised>
+              <div style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center' }}>
+                <Icon
+                  className="icon-white"
+                  style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center', 'margin-right': '2px', width: '18px', height: '18px' }}>
+                  {icon('pin')}
+                </Icon>
+                <span style={{ display: 'flex' }}>Pin Query</span>
+              </div>
+            </Button>
+
             <Button dense>Dense</Button>
             <Button compact>Compact</Button>
             <Button unelevated>Unelevated</Button>
             <Button stroked>Stroked</Button>
             <Button raised theme={['secondary-bg', 'text-primary-on-secondary']}>With Theme</Button>
-            <Fab>favorite</Fab>
-            <Fab mini>favorite</Fab>
+
+            <Fab><Icon className="icon-white" style={{ display: 'flex' }}>{icon('heart')}</Icon></Fab>
+            <Fab mini><Icon style={{ display: 'flex' }}>{icon('heart')}</Icon></Fab>
+
             <IconToggle
-              on={{label: 'Remove from favorites', content: 'favorite'}}
-              off={{label: 'Add to favorites', content: 'favorite_border'}}
+              on={{label: 'Remove from favorites', content: 'heart' }}
+              off={{label: 'Add to favorites', content: 'heart-outline'}}
             />
-            <Icon>favorite</Icon>
-            <Icon use="favorite" />
+
+            <Icon>{icon('heart')}</Icon>
+            <Icon>
+              <div style={{ background: 'white', width: '24px', height: '24px' }}>
+                {icon('heart-outline')}
+              </div>
+            </Icon>
           </section>
         </GridCell>
 

@@ -36,3 +36,9 @@ body {
     background-color: #EEE;
   }
 }
+
+.icon-white {
+  svg>path {
+    fill: white;
+  }
+}
