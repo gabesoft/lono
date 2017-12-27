@@ -89,7 +89,7 @@ export default class Styles extends React.Component<Props, State> {
             <Button raised>
               <div style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center' }}>
                 <Icon
-                  className="icon-white"
+                  className="-white"
                   style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center', 'margin-right': '2px', width: '18px', height: '18px' }}>
                   {icon('pin')}
                 </Icon>
@@ -103,13 +103,13 @@ export default class Styles extends React.Component<Props, State> {
             <Button stroked>Stroked</Button>
             <Button raised theme={['secondary-bg', 'text-primary-on-secondary']}>With Theme</Button>
 
-            <Fab><Icon className="icon-white" style={{ display: 'flex' }}>{icon('heart')}</Icon></Fab>
+            <Fab><Icon className="-white" style={{ display: 'flex' }}>{icon('heart')}</Icon></Fab>
             <Fab mini><Icon style={{ display: 'flex' }}>{icon('heart')}</Icon></Fab>
 
-            <Icon className="icon-success">{icon('heart')}</Icon>
-            <Icon className="icon-warning">{icon('heart')}</Icon>
-            <Icon className="icon-error">{icon('heart')}</Icon>
-            <Icon className="icon-32" style={{ background: 'white', display: 'flex', 'align-items': 'center', 'justify-content': 'center', width: '32px', height: '32px' }}>
+            <Icon className="-success">{icon('heart')}</Icon>
+            <Icon className="-warning">{icon('heart')}</Icon>
+            <Icon className="-error">{icon('heart')}</Icon>
+            <Icon className="-size-32" style={{ background: 'white', display: 'flex', 'align-items': 'center', 'justify-content': 'center', width: '32px', height: '32px' }}>
               {icon('heart-outline')}
             </Icon>
           </section>

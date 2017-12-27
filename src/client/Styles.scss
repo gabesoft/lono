@@ -56,33 +56,35 @@
   }
 }
 
-.icon-white {
+.material-icons.-white {
   svg > path {
     fill: $material-color-grey-50;
   }
 }
 
-.icon-success {
-  svg > path {
-    fill: $success-color;
+.material-icons {
+  &.-success {
+    svg > path {
+      fill: $success-color;
+    }
   }
-}
 
-.icon-warning {
-  svg > path {
-    fill: $warning-color;
+  &.-warning {
+    svg > path {
+      fill: $warning-color;
+    }
   }
-}
 
-.icon-error {
-  svg > path {
-    fill: $error-color;
+  &.-error {
+    svg > path {
+      fill: $error-color;
+    }
   }
-}
 
-.icon-32 {
-  svg {
-    height: 32px;
-    width: 32px;
+  &.-size-32 {
+    svg {
+      height: 32px;
+      width: 32px;
+    }
   }
 }
