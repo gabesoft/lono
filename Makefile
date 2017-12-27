@@ -12,6 +12,7 @@ cli_build_output := build/public/index.js build/public/vendor.js
 
 scss_files := $(shell ag src/client -g scss)
 css_files  := $(scss_files:src/client/%.scss=build/public/%.css)
+css_output := build/public/App.css
 
 # Compile all files
 all: build-srv build-cli css public
@@ -58,7 +59,9 @@ public-dir:
 
 
 # Compile scss files to css and output to build directory
-css: $(css_files)
+css: $(css_output)
+
+$(css_output): $(css_files)
 
 # Compile scss files to css on files changes
 css-watch:

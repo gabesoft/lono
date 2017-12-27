@@ -1,0 +1,88 @@
+@import '@material/theme/color-palette';
+@import './colors';
+
+.style-sections {
+  section {
+    padding: 5px 10px;
+  }
+
+  .header {
+    background-color: $material-color-grey-200;
+  }
+
+  .typography {
+    background-color: $material-color-grey-300;
+
+    span {
+      display: block;
+    }
+  }
+
+  .buttons {
+    background-color: $material-color-grey-400;
+
+    button {
+      margin: 0 2px;
+    }
+  }
+
+  .cards {
+    background-color: $material-color-grey-500;
+  }
+
+  .menus {
+    background-color: $material-color-grey-600;
+  }
+
+  .snackbars {
+    background-color: $material-color-grey-700;
+  }
+
+  .themes {
+    background-color: $material-color-grey-800;
+
+    span {
+      display: inline-block;
+      height: 96px;
+      margin: 4px;
+      padding: 16px;
+      vertical-align: top;
+      width: 96px;
+    }
+  }
+
+  .drawers {
+    background-color: $material-color-grey-900;
+  }
+}
+
+.icon-white {
+  svg > path {
+    fill: $material-color-grey-50;
+  }
+}
+
+.icon-success {
+  svg > path {
+    fill: $success-color;
+  }
+}
+
+.icon-warning {
+  svg > path {
+    fill: $warning-color;
+  }
+}
+
+.icon-error {
+  svg > path {
+    fill: $error-color;
+  }
+}
+
+.icon-32 {
+  svg {
+    height: 32px;
+    width: 32px;
+  }
+}
