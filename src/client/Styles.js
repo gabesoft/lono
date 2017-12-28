@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import Post from 'client/Post';
 import icon from 'client/Icons';
 
 import {
@@ -34,7 +35,9 @@ type State = {
   menu2IsOpen: boolean,
   open: boolean,
   snackbarIsOpen: boolean,
-  snackbarStartIsOpen: boolean
+  snackbarStartIsOpen: boolean,
+  post1IsNew: boolean,
+  post2IsNew: boolean
 };
 
 type Props = {};
@@ -47,15 +50,54 @@ export default class Styles extends React.Component<Props, State> {
       menu2IsOpen: false,
       open: false,
       snackbarIsOpen: false,
-      snackbarStartIsOpen: false
+      snackbarStartIsOpen: false,
+      post1IsNew: true,
+      post2IsNew: true
     };
+  }
+
+  renderPost1() {
+    return (
+      <Post
+        id="5a42092d10906305c8001248-56d7de17c788cb1d6eb91b0c"
+        author="Nikola Tore"
+        title="Job-hopping makes millennials better hires"
+        summary="There is a long history for both hiring managers and recruiters rejecting 'job-hoppers'. Not only in the past but even today a big proportion of employers (43%) support that they would not consider a job-hopper for their open positions. For all those who are not familiar with the term, job-hopping is used to describe employees"
+        link="http://blog.hackerearth.com/job-hopping-millennials-hoppers-better-hire"
+        date="2017-12-26T08:14:36.000Z"
+        isNew={this.state.post1IsNew}
+        onRead={() => this.setState({ post1IsNew: false })}
+      />
+    );
+  }
+
+  renderPost2() {
+    return (
+      <Post
+        id="5a421b2310906305c80012b4-5814c43709a64c359672dd7a"
+        link= "https://medium.freecodecamp.org/how-i-built-and-launched-a-chatbot-over-the-weekend-ad8efc522f33?source=rss----336d898217ee---4"
+        date= "2017-12-26T09:01:36.000Z"
+        guid= "https://medium.com/p/ad8efc522f33"
+        author= "Mike Williams"
+        title= "How I Built And Launched A Chatbot Over The Weekend"
+        isNew={this.state.post2IsNew}
+        onRead={() => this.setState({ post2IsNew: false })}
+      />
+    );
   }
 
   render() {
     return(
       <Grid className="style-sections">
+        <GridCell span="12">
+          <section className="style-sections__post">
+            {this.renderPost1()}
+            {this.renderPost2()}
+          </section>
+        </GridCell>
+
         <GridCell span="6">
-          <section className="header">
+          <section className="style-sections__header">
             <h1>Header 1</h1>
             <h2>Header 2</h2>
             <h3>Header 3</h3>
@@ -65,7 +107,7 @@ export default class Styles extends React.Component<Props, State> {
         </GridCell>
 
         <GridCell span="6">
-          <section className="typography">
+          <section className="style-sections__typography">
             <Typography use="display4">display4</Typography>
             <Typography use="display3">display3</Typography>
             <Typography use="display2">display2</Typography>
@@ -82,19 +124,15 @@ export default class Styles extends React.Component<Props, State> {
         </GridCell>
 
         <GridCell span="12">
-          <section className="buttons">
+          <section className="style-sections__buttons">
             <Button>Default</Button>
 
             <Button raised>Raised</Button>
-            <Button raised>
-              <div style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center' }}>
-                <Icon
-                  className="-white"
-                  style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center', 'margin-right': '2px', width: '18px', height: '18px' }}>
-                  {icon('pin')}
-                </Icon>
-                <span style={{ display: 'flex' }}>Pin Query</span>
-              </div>
+            <Button raised className="icon_warning">
+              {icon('pin')}
+            </Button>
+            <Button raised className="icon_success icon_size-16">
+              {icon('pin')} Pin Query
             </Button>
 
             <Button dense>Dense</Button>
@@ -103,25 +141,26 @@ export default class Styles extends React.Component<Props, State> {
             <Button stroked>Stroked</Button>
             <Button raised theme={['secondary-bg', 'text-primary-on-secondary']}>With Theme</Button>
 
-            <Fab><Icon className="-white" style={{ display: 'flex' }}>{icon('heart')}</Icon></Fab>
-            <Fab mini><Icon style={{ display: 'flex' }}>{icon('heart')}</Icon></Fab>
+            <Fab className="icon_white">{icon('heart')}</Fab>
+            <Fab mini>{icon('heart')}</Fab>
+            <Fab mini>{icon('dots-vertical')}</Fab>
 
-            <Icon className="-success">{icon('heart')}</Icon>
-            <Icon className="-warning">{icon('heart')}</Icon>
-            <Icon className="-error">{icon('heart')}</Icon>
-            <Icon className="-size-32" style={{ background: 'white', display: 'flex', 'align-items': 'center', 'justify-content': 'center', width: '32px', height: '32px' }}>
+            <Icon className="icon_success">{icon('heart')}</Icon>
+            <Icon className="icon_warning">{icon('heart')}</Icon>
+            <Icon className="icon_error">{icon('heart')}</Icon>
+            <Icon className="icon_size-32" style={{ background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px' }}>
               {icon('heart-outline')}
             </Icon>
           </section>
         </GridCell>
 
         <GridCell>
-          <section className="cards">
+          <section className="style-sections__cards">
             <Card style={{width: '320px'}}>
               <CardMedia style={{
                 backgroundImage: 'url(https://material-components-web.appspot.com/images/16-9.jpg)',
-                height: '12.313rem'
-              }}>
+                                      height: '12.313rem'
+  }}>
               </CardMedia>
               <CardPrimary>
                 <CardTitle large>Card Title</CardTitle>
@@ -138,10 +177,10 @@ export default class Styles extends React.Component<Props, State> {
         </GridCell>
 
         <GridCell>
-          <section className="menus">
+          <section className="style-sections__menus">
             <MenuAnchor>
               <Button onClick={() => this.setState({'menu1IsOpen': !this.state.menu1IsOpen})} >
-                <Icon style={{ display: 'flex' }}>{icon('dots-vertical')}</Icon>
+                <Icon>{icon('dots-vertical')}</Icon>
               </Button>
 
               <Menu
@@ -174,7 +213,7 @@ export default class Styles extends React.Component<Props, State> {
         </GridCell>
 
         <GridCell>
-          <section className="snackbars">
+          <section className="style-sections__snackbars">
             <Button
               raised
               onClick={() => this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})}
@@ -208,7 +247,7 @@ export default class Styles extends React.Component<Props, State> {
         </GridCell>
 
         <GridCell span="12">
-          <section className="themes">
+          <section className="style-sections__themes">
             <div>
               <div style={{ backgroundColor: '#ddd' }}>
                 {[
@@ -271,7 +310,7 @@ export default class Styles extends React.Component<Props, State> {
         </GridCell>
 
         <GridCell>
-          <section className="drawers">
+          <section className="style-sections__drawers">
             <Button
               onClick={() => this.setState({open: !this.state.open})}
               raised
@@ -301,6 +340,6 @@ export default class Styles extends React.Component<Props, State> {
           </section>
         </GridCell>
       </Grid>
-    );
-  }
+                );
+}
 }

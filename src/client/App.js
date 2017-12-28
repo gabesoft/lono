@@ -7,7 +7,7 @@ import {
 
 import Feeds from 'client/Feeds';
 import Home from 'client/Home';
-import Post from 'client/Post';
+import PostView from 'client/PostView';
 import Posts from 'client/Posts';
 import Styles from 'client/Styles';
 
@@ -40,7 +40,7 @@ export default class App extends Component<{||}> {
           <Route exact path="/" component={Home} />
           <Route path="/feeds" component={Feeds} />
           <Route path="/posts" component={Posts} />
-          <Route path="/post/:postId" component={Post} />
+          <Route path="/post/:postId" component={PostView} />
           <Route path="/styles" component={Styles} />
         </div>
       </Router>

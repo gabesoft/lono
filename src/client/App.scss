@@ -1,6 +1,10 @@
-@import './Styles';
 @import '@material/theme/color-palette';
 
+@import './Styles';
+@import './Icons';
+@import './Buttons';
+@import './Post';
+
 body {
-  background-color: $material-color-grey-100;
+  background-color: $material-color-grey-50;
 }

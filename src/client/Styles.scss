@@ -1,90 +1,60 @@
-@import '@material/theme/color-palette';
 @import './colors';
 
-.style-sections {
-  section {
-    padding: 5px 10px;
-  }
+.style-sections [class*='style-sections__'] {
+  margin: 5px 10px;
+}
 
-  .header {
-    background-color: $material-color-grey-200;
-  }
-
-  .typography {
-    background-color: $material-color-grey-300;
-
-    span {
-      display: block;
-    }
-  }
-
-  .buttons {
-    background-color: $material-color-grey-400;
-
-    button {
-      margin: 0 2px;
-    }
-  }
-
-  .cards {
-    background-color: $material-color-grey-500;
-  }
-
-  .menus {
-    background-color: $material-color-grey-600;
-  }
-
-  .snackbars {
-    background-color: $material-color-grey-700;
-  }
-
-  .themes {
-    background-color: $material-color-grey-800;
-
-    span {
-      display: inline-block;
-      height: 96px;
-      margin: 4px;
-      padding: 16px;
-      vertical-align: top;
-      width: 96px;
-    }
-  }
-
-  .drawers {
-    background-color: $material-color-grey-900;
+.style-sections__post {
+  .post {
+    margin: 10px 0;
   }
 }
 
-.material-icons.-white {
-  svg > path {
-    fill: $material-color-grey-50;
+.style-sections__header {
+  background-color: $material-color-grey-200;
+}
+
+.style-sections__typography {
+  background-color: $material-color-grey-300;
+
+  span {
+    display: block;
   }
 }
 
-.material-icons {
-  &.-success {
-    svg > path {
-      fill: $success-color;
-    }
-  }
+.style-sections__buttons {
+  background-color: $material-color-grey-400;
 
-  &.-warning {
-    svg > path {
-      fill: $warning-color;
-    }
+  button {
+    margin: 0 2px;
   }
+}
 
-  &.-error {
-    svg > path {
-      fill: $error-color;
-    }
-  }
+.style-sections__cards {
+  background-color: $material-color-grey-500;
+}
 
-  &.-size-32 {
-    svg {
-      height: 32px;
-      width: 32px;
-    }
+.style-sections__menus {
+  background-color: $material-color-grey-600;
+}
+
+.style-sections__snackbars {
+  background-color: $material-color-grey-700;
+}
+
+.style-sections__themes {
+  background-color: $material-color-grey-800;
+
+  span {
+    display: inline-block;
+    height: 96px;
+    margin: 4px;
+    padding: 16px;
+    vertical-align: top;
+    width: 96px;
   }
+}
+
+.style-sections__drawers {
+  background-color: $material-color-grey-900;
 }
