@@ -1,27 +1,8 @@
 @import './variables';
 @import './colors';
+@import './mixins';
 @import './Icons';
 @import '@material/typography/mixins';
-
-@mixin space-v($value) {
-  > * {
-    margin-top: $value;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-}
-
-@mixin space-h($value) {
-  > * {
-    margin-left: $value;
-
-    &:first-child {
-      margin-left: 0;
-    }
-  }
-}
 
 .post {
   @include space-v(15px);
@@ -56,8 +37,9 @@
   @include space-v(10px);
 }
 
-.post__author {
+.post__feed-title {
   @include mdc-typography('subheading2');
+  @include space-h(10px);
 }
 
 .post__title {
@@ -70,4 +52,8 @@
 
 .post__status {
   color: $mdc-theme-secondary-dark;
+}
+
+.post__date-author {
+  @include bullet-h;
 }

@@ -62,6 +62,7 @@ export default class Styles extends React.Component<Props, State> {
         id="5a42092d10906305c8001248-56d7de17c788cb1d6eb91b0c"
         author="Nikola Tore"
         title="Job-hopping makes millennials better hires"
+        feedTitle="HackerEarth Blog"
         summary="There is a long history for both hiring managers and recruiters rejecting 'job-hoppers'. Not only in the past but even today a big proportion of employers (43%) support that they would not consider a job-hopper for their open positions. For all those who are not familiar with the term, job-hopping is used to describe employees"
         link="http://blog.hackerearth.com/job-hopping-millennials-hoppers-better-hire"
         date="2017-12-26T08:14:36.000Z"
@@ -75,11 +76,12 @@ export default class Styles extends React.Component<Props, State> {
     return (
       <Post
         id="5a421b2310906305c80012b4-5814c43709a64c359672dd7a"
-        link= "https://medium.freecodecamp.org/how-i-built-and-launched-a-chatbot-over-the-weekend-ad8efc522f33?source=rss----336d898217ee---4"
-        date= "2017-12-26T09:01:36.000Z"
-        guid= "https://medium.com/p/ad8efc522f33"
-        author= "Mike Williams"
-        title= "How I Built And Launched A Chatbot Over The Weekend"
+        link="https://medium.freecodecamp.org/how-i-built-and-launched-a-chatbot-over-the-weekend-ad8efc522f33?source=rss----336d898217ee---4"
+        date="2017-12-26T09:01:36.000Z"
+        guid="https://medium.com/p/ad8efc522f33"
+        author="Mike Williams"
+        title="How I Built And Launched A Chatbot Over The Weekend"
+        feedTitle="Free Code Camp - Medium"
         isNew={this.state.post2IsNew}
         onRead={() => this.setState({ post2IsNew: false })}
       />

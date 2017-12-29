@@ -1,0 +1,13 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+
+.avatar {
+  @include round(32px);
+
+  align-items: center;
+  background-color: $mdc-theme-primary;
+  color: $material-color-grey-100;
+  display: inline-flex;
+  justify-content: center;
+}

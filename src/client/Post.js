@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Elevation } from 'rmwc';
 
 import icon from 'client/Icons';
+import Avatar from 'client/Avatar';
 
 const ELEVATION_UNFOCUSED: 1 = 1;
 const ELEVATION_FOCUSED: 4 = 4;
@@ -11,6 +12,7 @@ type Props = {
   id: string,
   author: string,
   title: string,
+  feedTitle: string,
   summary?: string,
   date: string,
   isNew: boolean,
@@ -42,7 +44,10 @@ export default class Post extends React.Component<Props, State> {
         onBlur={() => this.setState({ elevation: ELEVATION_UNFOCUSED })}
       >
         <div className="post__header">
-          <div className="post__author">{this.props.author}</div>
+          <div className="post__feed-title">
+            <Avatar text={this.props.feedTitle} />
+            <span>{this.props.feedTitle}</span>
+          </div>
           <div className="post__actions">{icon('dots-vertical')}</div>
         </div>
 
@@ -56,8 +61,13 @@ export default class Post extends React.Component<Props, State> {
         </div>
 
         <div className="post__footer">
-          <div className="post__date">
-            {'3 hours ago'}
+          <div className="post__date-author">
+            <span className="post__author">
+              {this.props.author}
+            </span>
+            <span className="post__date">
+              {'3 hours ago'}
+            </span>
           </div>
           <div className="post__status">
             {this.props.isNew ? 'new' : null}
