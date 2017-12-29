@@ -21,18 +21,20 @@
 
 @mixin bullet-h {
   > * {
-    &:not(:last-child):after {
-      content: " \2022  ";
+    &:not(:last-child) {
+      &::after {
+        content: ' \2022  ';
+      }
     }
   }
 }
 
 @mixin round($size: 0) {
   @if ($size != 0) {
-    width: $size;
-    min-width: $size;
     height: $size;
     min-height: $size;
+    min-width: $size;
+    width: $size;
   }
   border-radius: 50%;
 }

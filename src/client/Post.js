@@ -1,9 +1,15 @@
 import * as React from 'react';
 
-import { Elevation } from 'rmwc';
-
 import icon from 'client/Icons';
 import Avatar from 'client/Avatar';
+
+import {
+  Button,
+  Elevation,
+  Menu,
+  MenuAnchor,
+  MenuItem
+} from 'rmwc';
 
 const ELEVATION_UNFOCUSED: 1 = 1;
 const ELEVATION_FOCUSED: 4 = 4;
@@ -21,14 +27,16 @@ type Props = {
 };
 
 type State = {
-  elevation: typeof ELEVATION_UNFOCUSED | typeof ELEVATION_FOCUSED
+  elevation: typeof ELEVATION_UNFOCUSED | typeof ELEVATION_FOCUSED,
+  actionsOpen: boolean
 };
 
 export default class Post extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      elevation: ELEVATION_UNFOCUSED
+      elevation: ELEVATION_UNFOCUSED,
+      actionsOpen: false
     };
   }
 
@@ -48,7 +56,27 @@ export default class Post extends React.Component<Props, State> {
             <Avatar text={this.props.feedTitle} />
             <span>{this.props.feedTitle}</span>
           </div>
-          <div className="post__actions">{icon('dots-vertical')}</div>
+          <div className="post__actions">
+            <MenuAnchor>
+              <Button onClick={() => this.setState({ actionsOpen: true })}>
+                {icon('dots-vertical')}
+              </Button>
+
+              <Menu
+                open={this.state.actionsOpen}
+                onClose={() => this.setState({ actionsOpen: false })}
+              >
+                <MenuItem className="post__actions_menu-item">
+                  {icon('open-in-new')}
+                  <span>Open in new window</span>
+                </MenuItem>
+                <MenuItem className="post__actions_menu-item">
+                  {icon('tag')}
+                  <span>Edit tags</span>
+                </MenuItem>
+              </Menu>
+            </MenuAnchor>
+          </div>
         </div>
 
         <div className="post__content">
