@@ -52,7 +52,7 @@ export default class Styles extends React.Component<Props, State> {
       snackbarIsOpen: false,
       snackbarStartIsOpen: false,
       post1IsNew: true,
-      post2IsNew: true
+      post2IsNew: false
     };
   }
 

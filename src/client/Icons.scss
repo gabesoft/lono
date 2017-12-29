@@ -1,5 +1,11 @@
 @import './colors';
 
+@mixin icon-translate($xvalue: 0, $yvalue: 0) {
+  svg {
+    transform: translate($xvalue, $yvalue);
+  }
+}
+
 .icon_white {
   svg > path {
     fill: $material-color-grey-50;
@@ -34,6 +40,13 @@
   svg {
     height: 32px;
     width: 32px;
+  }
+}
+
+.icon_size-24 {
+  svg {
+    height: 24px;
+    width: 24px;
   }
 }
 

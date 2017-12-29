@@ -57,7 +57,7 @@ export default class Post extends React.Component<Props, State> {
 
         <div className="post__footer">
           <div className="post__date">
-            {this.props.date}
+            {'3 hours ago'}
           </div>
           <div className="post__status">
             {this.props.isNew ? 'new' : null}

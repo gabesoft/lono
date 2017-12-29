@@ -1,5 +1,73 @@
+@import './variables';
 @import './colors';
+@import './Icons';
+@import '@material/typography/mixins';
+
+@mixin space-v($value) {
+  > * {
+    margin-top: $value;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+@mixin space-h($value) {
+  > * {
+    margin-left: $value;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
 
 .post {
+  @include space-v(15px);
+
   background-color: $material-color-grey-100;
+
+  > * {
+    padding: 5px 10px;
+  }
+}
+
+.post__header,
+.post__footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post__header {
+  background-color: $mdc-theme-primary-light;
+}
+
+.post__actions {
+  @include icon-translate(10px);
+}
+
+.post__footer {
+  @include mdc-typography('caption');
+}
+
+.post__content {
+  @include space-v(10px);
+}
+
+.post__author {
+  @include mdc-typography('subheading2');
+}
+
+.post__title {
+  @include mdc-typography('headline');
+}
+
+.post__summary {
+  @include mdc-typography('body1');
+}
+
+.post__status {
+  color: $mdc-theme-secondary-dark;
 }
