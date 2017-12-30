@@ -39,7 +39,9 @@ type State = {
   snackbarIsOpen: boolean,
   snackbarStartIsOpen: boolean,
   post1IsNew: boolean,
-  post2IsNew: boolean
+  post2IsNew: boolean,
+  feed1IsSubscribed: boolean,
+  feed2IsSubscribed: boolean
 };
 
 type Props = {};
@@ -54,7 +56,9 @@ export default class Styles extends React.Component<Props, State> {
       snackbarIsOpen: false,
       snackbarStartIsOpen: false,
       post1IsNew: true,
-      post2IsNew: false
+      post2IsNew: false,
+      feed1IsSubscribed: false,
+      feed2IsSubscribed: true
     };
   }
 
@@ -70,11 +74,12 @@ export default class Styles extends React.Component<Props, State> {
         title="All Confirmation Bias, All The Time"
         unreadCount={4}
         uri="http://aredridel.dinhe.net/atom.xml"
+        subscribed={this.state.feed1IsSubscribed}
         onEditClick={() => undefined}
         onOpenFeedClick={() => undefined}
         onOpenRssClick={() => undefined}
-        onSubscribeClick={() => undefined}
         onDeleteClick={() => undefined}
+        onSubscribeClick={() => this.setState({ feed1IsSubscribed: !this.state.feed1IsSubscribed })}
       />
     );
   }
@@ -88,11 +93,12 @@ export default class Styles extends React.Component<Props, State> {
         postCount={34}
         title="An Innovative Web"
         uri="http://aninnovativeweb.tumblr.com/rss"
+        subscribed={this.state.feed2IsSubscribed}
         onEditClick={() => undefined}
         onOpenFeedClick={() => undefined}
         onOpenRssClick={() => undefined}
-        onSubscribeClick={() => undefined}
         onDeleteClick={() => undefined}
+        onSubscribeClick={() => this.setState({ feed2IsSubscribed: !this.state.feed2IsSubscribed })}
       />
     );
   }

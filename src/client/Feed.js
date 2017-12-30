@@ -22,6 +22,7 @@ type Props = {
   unreadCount?: number,
   link: string,
   uri: string,
+  subscribed: boolean,
   onEditClick: (id: string) => void,
   onOpenFeedClick: (id: string) => void,
   onOpenRssClick: (id: string) => void,
@@ -48,6 +49,17 @@ export default class Feed extends React.Component<Props, State> {
         <span>{text}</span>
       </MenuItem>
     );
+  }
+
+  renderSubscribeMenuItem() {
+    const subscribed = this.props.subscribed;
+    const icon = subscribed ? 'playlist-remove' : 'playlist-check';
+    const text = subscribed ? 'Unsubscribe from feed' : 'Subscribe to feed';
+
+    return this.renderMenuItem(icon, text, () => {
+      this.setState({ actionsOpen: false });
+      this.props.onSubscribeClick(this.props.id);
+    });
   }
 
   render () {
@@ -78,7 +90,7 @@ export default class Feed extends React.Component<Props, State> {
                 {this.renderMenuItem('pencil', 'Edit subscription', handler(this.props.onEditClick))}
                 {this.renderMenuItem('open-in-new', 'Open feed in new window', handler(this.props.onOpenFeedClick))}
                 {this.renderMenuItem('rss', 'Open rss in new window', handler(this.props.onOpenRssClick))}
-                {this.renderMenuItem('playlist-check', 'Subscribe to feed', handler(this.props.onSubscribeClick))}
+                {this.renderSubscribeMenuItem()}
                 {this.renderMenuItem('trash', 'Delete feed', handler(this.props.onDeleteClick))}
               </Menu>
             </MenuAnchor>
