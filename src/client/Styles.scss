@@ -1,13 +1,13 @@
 @import './colors';
+@import './mixins';
 
 .style-sections [class*='style-sections__'] {
   margin: 5px 10px;
 }
 
-.style-sections__post {
-  .post {
-    margin: 10px 0;
-  }
+.style-sections__post,
+.style-sections__feed {
+  @include space-v(20px);
 }
 
 .style-sections__header {

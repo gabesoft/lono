@@ -1,0 +1,48 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import './Icons';
+@import '@material/typography/mixins';
+
+.feed {
+  @include space-v(15px);
+  @include padding(5px 10px);
+
+  background-color: $material-color-grey-100;
+}
+
+.feed__header,
+.feed__footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.feed__header {
+  background-color: $mdc-theme-secondary-dark;
+}
+
+.feed__content {
+  @include space-v(10px);
+}
+
+.feed__title {
+  @include mdc-typography('headline');
+}
+
+.feed__avatar-author {
+  @include mdc-typography('subheading2');
+  @include space-h(10px);
+}
+
+.feed__description {
+  @include mdc-typography('body2');
+}
+
+.feed__post-counts {
+  @include bullet-h;
+}
+
+.feed__footer {
+  @include mdc-typography('caption');
+}

@@ -63,12 +63,31 @@ export default class Styles extends React.Component<Props, State> {
       <Feed
         id="56d7de07c788cb1d6eb91a6d"
         author="Aria Stewart"
+        description="Musings about javascript and web technologies"
         lastPostDate="30 minutes ago"
         link="http://aredridel.dinhe.net/"
         postCount={26}
         title="All Confirmation Bias, All The Time"
         unreadCount={4}
         uri="http://aredridel.dinhe.net/atom.xml"
+        onEditClick={() => undefined}
+        onOpenFeedClick={() => undefined}
+        onOpenRssClick={() => undefined}
+        onSubscribeClick={() => undefined}
+        onDeleteClick={() => undefined}
+      />
+    );
+  }
+
+  renderFeed2() {
+    return (
+      <Feed
+        id="56d7ddfbc788cb1d6eb919f1"
+        description="An Innovative Web - the future, now."
+        link="http://aninnovativeweb.tumblr.com/"
+        postCount={34}
+        title="An Innovative Web"
+        uri="http://aninnovativeweb.tumblr.com/rss"
         onEditClick={() => undefined}
         onOpenFeedClick={() => undefined}
         onOpenRssClick={() => undefined}
@@ -118,6 +137,7 @@ export default class Styles extends React.Component<Props, State> {
         <GridCell span="12">
           <section className="style-sections__feed">
             {this.renderFeed1()}
+            {this.renderFeed2()}
           </section>
         </GridCell>
 

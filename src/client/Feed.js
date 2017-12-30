@@ -3,6 +3,7 @@ import * as React from 'react';
 import icon from 'client/Icons';
 import Avatar from 'client/Avatar';
 import Elevated from 'client/Elevated';
+import Optional from 'client/Optional';
 
 import {
   Button,
@@ -15,9 +16,10 @@ type Props = {
   id: string,
   author?: string,
   title: string,
-  lastPostDate: string,
+  description?: string,
+  lastPostDate?: string,
   postCount: number,
-  unreadCount: number,
+  unreadCount?: number,
   link: string,
   uri: string,
   onEditClick: (id: string) => void,
@@ -49,7 +51,6 @@ export default class Feed extends React.Component<Props, State> {
   }
 
   render () {
-    const author = this.props.author ? `by ${this.props.author}` : null;
     const handler = (fn: Function) => {
       return () => {
         this.setState({ actionsOpen: false });
@@ -60,7 +61,10 @@ export default class Feed extends React.Component<Props, State> {
     return (
       <Elevated className="feed">
         <div className="feed__header">
-          <Avatar text={this.props.title} />
+          <div className="feed__avatar-author">
+            <Avatar text={this.props.title} />
+            <span>{this.props.author}</span>
+          </div>
           <div className="feed__actions">
             <MenuAnchor>
               <Button onClick={() => this.setState({ actionsOpen: true })}>
@@ -84,8 +88,8 @@ export default class Feed extends React.Component<Props, State> {
           <div className="feed__title">
             {this.props.title}
           </div>
-          <div className="feed__author">
-            {author}
+          <div className="feed__description">
+            {this.props.description}
           </div>
         </div>
         <div className="feed__footer">
@@ -96,9 +100,11 @@ export default class Feed extends React.Component<Props, State> {
             <span className="feed__post-count">
               {this.props.postCount}
             </span>
-            <div className="feed__unread-count">
-              {this.props.unreadCount}
-            </div>
+            <Optional canRender={!!this.props.unreadCount}>
+              <span className="feed__unread-count">
+                {this.props.unreadCount}
+              </span>
+            </Optional>
           </div>
         </div>
       </Elevated>

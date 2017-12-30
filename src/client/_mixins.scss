@@ -19,6 +19,12 @@
   }
 }
 
+@mixin padding($value) {
+  > * {
+    padding: $value;
+  }
+}
+
 @mixin bullet-h {
   > * {
     &:not(:last-child) {
