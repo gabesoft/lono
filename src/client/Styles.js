@@ -67,7 +67,8 @@ export default class Styles extends React.Component<Props, State> {
         link="http://blog.hackerearth.com/job-hopping-millennials-hoppers-better-hire"
         date="2017-12-26T08:14:36.000Z"
         isNew={this.state.post1IsNew}
-        onRead={() => this.setState({ post1IsNew: false })}
+        onOpenClick={() => this.setState({ post1IsNew: !this.state.post1IsNew })}
+        onEditTagsClick={() => this.setState({ post1IsNew: !this.state.post1IsNew  })}
       />
     );
   }
@@ -83,7 +84,8 @@ export default class Styles extends React.Component<Props, State> {
         title="How I Built And Launched A Chatbot Over The Weekend"
         feedTitle="Free Code Camp - Medium"
         isNew={this.state.post2IsNew}
-        onRead={() => this.setState({ post2IsNew: false })}
+        onOpenClick={() => this.setState({ post2IsNew: !this.state.post2IsNew })}
+        onEditTagsClick={() => this.setState({ post2IsNew: !this.state.post2IsNew })}
       />
     );
   }

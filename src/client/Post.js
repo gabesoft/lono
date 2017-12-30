@@ -3,6 +3,8 @@ import * as React from 'react';
 import icon from 'client/Icons';
 import Avatar from 'client/Avatar';
 
+import { Link } from 'react-router-dom';
+
 import {
   Button,
   Elevation,
@@ -23,7 +25,8 @@ type Props = {
   date: string,
   isNew: boolean,
   link: string,
-  onRead: (id: string) => void
+  onOpenClick: (id: string) => void,
+  onEditTagsClick: (id: string) => void
 };
 
 type State = {
@@ -38,6 +41,25 @@ export default class Post extends React.Component<Props, State> {
       elevation: ELEVATION_UNFOCUSED,
       actionsOpen: false
     };
+  }
+
+  onOpenClick() {
+    this.setState({ actionsOpen: false });
+    this.props.onOpenClick(this.props.id);
+  }
+
+  onEditTagsClick() {
+    this.setState({ actionsOpen: false });
+    this.props.onEditTagsClick(this.props.id);
+  }
+
+  renderMenuItem(iconName: string, text: string, onClick: Function) {
+    return (
+      <MenuItem className="post__actions_menu-item" onClick={onClick}>
+        {icon(iconName)}
+        <span>{text}</span>
+      </MenuItem>
+    );
   }
 
   render () {
@@ -66,27 +88,21 @@ export default class Post extends React.Component<Props, State> {
                 open={this.state.actionsOpen}
                 onClose={() => this.setState({ actionsOpen: false })}
               >
-                <MenuItem className="post__actions_menu-item">
-                  {icon('open-in-new')}
-                  <span>Open in new window</span>
-                </MenuItem>
-                <MenuItem className="post__actions_menu-item">
-                  {icon('tag')}
-                  <span>Edit tags</span>
-                </MenuItem>
+                {this.renderMenuItem('open-in-new', 'Open in new window', () => this.onOpenClick())}
+                {this.renderMenuItem('tag', 'Edit tags', () => this.onEditTagsClick())}
               </Menu>
             </MenuAnchor>
           </div>
         </div>
 
-        <div className="post__content">
+        <Link to={`/post/${this.props.id}`} className="post__content">
           <div className="post__title">
             {this.props.title}
           </div>
           <div className="post__summary">
             {this.props.summary}
           </div>
-        </div>
+        </Link>
 
         <div className="post__footer">
           <div className="post__date-author">

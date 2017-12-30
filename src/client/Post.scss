@@ -35,6 +35,10 @@
 
 .post__content {
   @include space-v(10px);
+
+  color: currentColor;
+  display: block;
+  text-decoration: none;
 }
 
 .post__feed-title {
