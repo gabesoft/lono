@@ -75,11 +75,11 @@ export default class Feed extends React.Component<Props, State> {
                 open={this.state.actionsOpen}
                 onClose={() => this.setState({ actionsOpen: false })}
               >
-                {this.renderMenuItem('edit', 'Edit subscription', handler(this.props.onEditClick))}
+                {this.renderMenuItem('pencil', 'Edit subscription', handler(this.props.onEditClick))}
                 {this.renderMenuItem('open-in-new', 'Open feed in new window', handler(this.props.onOpenFeedClick))}
                 {this.renderMenuItem('rss', 'Open rss in new window', handler(this.props.onOpenRssClick))}
-                {this.renderMenuItem('plus', 'Subscribe to feed', handler(this.props.onSubscribeClick))}
-                {this.renderMenuItem('delete', 'Delete feed', handler(this.props.onDeleteClick))}
+                {this.renderMenuItem('playlist-check', 'Subscribe to feed', handler(this.props.onSubscribeClick))}
+                {this.renderMenuItem('trash', 'Delete feed', handler(this.props.onDeleteClick))}
               </Menu>
             </MenuAnchor>
           </div>

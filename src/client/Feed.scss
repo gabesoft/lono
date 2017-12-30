@@ -36,13 +36,21 @@
 }
 
 .feed__description {
-  @include mdc-typography('body2');
+  @include mdc-typography('body1');
 }
 
 .feed__post-counts {
   @include bullet-h;
 }
 
+.feed__unread-count {
+  color: $mdc-theme-secondary-dark;
+}
+
 .feed__footer {
   @include mdc-typography('caption');
+}
+
+.feed__actions_menu-item {
+  @include space-h(5px);
 }
