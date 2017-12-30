@@ -24,6 +24,7 @@
   "homepage": "https://github.com/gabesoft/lono#readme",
   "dependencies": {
     "koa": "^2.4.1",
+    "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
     "koa-send": "^4.1.2",
     "koa-static": "^4.0.2",

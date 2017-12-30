@@ -4,6 +4,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import send from 'koa-send';
 import serve from 'koa-static';
+import logger from 'koa-logger';
 
 const app = new Koa();
 const router = new Router();
@@ -18,6 +19,7 @@ router.get('/feeds', (ctx) => {
   ctx.body = 'This is the feeds page';
 });
 
+app.use(logger());
 app.use(serve(root));
 
 app
