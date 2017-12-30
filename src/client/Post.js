@@ -2,19 +2,18 @@ import * as React from 'react';
 
 import icon from 'client/Icons';
 import Avatar from 'client/Avatar';
+import Elevated from 'client/Elevated';
 
-import { Link } from 'react-router-dom';
+import {
+  Link
+} from 'react-router-dom';
 
 import {
   Button,
-  Elevation,
   Menu,
   MenuAnchor,
   MenuItem
 } from 'rmwc';
-
-const ELEVATION_UNFOCUSED: 1 = 1;
-const ELEVATION_FOCUSED: 4 = 4;
 
 type Props = {
   id: string,
@@ -30,7 +29,6 @@ type Props = {
 };
 
 type State = {
-  elevation: typeof ELEVATION_UNFOCUSED | typeof ELEVATION_FOCUSED,
   actionsOpen: boolean
 };
 
@@ -38,41 +36,29 @@ export default class Post extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      elevation: ELEVATION_UNFOCUSED,
       actionsOpen: false
     };
   }
 
-  onOpenClick() {
-    this.setState({ actionsOpen: false });
-    this.props.onOpenClick(this.props.id);
-  }
-
-  onEditTagsClick() {
-    this.setState({ actionsOpen: false });
-    this.props.onEditTagsClick(this.props.id);
-  }
-
-  renderMenuItem(iconName: string, text: string, onClick: Function) {
+  renderMenuItem(iconName: string, text: string, clickHandler: Function) {
     return (
-      <MenuItem className="post__actions_menu-item" onClick={onClick}>
+      <MenuItem className="post__actions_menu-item" onClick={clickHandler}>
         {icon(iconName)}
         <span>{text}</span>
       </MenuItem>
     );
   }
 
-  render () {
+  render() {
+    const handler= (fn: Function) => {
+      return () => {
+        this.setState({ actionsOpen: false });
+        fn(this.props.id);
+      }
+    };
+
     return (
-      <Elevation
-        z={this.state.elevation}
-        transition
-        className="post"
-        onMouseOver={() => this.setState({ elevation: ELEVATION_FOCUSED })}
-        onFocus={() => this.setState({ elevation: ELEVATION_FOCUSED })}
-        onMouseOut={() => this.setState({ elevation: ELEVATION_UNFOCUSED })}
-        onBlur={() => this.setState({ elevation: ELEVATION_UNFOCUSED })}
-      >
+      <Elevated className="post">
         <div className="post__header">
           <div className="post__feed-title">
             <Avatar text={this.props.feedTitle} />
@@ -88,8 +74,8 @@ export default class Post extends React.Component<Props, State> {
                 open={this.state.actionsOpen}
                 onClose={() => this.setState({ actionsOpen: false })}
               >
-                {this.renderMenuItem('open-in-new', 'Open in new window', () => this.onOpenClick())}
-                {this.renderMenuItem('tag', 'Edit tags', () => this.onEditTagsClick())}
+                {this.renderMenuItem('open-in-new', 'Open in new window', handler(this.props.onOpenClick))}
+                {this.renderMenuItem('tag', 'Edit tags', handler(this.props.onEditTagsClick))}
               </Menu>
             </MenuAnchor>
           </div>
@@ -117,7 +103,8 @@ export default class Post extends React.Component<Props, State> {
             {this.props.isNew ? 'new' : null}
           </div>
         </div>
-      </Elevation>
+      </Elevated>
     );
   }
 }
+

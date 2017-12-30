@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-import Post from 'client/Post';
 import icon from 'client/Icons';
+
+import Post from 'client/Post';
+import Feed from 'client/Feed';
 
 import {
   Button,
@@ -56,6 +58,26 @@ export default class Styles extends React.Component<Props, State> {
     };
   }
 
+  renderFeed1() {
+    return (
+      <Feed
+        id="56d7de07c788cb1d6eb91a6d"
+        author="Aria Stewart"
+        lastPostDate="30 minutes ago"
+        link="http://aredridel.dinhe.net/"
+        postCount={26}
+        title="All Confirmation Bias, All The Time"
+        unreadCount={4}
+        uri="http://aredridel.dinhe.net/atom.xml"
+        onEditClick={() => undefined}
+        onOpenFeedClick={() => undefined}
+        onOpenRssClick={() => undefined}
+        onSubscribeClick={() => undefined}
+        onDeleteClick={() => undefined}
+      />
+    );
+  }
+
   renderPost1() {
     return (
       <Post
@@ -93,6 +115,12 @@ export default class Styles extends React.Component<Props, State> {
   render() {
     return(
       <Grid className="style-sections">
+        <GridCell span="12">
+          <section className="style-sections__feed">
+            {this.renderFeed1()}
+          </section>
+        </GridCell>
+
         <GridCell span="12">
           <section className="style-sections__post">
             {this.renderPost1()}
@@ -163,8 +191,8 @@ export default class Styles extends React.Component<Props, State> {
             <Card style={{width: '320px'}}>
               <CardMedia style={{
                 backgroundImage: 'url(https://material-components-web.appspot.com/images/16-9.jpg)',
-                                      height: '12.313rem'
-  }}>
+                height: '12.313rem'
+              }}>
               </CardMedia>
               <CardPrimary>
                 <CardTitle large>Card Title</CardTitle>
@@ -344,6 +372,6 @@ export default class Styles extends React.Component<Props, State> {
           </section>
         </GridCell>
       </Grid>
-                );
-}
+    );
+  }
 }
