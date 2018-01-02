@@ -31,6 +31,7 @@
     "material-components-web": "^0.27.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-headroom": "^2.2.2",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",

@@ -62,7 +62,7 @@ export default class Feed extends React.Component<Props, State> {
     });
   }
 
-  render () {
+  render() {
     const handler = (fn: Function) => {
       return () => {
         this.setState({ actionsOpen: false });

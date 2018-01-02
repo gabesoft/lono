@@ -10,13 +10,14 @@ import Home from 'client/Home';
 import PostView from 'client/PostView';
 import Posts from 'client/Posts';
 import Styles from 'client/Styles';
+import Header from 'client/Header';
 
 export default class App extends Component<{||}> {
   render() {
     return(
       <Router>
         <div className="app">
-          <h1>Lono</h1>
+          <Header username="gabesoft" subscribedCount={35} newPostCount={12} />
           <ul>
             <li>
               <Link to="/">Home</Link>

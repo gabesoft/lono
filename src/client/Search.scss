@@ -1,0 +1,23 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import '@material/typography/mixins';
+
+.search {
+  display: flex;
+}
+
+.search__input {
+  @include mdc-typography('display2');
+
+  background-color: $material-color-grey-100;
+  border: 1px solid $material-color-grey-300;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px 7px;
+  width: 100%;
+
+  &:focus {
+    border: 1px solid $material-color-grey-400;
+  }
+}

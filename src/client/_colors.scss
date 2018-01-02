@@ -1,3 +1,4 @@
+@import './variables';
 @import '@material/theme/color-palette';
 
 $success-color: $material-color-green-600;
@@ -6,3 +7,6 @@ $warning-color: $material-color-yellow-600;
 
 $black-color: #000;
 $white-color: #FFF;
+
+$background-color: $material-color-grey-100;
+$unread-color: $mdc-theme-secondary-dark;
