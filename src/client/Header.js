@@ -41,7 +41,7 @@ export default class Header extends React.Component<Props, State> {
             </Optional>
             <Optional canRender={!!this.props.newPostCount}>
               <div className="header__new-post-count">
-                {this.props.newPostCount} Unread
+                {this.props.newPostCount} Unread Posts
               </div>
             </Optional>
           </div>

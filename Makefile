@@ -51,7 +51,7 @@ rfresh:
 # Build all public files
 public: public-dir
 	@cp public/icons/*.{png,ico} $(PUBLIC)/
-	@cp public/*.{html,json} $(PUBLIC)/
+	@cp public/*.{png,html,json} $(PUBLIC)/
 
 # Create the public directory
 public-dir:

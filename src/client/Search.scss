@@ -8,7 +8,7 @@
 }
 
 .search__input {
-  @include mdc-typography('display2');
+  @include mdc-typography('display1');
 
   background-color: $material-color-grey-100;
   border: 1px solid $material-color-grey-300;

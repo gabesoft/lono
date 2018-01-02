@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import Elevated from 'client/Elevated';
-
 type Props = {
   value: string,
   className?: string
