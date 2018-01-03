@@ -27,7 +27,7 @@ export default class Header extends React.Component<Props, State> {
       <Headroom disableInlineStyles>
         <div className="header">
           <div className="header__logo">
-            <img className="logo" alt="logo" src="https://via.placeholder.com/64x64"/>
+            <img className="logo" alt="logo" src="/logo.png"/>
           </div>
           <Search className="header__search" value="" />
           <div className="header__user-info">

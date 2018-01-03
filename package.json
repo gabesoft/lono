@@ -30,6 +30,7 @@
     "koa-static": "^4.0.2",
     "material-components-web": "^0.27.0",
     "react": "^16.2.0",
+    "react-autosuggest": "^9.3.2",
     "react-dom": "^16.2.0",
     "react-headroom": "^2.2.2",
     "react-redux": "^5.0.6",
