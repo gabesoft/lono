@@ -1,0 +1,78 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import '@material/typography/mixins';
+
+.headroom {
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.headroom--unfixed {
+  position: relative;
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.headroom--unpinned {
+  box-shadow: none;
+  position: fixed;
+  transform: translateY(-100%);
+}
+
+.headroom--pinned {
+  position: fixed;
+  transform: translateY(0%);
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .15);
+}
+
+.headroom--scrolled {
+  transition: transform 400ms ease-in-out;
+}
+
+// .react-autosuggest__container,
+// .react-autosuggest__container--open {
+//   position: relative;
+//   width: 100%;
+// }
+
+.react-autosuggest__container {
+  position: relative;
+  width: 100%;
+}
+
+.react-autosuggest__container--open {
+
+}
+
+.react-autosuggest__suggestions-container {
+  background-color: $material-color-grey-200;
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 3px;
+}
+
+.react-autosuggest__suggestions-list {
+  @include space-v(5px);
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.react-autosuggest__suggestion--first {
+
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: $mdc-theme-secondary;
+  border-radius: 3px;
+}
+
+.react-autosuggest__suggestion {
+  padding: 5px 10px;
+}

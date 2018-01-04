@@ -1,16 +1,20 @@
 import * as React from 'react';
 
+import icon from 'client/Icons';
+
 import Autosuggest from 'react-autosuggest';
 
-const STATUS: 1 = 1;
-const FEED: 2 = 2;
-const TAG: 3 = 3;
+const STATUS: 'status' = 'status';
+const FEED: 'feed' = 'feed';
+const TAG: 'tag' = 'tag';
 
 const REASON_CHANGED: 'input-changed' = 'input-changed';
 const REASON_FOCUSED: 'input-focused' = 'input-focused';
 const ESCAPE_PRESSED: 'escape-pressed' = 'escape-pressed';
 const SUGGESTIONS_REVEALED: 'suggestions-revealed' = 'suggestions-revealed';
 const SUGGESTION_SELECTED: 'suggestion-selected' = 'suggestion-selected';
+const CLICK: 'click' = 'click';
+const ENTER: 'enter' = 'enter';
 
 type Props = {
   value: string,
@@ -24,7 +28,8 @@ type State = {
 
 type Suggestion = {
   title: string,
-  type: typeof STATUS | typeof FEED | typeof TAG
+  type: typeof STATUS | typeof FEED | typeof TAG,
+  name?: string
 };
 
 type SuggestionFetch = {
@@ -36,15 +41,30 @@ type SuggestionFetch = {
         | typeof SUGGESTION_SELECTED
 };
 
+type SuggestionSelected = {
+  suggestion: Suggestion,
+  suggestionValue: string,
+  suggestionIndex: number,
+  method: typeof CLICK | typeof ENTER
+}
+
+const ICONS = Object.freeze({
+  'tag': 'tag',
+  'feed': 'rss',
+  ':unread': 'new-box',
+  ':read': 'read',
+  'status': null
+});
+
+
 // TODO compute from feeds, tags, and status
-const SUGGESTIONS: Array<Suggestion> = [
+const SUGGESTIONS: Array<Suggestion> = Object.freeze([
   { title: ":unread", type: STATUS },
   { title: ":read", type: STATUS },
   { title: "#haskell", type: TAG },
   { title: "#programming", type: TAG },
   { title: "#web", type: TAG },
   { title: "#web-design", type: TAG },
-  { title: "#design", type: TAG },
   { title: "#database", type: TAG },
   { title: "#development", type: TAG },
   { title: "#design", type: TAG },
@@ -59,7 +79,7 @@ const SUGGESTIONS: Array<Suggestion> = [
   { title: "@the-java-blog", type: FEED },
   { title: "@an-innovative-web", type: FEED },
   { title: "@all-confirmation-bias", type: FEED }
-];
+]);
 
 export default class Search extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -70,27 +90,49 @@ export default class Search extends React.Component<Props, State> {
     };
   }
 
+  shouldRenderSuggestions(value: string = '') {
+    return value.trim().length > 0;
+  }
+
   renderSuggestion(item: Suggestion) {
+    const name = React.createElement('span', {
+      dangerouslySetInnerHTML: {__html: item.name}
+    });
+
     return (
-      <div>
-        {item.title}
+      <div className="search__suggestion">
+        <div className="search__suggestion_info">
+          {icon(ICONS[item.type] || ICONS[item.title])}
+          {name}
+        </div>
       </div>
     );
   }
 
-  getSuggestions(value: string) {
-    const input = value.trim().toLowerCase();
+  addName(item: Suggestion, pattern: RegExp): Suggestion {
+    return Object.assign({}, {
+      name: item.title.replace(pattern, '<mark>$1</mark>')
+    }, item);
+  }
+
+  getSuggestions(value: string = '') {
+    const input = value.toLowerCase();
     const length = input.length;
+    const parts = input.replace(/[()]/g, '').split(/[|&!]/);
+    const last = parts[parts.length - 1].trim();
 
     if (length === 0) {
       return [];
     }
 
+    const pattern = new RegExp(`(${last})`);
     const match = item => {
-      return item.title.match(new RegExp(input))
+      return item.title.match(pattern)
     };
 
-    return SUGGESTIONS.filter(match)
+    return SUGGESTIONS
+      .filter(match)
+      .map(s => this.addName(s, pattern));
   }
 
   getSuggestionValue(item: Suggestion) {
@@ -105,6 +147,13 @@ export default class Search extends React.Component<Props, State> {
 
   onSuggestionsClearRequested() {
     this.setState({ suggestions: [] });
+  }
+
+  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, { suggestion }: SuggestionSelected) {
+    const prev = this.state.value.replace(/([^|&!()]+)$/, '');
+    const separator = prev.match(/[!(]$/) ? '' : ' ';
+    const value = [ prev, suggestion.title ].filter(Boolean).join(separator);
+    this.setState({ value });
   }
 
   render() {
@@ -125,6 +174,9 @@ export default class Search extends React.Component<Props, State> {
           getSuggestionValue={this.getSuggestionValue.bind(this)}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+          onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+          shouldRenderSuggestions={this.shouldRenderSuggestions.bind(this)}
+          highlightFirstSuggestion={true}
           inputProps={inputProps}
         />
       </div>

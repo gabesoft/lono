@@ -8,7 +8,14 @@
 @import './Feed';
 @import './Header';
 @import './Search';
+@import './vendor';
 
 body {
   background-color: $background-color;
+}
+
+mark {
+  text-decoration: underline;
+  background: none;
+  color: currentColor;
 }

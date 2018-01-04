@@ -5,11 +5,13 @@
 
 .search {
   display: flex;
+  position: relative;
 }
 
 .search__input {
-  @include mdc-typography('display1');
+  @include mdc-typography('headline');
 
+  box-sizing: border-box;
   background-color: $material-color-grey-100;
   border: 1px solid $material-color-grey-300;
   border-radius: 5px;
@@ -20,4 +22,18 @@
   &:focus {
     border: 1px solid $material-color-grey-400;
   }
+}
+
+.search__suggestion_info {
+  @include space-h(10px);
+
+  display: flex;
+}
+
+.search__suggestion {
+  @include mdc-typography('subheading2');
+
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
