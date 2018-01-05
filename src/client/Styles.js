@@ -34,6 +34,7 @@ import {
 } from 'rmwc';
 
 type State = {
+  addFeedLoading: boolean,
   addFeedOpen: boolean,
   menu1IsOpen: boolean,
   menu2IsOpen: boolean,
@@ -52,6 +53,7 @@ export default class Styles extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      addFeedLoading: false,
       addFeedOpen: false,
       menu1IsOpen: false,
       menu2IsOpen: false,
@@ -145,16 +147,16 @@ export default class Styles extends React.Component<Props, State> {
       <Grid className="style-sections">
         <GridCell span="12">
           <section className="style-sections__modals">
-            <Button onClick={() => this.setState({ addFeedOpen: true })}>
+            <Button onClick={() => this.setState({ addFeedOpen: true, addFeedLoading: false })}>
               Add Feed
             </Button>
 
-
             <AddFeedDialog
               open={this.state.addFeedOpen}
+              loading={this.state.addFeedLoading}
               onCancel={() => this.setState({ addFeedOpen: false })}
               onClose={() => this.setState({ addFeedOpen: false })}
-              onAccept={() => this.setState({ addFeedOpen: false })}
+              onAccept={() => this.setState({ addFeedLoading: true })}
             />
           </section>
         </GridCell>
