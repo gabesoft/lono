@@ -1,5 +1,6 @@
 @import '@material/theme/color-palette';
 
+@import './vendor';
 @import './Styles';
 @import './Icons';
 @import './Avatar';
@@ -8,7 +9,7 @@
 @import './Feed';
 @import './Header';
 @import './Search';
-@import './vendor';
+@import './AddFeedDialog';
 
 body {
   background-color: $background-color;

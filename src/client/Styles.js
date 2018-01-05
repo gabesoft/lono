@@ -4,6 +4,7 @@ import icon from 'client/Icons';
 
 import Post from 'client/Post';
 import Feed from 'client/Feed';
+import AddFeedDialog from 'client/AddFeedDialog';
 
 import {
   Button,
@@ -33,6 +34,7 @@ import {
 } from 'rmwc';
 
 type State = {
+  addFeedOpen: boolean,
   menu1IsOpen: boolean,
   menu2IsOpen: boolean,
   open: boolean,
@@ -50,6 +52,7 @@ export default class Styles extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      addFeedOpen: false,
       menu1IsOpen: false,
       menu2IsOpen: false,
       open: false,
@@ -140,6 +143,22 @@ export default class Styles extends React.Component<Props, State> {
   render() {
     return(
       <Grid className="style-sections">
+        <GridCell span="12">
+          <section className="style-sections__modals">
+            <Button onClick={() => this.setState({ addFeedOpen: true })}>
+              Add Feed
+            </Button>
+
+
+            <AddFeedDialog
+              open={this.state.addFeedOpen}
+              onCancel={() => this.setState({ addFeedOpen: false })}
+              onClose={() => this.setState({ addFeedOpen: false })}
+              onAccept={() => this.setState({ addFeedOpen: false })}
+            />
+          </section>
+        </GridCell>
+
         <GridCell span="12">
           <section className="style-sections__feed">
             {this.renderFeed1()}

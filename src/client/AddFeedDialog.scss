@@ -1,0 +1,5 @@
+@import './mixins';
+
+.add-feed-dialog__footer {
+  @include space-h(5px);
+}
