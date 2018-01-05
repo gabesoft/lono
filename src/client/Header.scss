@@ -4,10 +4,9 @@
 @import '@material/typography/mixins';
 
 .header {
-  align-items: center;
+  @include layout-h;
+
   background-color: $background-color;
-  display: flex;
-  justify-content: space-between;
   padding: 10px 15px;
   position: relative;
 }
@@ -28,8 +27,8 @@
 
 .logo {
   border-radius: 50%;
-  height: 64px;
-  width: 64px;
+  height: $logo-size;
+  width: $logo-size;
 }
 
 .header_hidden {
@@ -47,4 +46,8 @@
 
 .header__new-post-count {
   color: $unread-color;
+}
+
+.header_logged-out {
+  height: $logo-size;
 }

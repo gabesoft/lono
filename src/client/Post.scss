@@ -13,9 +13,7 @@
 
 .post__header,
 .post__footer {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
+  @include layout-h;
 }
 
 .post__header {

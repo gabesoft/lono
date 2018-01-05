@@ -17,7 +17,12 @@ export default class App extends Component<{||}> {
     return(
       <Router>
         <div className="app">
-          <Header username="gabesoft" subscribedCount={35} newPostCount={12} />
+          <Header
+            username="gabesoft"
+            subscribedCount={35}
+            newPostCount={12}
+            onLoginClick={() => undefined}
+          />
           <ul>
             <li>
               <Link to="/">Home</Link>

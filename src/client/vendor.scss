@@ -33,12 +33,6 @@
   transition: transform 400ms ease-in-out;
 }
 
-// .react-autosuggest__container,
-// .react-autosuggest__container--open {
-//   position: relative;
-//   width: 100%;
-// }
-
 .react-autosuggest__container {
   position: relative;
   width: 100%;
@@ -50,10 +44,10 @@
 
 .react-autosuggest__suggestions-container {
   background-color: $material-color-grey-200;
-  position: absolute;
+  border-radius: $border-radius;
   left: 0;
+  position: absolute;
   right: 0;
-  border-radius: 3px;
 }
 
 .react-autosuggest__suggestions-list {
@@ -70,7 +64,7 @@
 
 .react-autosuggest__suggestion--highlighted {
   background-color: $mdc-theme-secondary;
-  border-radius: 3px;
+  border-radius: $border-radius;
 }
 
 .react-autosuggest__suggestion {
