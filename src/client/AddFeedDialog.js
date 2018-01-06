@@ -18,6 +18,7 @@ import {
 type Props = {
   open: boolean,
   loading: boolean,
+  error: ?string,
   onClose: () => void,
   onAccept: (value: string) => void,
   onCancel: () => void
@@ -48,6 +49,18 @@ export default class AddFeedDialog extends React.Component<Props, State> {
     }
   }
 
+  renderHeaderError() {
+    if (!this.props.error) {
+      return null;
+    }
+
+    return (
+      <span className="add-feed-dialog__error">
+        {this.props.error}
+      </span>
+    );
+  }
+
   renderBody() {
     if (this.props.loading) {
       return (
@@ -64,7 +77,9 @@ export default class AddFeedDialog extends React.Component<Props, State> {
             value={this.state.value}
             onChange={(event) => this.setState({ value: event.target.value })}
           />
-          <TextFieldHelperText>Enter an RSS feed url or youtube channel-external-id</TextFieldHelperText>
+          <TextFieldHelperText>
+            Enter an RSS feed url or youtube channel-external-id
+          </TextFieldHelperText>
         </DialogBody>
       );
     }
@@ -77,6 +92,7 @@ export default class AddFeedDialog extends React.Component<Props, State> {
           <DialogSurface>
             <DialogHeader className="add-feed-dialog__header">
               {this.renderHeaderTitle()}
+              {this.renderHeaderError()}
             </DialogHeader>
             {this.renderBody()}
             <DialogFooter className="add-feed-dialog__footer">

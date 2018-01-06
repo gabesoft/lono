@@ -34,6 +34,7 @@ import {
 } from 'rmwc';
 
 type State = {
+  addFeedError: ?string,
   addFeedLoading: boolean,
   addFeedOpen: boolean,
   menu1IsOpen: boolean,
@@ -52,7 +53,9 @@ type Props = {};
 export default class Styles extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
     this.state = {
+      addFeedError: null,
       addFeedLoading: false,
       addFeedOpen: false,
       menu1IsOpen: false,
@@ -142,6 +145,16 @@ export default class Styles extends React.Component<Props, State> {
     );
   }
 
+  onAddFeedAccept() {
+    const loading: boolean = !this.state.addFeedLoading;
+    const error = loading ? null : "Failed to add feed!";
+
+    this.setState({
+      addFeedLoading: loading,
+      addFeedError: error
+    });
+  }
+
   render() {
     return(
       <Grid className="style-sections">
@@ -154,9 +167,10 @@ export default class Styles extends React.Component<Props, State> {
             <AddFeedDialog
               open={this.state.addFeedOpen}
               loading={this.state.addFeedLoading}
+              error={this.state.addFeedError}
               onCancel={() => this.setState({ addFeedOpen: false })}
               onClose={() => this.setState({ addFeedOpen: false })}
-              onAccept={() => this.setState({ addFeedLoading: true })}
+              onAccept={() => this.onAddFeedAccept()}
             />
           </section>
         </GridCell>
