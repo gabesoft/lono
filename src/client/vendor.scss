@@ -38,6 +38,10 @@
   width: 100%;
 }
 
+.edit-feed-dialog .react-autosuggest__container {
+  display: inline;
+}
+
 .react-autosuggest__container--open {
 
 }
@@ -69,4 +73,32 @@
 
 .react-autosuggest__suggestion {
   padding: 5px 10px;
+}
+
+.react-tagsinput {
+
+}
+
+.react-tagsinput--focused {
+
+}
+
+.react-tagsinput-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.react-tagsinput-tag {
+  background-color: $material-color-grey-300;
+  padding: 10px 15px;
+  border-radius: 40px;
+}
+
+.react-tagsinput-tag a::before {
+
+}
+
+.react-tagsinput-input {
+
 }

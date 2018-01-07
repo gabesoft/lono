@@ -1,0 +1,44 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import '@material/typography/mixins';
+
+.edit-feed-dialog__tags-input {
+  span {
+    @include space-h(5px);
+    @include space-v(5px);
+  }
+
+  display: inline-flex;
+}
+
+.edit-feed-dialog__tags-input_input {
+  @include mdc-typography('subheading2');
+
+  border: 0;
+  outline: none;
+}
+
+// TODO: use mixin
+.tag {
+  @include space-h(5px);
+  @include mdc-typography('body1');
+
+  display: inline-flex;
+  background-color: $material-color-grey-300;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 3px;
+  padding: 3px 5px 3px 10px;
+
+  // TODO use icons mixin
+  &:hover path {
+    fill: $error-color;
+  }
+}
+
+.tag__remove {
+  background-color: $material-color-grey-200;
+  border-radius: 50%;
+  cursor: pointer;
+}

@@ -4,17 +4,17 @@ import icon from 'client/Icons';
 
 import Autosuggest from 'react-autosuggest';
 
-const STATUS: 'status' = 'status';
-const FEED: 'feed' = 'feed';
-const TAG: 'tag' = 'tag';
+import {
+  STATUS,
+  FEED,
+  TAG
+} from 'client/Constants';
 
-const REASON_CHANGED: 'input-changed' = 'input-changed';
-const REASON_FOCUSED: 'input-focused' = 'input-focused';
-const ESCAPE_PRESSED: 'escape-pressed' = 'escape-pressed';
-const SUGGESTIONS_REVEALED: 'suggestions-revealed' = 'suggestions-revealed';
-const SUGGESTION_SELECTED: 'suggestion-selected' = 'suggestion-selected';
-const CLICK: 'click' = 'click';
-const ENTER: 'enter' = 'enter';
+import type {
+  Suggestion,
+  SuggestionFetch,
+  SuggestionSelected
+} from 'client/AutosuggestTypes'
 
 type Props = {
   value: string,
@@ -25,28 +25,6 @@ type State = {
   suggestions: Array<Suggestion>,
   value: string
 };
-
-type Suggestion = {
-  title: string,
-  type: typeof STATUS | typeof FEED | typeof TAG,
-  name?: string
-};
-
-type SuggestionFetch = {
-  value: string,
-  reason: typeof REASON_FOCUSED
-        | typeof REASON_CHANGED
-        | typeof ESCAPE_PRESSED
-        | typeof SUGGESTIONS_REVEALED
-        | typeof SUGGESTION_SELECTED
-};
-
-type SuggestionSelected = {
-  suggestion: Suggestion,
-  suggestionValue: string,
-  suggestionIndex: number,
-  method: typeof CLICK | typeof ENTER
-}
 
 const ICONS = Object.freeze({
   'tag': 'tag',
@@ -115,7 +93,7 @@ export default class Search extends React.Component<Props, State> {
     }, item);
   }
 
-  getSuggestions(value: string = '') {
+  getSuggestions(value: string = ''): Array<Suggestion> {
     const input = value.toLowerCase();
     const length = input.length;
     const parts = input.replace(/[()]/g, '').split(/[|&!]/);
@@ -149,7 +127,7 @@ export default class Search extends React.Component<Props, State> {
     this.setState({ suggestions: [] });
   }
 
-  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, { suggestion }: SuggestionSelected) {
+  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, { suggestion }: SuggestionSelected<Suggestion>) {
     const prev = this.state.value.replace(/([^|&!()]+)$/, '');
     const separator = prev.match(/[!(]$/) ? '' : ' ';
     const value = [ prev, suggestion.title ].filter(Boolean).join(separator);
