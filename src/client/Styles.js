@@ -173,7 +173,7 @@ export default class Styles extends React.Component<Props, State> {
             <EditFeedDialog
               open={this.state.editFeedOpen}
               title="An innovative web"
-              tags={['web', 'javascript']}
+              tags={['web', 'javascript', 'web-design', 'performance', 'scalability', 'html', 'emacs', 'vim', 'programming', 'technology', 'usability']}
               onCancel={() => this.setState({ editFeedOpen: false })}
               onClose={() => this.setState({ editFeedOpen: false })}
               onAccept={() => this.setState({ editFeedOpen: false })}

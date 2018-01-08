@@ -6,34 +6,37 @@
   }
 }
 
-.icon_white {
+@mixin icon-color($color) {
   svg > path {
-    fill: $material-color-grey-50;
+    fill: $color;
   }
+}
+
+@mixin icon-size($size) {
+  svg {
+    height: $size;
+    width: $size;
+  }
+}
+
+.icon_white {
+  @include icon-color($material-color-grey-50);
 }
 
 .icon_black {
-  svg > path {
-    fill: $black-color;
-  }
+  @include icon-color($black-color);
 }
 
 .icon_success {
-  svg > path {
-    fill: $success-color;
-  }
+  @include icon-color($success-color);
 }
 
 .icon_warning {
-  svg > path {
-    fill: $warning-color;
-  }
+  @include icon-color($warning-color);
 }
 
 .icon_error {
-  svg > path {
-    fill: $error-color;
-  }
+  @include icon-color($error-color);
 }
 
 .icon_size-32 {

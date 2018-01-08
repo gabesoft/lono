@@ -40,6 +40,7 @@
 
 .edit-feed-dialog .react-autosuggest__container {
   display: inline;
+  width: fit-content;
 }
 
 .react-autosuggest__container--open {
@@ -52,6 +53,7 @@
   left: 0;
   position: absolute;
   right: 0;
+  z-index: 2;
 }
 
 .react-autosuggest__suggestions-list {
@@ -84,15 +86,11 @@
 }
 
 .react-tagsinput-remove {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
+
 }
 
 .react-tagsinput-tag {
-  background-color: $material-color-grey-300;
-  padding: 10px 15px;
-  border-radius: 40px;
+
 }
 
 .react-tagsinput-tag a::before {

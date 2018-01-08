@@ -47,6 +47,14 @@ module.exports = {
     "import/no-unresolved": 0,
 
     // Useless rule which does not observe the flowtype settings
-    "flowtype/no-types-missing-file-annotation": 0
+    "flowtype/no-types-missing-file-annotation": 0,
+
+    // Require one of nesting or htmlFor but do not require both
+    "jsx-a11y/label-has-for": [1, {
+      "components": ["label"],
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }]
   }
 };

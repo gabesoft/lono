@@ -45,17 +45,22 @@
   border-radius: 50%;
 }
 
-@mixin layout($dir) {
+@mixin layout($dir, $inline: false) {
+  @if $inline == true {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+
   align-items: center;
-  display: flex;
   flex-direction: $dir;
   justify-content: space-between;
 }
 
-@mixin layout-h {
-  @include layout('row');
+@mixin layout-h($inline: false) {
+  @include layout('row', $inline);
 }
 
-@mixin layout-v {
-  @include layout('column');
+@mixin layout-v($inline: false) {
+  @include layout('column', $inline);
 }

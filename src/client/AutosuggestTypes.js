@@ -1,7 +1,4 @@
 import {
-  STATUS,
-  FEED,
-  TAG,
   REASON_FOCUSED,
   REASON_CHANGED,
   ESCAPE_PRESSED,
@@ -10,12 +7,6 @@ import {
   CLICK,
   ENTER
 } from 'client/Constants';
-
-export type Suggestion = {
-  title: string,
-  type: typeof STATUS | typeof FEED | typeof TAG,
-  name?: string
-};
 
 export type SuggestionFetch = {
   value: string,

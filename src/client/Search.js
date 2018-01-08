@@ -4,17 +4,16 @@ import icon from 'client/Icons';
 
 import Autosuggest from 'react-autosuggest';
 
-import {
-  STATUS,
-  FEED,
-  TAG
-} from 'client/Constants';
-
 import type {
-  Suggestion,
   SuggestionFetch,
   SuggestionSelected
 } from 'client/AutosuggestTypes'
+
+export type Suggestion = {
+  title: string,
+  type: typeof STATUS | typeof FEED | typeof TAG,
+  name?: string
+};
 
 type Props = {
   value: string,
@@ -25,6 +24,10 @@ type State = {
   suggestions: Array<Suggestion>,
   value: string
 };
+
+const STATUS: 'status' = 'status';
+const FEED: 'feed' = 'feed';
+const TAG: 'tag' = 'tag';
 
 const ICONS = Object.freeze({
   'tag': 'tag',
@@ -72,15 +75,15 @@ export default class Search extends React.Component<Props, State> {
     return value.trim().length > 0;
   }
 
-  renderSuggestion(item: Suggestion) {
+  renderSuggestion(suggestion: Suggestion) {
     const name = React.createElement('span', {
-      dangerouslySetInnerHTML: {__html: item.name}
+      dangerouslySetInnerHTML: { __html: suggestion.name }
     });
 
     return (
       <div className="search__suggestion">
         <div className="search__suggestion_info">
-          {icon(ICONS[item.type] || ICONS[item.title])}
+          {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
           {name}
         </div>
       </div>
@@ -104,12 +107,9 @@ export default class Search extends React.Component<Props, State> {
     }
 
     const pattern = new RegExp(`(${last})`);
-    const match = item => {
-      return item.title.match(pattern)
-    };
 
     return SUGGESTIONS
-      .filter(match)
+      .filter(s => s.title.match(pattern))
       .map(s => this.addName(s, pattern));
   }
 

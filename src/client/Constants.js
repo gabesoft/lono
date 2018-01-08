@@ -8,7 +8,3 @@ export const CLICK: 'click' = 'click';
 export const ENTER: 'enter' = 'enter';
 
 export const DELETE_KEY = 8;
-
-export const STATUS: 'status' = 'status';
-export const FEED: 'feed' = 'feed';
-export const TAG: 'tag' = 'tag';

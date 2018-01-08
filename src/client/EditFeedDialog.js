@@ -30,24 +30,29 @@ import type {
 
 // TODO: populate from store
 const TAGS = Object.freeze([
-  'design',
-  'dev-tools',
-  'emacs',
-  'functional',
-  'haskell',
-  'html',
-  'java',
-  'javascript',
-  'performance',
-  'programming',
-  'python',
-  'scalability',
-  'technology',
-  'usability',
-  'vim',
-  'web',
-  'web-design'
+  { title: 'design' },
+  { title: 'dev-tools' },
+  { title: 'emacs' },
+  { title: 'functional' },
+  { title: 'haskell' },
+  { title: 'html' },
+  { title: 'java' },
+  { title: 'javascript' },
+  { title: 'performance' },
+  { title: 'programming' },
+  { title: 'python' },
+  { title: 'scalability' },
+  { title: 'technology' },
+  { title: 'usability' },
+  { title: 'vim' },
+  { title: 'web' },
+  { title: 'web-design' }
 ]);
+
+type Suggestion = {
+  title: string,
+  name?: string
+};
 
 type Props = {
   open: boolean,
@@ -62,7 +67,7 @@ type State = {
   title: string,
   tags: Array<string>,
   value: string,
-  suggestions: Array<string>
+  suggestions: Array<Suggestion>
 };
 
 export default class EditFeedDialog extends React.Component<Props, State> {
@@ -81,11 +86,18 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     this.setState({ tags });
   }
 
-  getSuggestions(value: string = ''): Array<string> {
-    // TODO: add <mark> to suggestions
+  addName(item: Suggestion, pattern: RegExp): Suggestion {
+    return Object.assign({}, {
+      name: item.title.replace(pattern, '<mark>$1</mark>')
+    }, item);
+  }
+
+  getSuggestions(value: string = ''): Array<Suggestion> {
     const input = value.toLowerCase().trim();
-    const pattern = new RegExp(input);
-    return TAGS.filter(item => item.match(pattern));
+    const pattern = new RegExp(`(${input})`);
+    return TAGS
+      .filter(t => t.title.match(pattern))
+      .map(t => this.addName(t, pattern));
   }
 
   onSuggestionsFetchRequested({ value }: SuggestionFetch) {
@@ -96,9 +108,9 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     this.setState({ suggestions: [] });
   }
 
-  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, { suggestion }: SuggestionSelected<string>) {
+  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, { suggestion }: SuggestionSelected<Suggestion>) {
     const tags = this.state.tags;
-    tags.push(suggestion);
+    tags.push(suggestion.title);
     this.setState({ value: '', tags });
   }
 
@@ -122,24 +134,39 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     };
 
     const inputProps = {
+      id: 'edit-tags-input',
       name: 'tags',
       type: 'text',
+      label: 'Feed Tags',
       onChange,
       onKeyDown,
       value: this.state.value,
-      className: 'edit-feed-dialog__tags-input_input'
+      className: 'edit-feed-dialog__tags-input-input'
     };
 
-    const renderSuggestion = (suggestion) => {
-      return (
-        <span>{suggestion}</span>
-      );
+    const renderSuggestion = (suggestion: Suggestion) => {
+      return React.createElement('span', {
+        dangerouslySetInnerHTML: { __html: suggestion.name }
+      });
+    };
+
+    const renderInputComponent = (props) => {
+      if (this.state.tags.length > 0) {
+        return (
+          <input {...props}/>
+        );
+      } else {
+        return (
+          <TextField {...props}/>
+        );
+      }
     };
 
     return (
       <Autosuggest
         suggestions={this.state.suggestions}
         renderSuggestion={renderSuggestion}
+        renderInputComponent={renderInputComponent}
         getSuggestionValue={(item) => item}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
@@ -150,20 +177,41 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     );
   }
 
+  renderTagsTitle() {
+    if (this.state.tags.length === 0) {
+      return null;
+    }
+
+    return (
+      <label htmlFor="edit-tags-input" className="edit-feed-dialog__tags-input-title">
+        Feed Tags
+      </label>
+    );
+  }
+
   renderTag(props: Object) {
     const { key, tag, disabled, onRemove, getTagDisplayValue, classNameRemove } = props;
     const removeClass = `${classNameRemove} tag__remove`
 
     const remove = (
-      <a className={removeClass} onClick={() => onRemove(key)}>
+      <button className={removeClass} onClick={() => onRemove(key)}>
         {icon('close')}
-      </a>
+      </button>
     );
 
     return (
       <div key={key} className="tag">
         <span>{getTagDisplayValue(tag)}</span>
         {!disabled && remove}
+      </div>
+    );
+  }
+
+  renderTagsLayout(tagComponents: React.Node, inputComponents: React.Node) {
+    return (
+      <div className="edit-feed-dialog__tags-input-tags">
+        {tagComponents}
+        {inputComponents}
       </div>
     );
   }
@@ -186,13 +234,16 @@ export default class EditFeedDialog extends React.Component<Props, State> {
                 Enter a new feed title
               </TextFieldHelperText>
 
-              <TagsInput
-                className="edit-feed-dialog__tags-input"
-                value={this.state.tags}
-                renderInput={this.renderInput.bind(this)}
-                renderTag={this.renderTag.bind(this)}
-                onChange={(tags) => this.handleTagsChange(tags)}
-              />
+              <div className="edit-feed-dialog__tags-input">
+                {this.renderTagsTitle()}
+                <TagsInput
+                  value={this.state.tags}
+                  renderInput={this.renderInput.bind(this)}
+                  renderTag={this.renderTag.bind(this)}
+                  renderLayout={this.renderTagsLayout.bind(this)}
+                  onChange={(tags) => this.handleTagsChange(tags)}
+                />
+              </div>
             </DialogBody>
             <DialogFooter className="edit-feed-dialog__footer">
               <Button onClick={this.props.onCancel}>
