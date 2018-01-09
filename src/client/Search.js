@@ -82,10 +82,8 @@ export default class Search extends React.Component<Props, State> {
 
     return (
       <div className="search__suggestion">
-        <div className="search__suggestion_info">
-          {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
-          {name}
-        </div>
+        {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
+        {name}
       </div>
     );
   }

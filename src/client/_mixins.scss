@@ -45,7 +45,7 @@
   border-radius: 50%;
 }
 
-@mixin layout($dir, $inline: false) {
+@mixin layout($dir, $inline: false, $justify-content: space-between) {
   @if $inline == true {
     display: inline-flex;
   } @else {
@@ -54,13 +54,13 @@
 
   align-items: center;
   flex-direction: $dir;
-  justify-content: space-between;
+  justify-content: $justify-content;
 }
 
-@mixin layout-h($inline: false) {
-  @include layout('row', $inline);
+@mixin layout-h($inline: false, $justify-content: space-between) {
+  @include layout(row, $inline, $justify-content);
 }
 
-@mixin layout-v($inline: false) {
-  @include layout('column', $inline);
+@mixin layout-v($inline: false, $justify-content: space-between) {
+  @include layout(column, $inline, $justify-content);
 }

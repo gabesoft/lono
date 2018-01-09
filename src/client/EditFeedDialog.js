@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import TagsInput from 'react-tagsinput';
 import Autosuggest from 'react-autosuggest';
-import icon from 'client/Icons';
+
+import Tag from 'client/Tag';
 
 import {
   Button,
@@ -191,19 +192,15 @@ export default class EditFeedDialog extends React.Component<Props, State> {
 
   renderTag(props: Object) {
     const { key, tag, disabled, onRemove, getTagDisplayValue, classNameRemove } = props;
-    const removeClass = `${classNameRemove} tag__remove`
-
-    const remove = (
-      <button className={removeClass} onClick={() => onRemove(key)}>
-        {icon('close')}
-      </button>
-    );
 
     return (
-      <div key={key} className="tag">
-        <span>{getTagDisplayValue(tag)}</span>
-        {!disabled && remove}
-      </div>
+      <Tag
+        key={key}
+        title={getTagDisplayValue(tag)}
+        renderRemove={!disabled}
+        removeClass={classNameRemove}
+        onRemoveClick={() => onRemove(key)}
+      />
     );
   }
 
