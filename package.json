@@ -28,7 +28,7 @@
     "koa-router": "^7.3.0",
     "koa-send": "^4.1.2",
     "koa-static": "^4.0.2",
-    "material-components-web": "^0.27.0",
+    "material-components-web": "^0.28.0",
     "react": "^16.2.0",
     "react-autosuggest": "^9.3.2",
     "react-dom": "^16.2.0",
@@ -41,20 +41,20 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.1.2",
+    "babel-eslint": "^8.2.1",
     "babel-preset-react": "^6.24.1",
-    "eslint": "^4.14.0",
-    "eslint-plugin-flowtype": "^2.40.1",
+    "eslint": "^4.15.0",
+    "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
-    "flow-bin": "^0.62.0",
+    "flow-bin": "^0.63.1",
     "flow-remove-types": "^1.2.3",
     "flow-typed": "^2.2.3",
     "node-sass": "^4.7.2",
     "rfresh": "0.0.25",
     "sass-lint": "^1.12.1",
     "webpack": "^3.10.0",
-    "webpack-bundle-analyzer": "^2.9.1"
+    "webpack-bundle-analyzer": "^2.9.2"
   }
 }
