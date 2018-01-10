@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import TagsInput from 'react-tagsinput';
-import Autosuggest from 'react-autosuggest';
+import Autosuggest, { filterSuggestions } from 'client/Autosuggest';
 
 import Tag from 'client/Tag';
 
@@ -21,16 +21,15 @@ import {
 
 import {
   DELETE_KEY,
-  ENTER
+  ENTER,
 } from 'client/Constants';
 
 import type {
-  SuggestionFetch,
-  SuggestionSelected
-} from 'client/AutosuggestTypes';
+  BaseSuggestion
+} from 'client/Autosuggest';
 
 // TODO: populate from store
-const TAGS = Object.freeze([
+const TAGS: Array<BaseSuggestion> = Object.freeze([
   { title: 'design' },
   { title: 'dev-tools' },
   { title: 'emacs' },
@@ -50,11 +49,6 @@ const TAGS = Object.freeze([
   { title: 'web-design' }
 ]);
 
-type Suggestion = {
-  title: string,
-  name?: string
-};
-
 type Props = {
   open: boolean,
   title: string,
@@ -68,7 +62,7 @@ type State = {
   title: string,
   tags: Array<string>,
   value: string,
-  suggestions: Array<Suggestion>
+  suggestions: Array<BaseSuggestion>
 };
 
 export default class EditFeedDialog extends React.Component<Props, State> {
@@ -87,31 +81,13 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     this.setState({ tags });
   }
 
-  addName(item: Suggestion, pattern: RegExp): Suggestion {
-    return Object.assign({}, {
-      name: item.title.replace(pattern, '<mark>$1</mark>')
-    }, item);
+  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, suggestion: BaseSuggestion) {
+    this.onFreeFormSelected(event, suggestion.title);
   }
 
-  getSuggestions(value: string = ''): Array<Suggestion> {
-    const input = value.toLowerCase().trim();
-    const pattern = new RegExp(`(${input})`);
-    return TAGS
-      .filter(t => t.title.match(pattern))
-      .map(t => this.addName(t, pattern));
-  }
-
-  onSuggestionsFetchRequested({ value }: SuggestionFetch) {
-    this.setState({ suggestions: this.getSuggestions(value) });
-  }
-
-  onSuggestionsClearRequested() {
-    this.setState({ suggestions: [] });
-  }
-
-  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, { suggestion }: SuggestionSelected<Suggestion>) {
+  onFreeFormSelected(event: SyntheticEvent<HTMLElement>, value: string) {
     const tags = this.state.tags;
-    tags.push(suggestion.title);
+    tags.push(value);
     this.setState({ value: '', tags });
   }
 
@@ -119,7 +95,8 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     const onChange = (event, { method }) => {
       if (method === ENTER) {
         event.preventDefault();
-      } else {
+      }
+      else {
         this.setState({ value: event.target.value });
       }
     };
@@ -127,28 +104,13 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     const onKeyDown = (event) => {
       const remove = event.keyCode === DELETE_KEY || event.key === DELETE_KEY;
       const tags = this.state.tags;
-      if (remove && tags.length > 0 && this.state.value === '') {
+      const value = event.currentTarget.value;
+
+      if (remove && tags.length > 0 && value === '') {
         event.preventDefault();
         tags.pop();
         this.setState({ tags });
       }
-    };
-
-    const inputProps = {
-      id: 'edit-tags-input',
-      name: 'tags',
-      type: 'text',
-      label: 'Feed Tags',
-      onChange,
-      onKeyDown,
-      value: this.state.value,
-      className: 'edit-feed-dialog__tags-input-input'
-    };
-
-    const renderSuggestion = (suggestion: Suggestion) => {
-      return React.createElement('span', {
-        dangerouslySetInnerHTML: { __html: suggestion.name }
-      });
     };
 
     const renderInputComponent = (props) => {
@@ -165,15 +127,19 @@ export default class EditFeedDialog extends React.Component<Props, State> {
 
     return (
       <Autosuggest
-        suggestions={this.state.suggestions}
-        renderSuggestion={renderSuggestion}
-        renderInputComponent={renderInputComponent}
-        getSuggestionValue={(item) => item}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-        highlightFirstSuggestion={true}
+        inline
+        getSuggestions={value => filterSuggestions(TAGS, value)}
+        highlightFirstSuggestion={false}
+        inputId="edit-tags-input"
+        inputName="tags"
+        inputLabel="Feed Tags"
+        inputClassName="edit-feed-dialog__tags-input-input"
+        onInputChange={onChange}
+        onInputKeyDown={onKeyDown}
         onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-        inputProps={inputProps}
+        onFreeFormSelected={this.onFreeFormSelected.bind(this)}
+        renderInputComponent={renderInputComponent}
+        value={this.state.value}
       />
     );
   }

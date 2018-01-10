@@ -2,17 +2,14 @@ import * as React from 'react';
 
 import icon from 'client/Icons';
 
-import Autosuggest from 'react-autosuggest';
+import Autosuggest, { filterSuggestions } from 'client/Autosuggest';
 
 import type {
-  SuggestionFetch,
-  SuggestionSelected
-} from 'client/AutosuggestTypes'
+  BaseSuggestion
+} from 'client/Autosuggest'
 
-export type Suggestion = {
-  title: string,
-  type: typeof STATUS | typeof FEED | typeof TAG,
-  name?: string
+export type Suggestion = BaseSuggestion & {
+  type: typeof STATUS | typeof FEED | typeof TAG
 };
 
 type Props = {
@@ -71,15 +68,7 @@ export default class Search extends React.Component<Props, State> {
     };
   }
 
-  shouldRenderSuggestions(value: string = '') {
-    return value.trim().length > 0;
-  }
-
-  renderSuggestion(suggestion: Suggestion) {
-    const name = React.createElement('span', {
-      dangerouslySetInnerHTML: { __html: suggestion.name }
-    });
-
+  renderSuggestion(suggestion: Suggestion, name: React.Node) {
     return (
       <div className="search__suggestion">
         {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
@@ -88,44 +77,15 @@ export default class Search extends React.Component<Props, State> {
     );
   }
 
-  addName(item: Suggestion, pattern: RegExp): Suggestion {
-    return Object.assign({}, {
-      name: item.title.replace(pattern, '<mark>$1</mark>')
-    }, item);
-  }
-
   getSuggestions(value: string = ''): Array<Suggestion> {
     const input = value.toLowerCase();
     const length = input.length;
     const parts = input.replace(/[()]/g, '').split(/[|&!]/);
     const last = parts[parts.length - 1].trim();
-
-    if (length === 0) {
-      return [];
-    }
-
-    const pattern = new RegExp(`(${last})`);
-
-    return SUGGESTIONS
-      .filter(s => s.title.match(pattern))
-      .map(s => this.addName(s, pattern));
+    return length === 0 ? [] : filterSuggestions(SUGGESTIONS, last);
   }
 
-  getSuggestionValue(item: Suggestion) {
-    return item.title;
-  }
-
-  onSuggestionsFetchRequested({ value }: SuggestionFetch) {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
-  }
-
-  onSuggestionsClearRequested() {
-    this.setState({ suggestions: [] });
-  }
-
-  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, { suggestion }: SuggestionSelected<Suggestion>) {
+  onSuggestionSelected(event: SyntheticEvent<HTMLElement>, suggestion: Suggestion) {
     const prev = this.state.value.replace(/([^|&!()]+)$/, '');
     const separator = prev.match(/[!(]$/) ? '' : ' ';
     const value = [ prev, suggestion.title ].filter(Boolean).join(separator);
@@ -134,26 +94,18 @@ export default class Search extends React.Component<Props, State> {
 
   render() {
     const className = `search ${this.props.className || ''}`;
-    const inputProps = {
-      name: "search",
-      type: "text",
-      onChange: (event) => this.setState({ value: event.target.value }),
-      value: this.state.value,
-      className: "search__input"
-    };
 
     return (
       <div className={className}>
         <Autosuggest
-          suggestions={this.state.suggestions}
-          renderSuggestion={this.renderSuggestion.bind(this)}
-          getSuggestionValue={this.getSuggestionValue.bind(this)}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-          onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-          shouldRenderSuggestions={this.shouldRenderSuggestions.bind(this)}
+          getSuggestions={this.getSuggestions.bind(this)}
           highlightFirstSuggestion={true}
-          inputProps={inputProps}
+          inputClassName="search__input"
+          inputName="search"
+          onInputChange={event => this.setState({ value: event.target.value })}
+          onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+          renderSuggestion={this.renderSuggestion.bind(this)}
+          value={this.state.value}
         />
       </div>
     );

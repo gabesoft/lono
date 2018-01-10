@@ -7,4 +7,6 @@ export const SUGGESTION_SELECTED: 'suggestion-selected' = 'suggestion-selected';
 export const CLICK: 'click' = 'click';
 export const ENTER: 'enter' = 'enter';
 
-export const DELETE_KEY = 8;
+export const DELETE_KEY: 8 = 8;
+export const ENTER_KEY: 13 = 13;
+
