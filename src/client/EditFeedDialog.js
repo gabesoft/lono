@@ -66,6 +66,9 @@ type State = {
 };
 
 export default class EditFeedDialog extends React.Component<Props, State> {
+  tagsInput: ?HTMLElement
+  titleInput: ?HTMLElement
+
   constructor(props: Props) {
     super(props);
 
@@ -75,6 +78,14 @@ export default class EditFeedDialog extends React.Component<Props, State> {
       value: '',
       suggestions: TAGS
     };
+  }
+
+  componentDidUpdate() {
+    const titleFocused = document.activeElement === this.titleInput;
+    const zeroOrOneTag = this.state.tags.length <= 1;
+    if (zeroOrOneTag && !titleFocused && this.tagsInput && this.tagsInput.focus) {
+      this.tagsInput.focus();
+    }
   }
 
   handleTagsChange(tags: Array<string>) {
@@ -116,11 +127,11 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     const renderInputComponent = (props) => {
       if (this.state.tags.length > 0) {
         return (
-          <input {...props}/>
+          <input {...props} ref={input => { this.tagsInput = input }} />
         );
       } else {
         return (
-          <TextField {...props}/>
+          <TextField {...props} ref={field => { this.tagsInput = field && field.mdcApi.input_ }} />
         );
       }
     };
@@ -192,6 +203,7 @@ export default class EditFeedDialog extends React.Component<Props, State> {
                 label="Feed Title"
                 value={this.state.title}
                 onChange={(event) => this.setState({ title: event.target.value })}
+                ref={field => { this.titleInput = field && field.mdcApi.input_ }}
               />
               <TextFieldHelperText>
                 Enter a new feed title
