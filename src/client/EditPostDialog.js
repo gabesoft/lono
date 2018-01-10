@@ -15,8 +15,7 @@ import {
   DialogBody,
   DialogFooter,
   DialogBackdrop,
-  TextField,
-  TextFieldHelperText
+  TextField
 } from 'rmwc';
 
 import {
@@ -64,9 +63,8 @@ type State = {
   value: string
 };
 
-export default class EditFeedDialog extends React.Component<Props, State> {
+export default class EditPostDialog extends React.Component<Props, State> {
   tagsInput: ?HTMLElement
-  titleInput: ?HTMLElement
 
   constructor(props: Props) {
     super(props);
@@ -79,9 +77,8 @@ export default class EditFeedDialog extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    const titleFocused = document.activeElement === this.titleInput;
     const zeroOrOneTag = this.state.tags.length <= 1;
-    if (zeroOrOneTag && !titleFocused && this.tagsInput && this.tagsInput.focus) {
+    if (zeroOrOneTag && this.tagsInput && this.tagsInput.focus) {
       this.tagsInput.focus();
     }
   }
@@ -127,7 +124,7 @@ export default class EditFeedDialog extends React.Component<Props, State> {
         return (
           <input {...props}
             ref={input => { this.tagsInput = input }}
-            className="edit-feed-dialog__tags-input-input"
+            className="edit-post-dialog__tags-input-input"
           />
         );
       } else {
@@ -146,7 +143,7 @@ export default class EditFeedDialog extends React.Component<Props, State> {
         highlightFirstSuggestion={false}
         inputId="edit-tags-input"
         inputName="tags"
-        inputLabel="Feed Tags"
+        inputLabel="Post Tags"
         onInputChange={onChange}
         onInputKeyDown={onKeyDown}
         onSuggestionSelected={this.onSuggestionSelected.bind(this)}
@@ -163,8 +160,8 @@ export default class EditFeedDialog extends React.Component<Props, State> {
     }
 
     return (
-      <label htmlFor="edit-tags-input" className="edit-feed-dialog__tags-input-title">
-        Feed Tags
+      <label htmlFor="edit-tags-input" className="edit-post-dialog__tags-input-title">
+        Post Tags
       </label>
     );
   }
@@ -185,7 +182,7 @@ export default class EditFeedDialog extends React.Component<Props, State> {
 
   renderTagsLayout(tagComponents: React.Node, inputComponents: React.Node) {
     return (
-      <div className="edit-feed-dialog__tags-input-tags">
+      <div className="edit-post-dialog__tags-input-tags">
         {tagComponents}
         {inputComponents}
       </div>
@@ -195,23 +192,13 @@ export default class EditFeedDialog extends React.Component<Props, State> {
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <DialogRoot className="edit-feed-dialog">
+        <DialogRoot className="edit-post-dialog">
           <DialogSurface>
-            <DialogHeader className="edit-feed-dialog__header">
-              <DialogHeaderTitle>Edit feed</DialogHeaderTitle>
+            <DialogHeader className="edit-post-dialog__header">
+              <DialogHeaderTitle>Edit post</DialogHeaderTitle>
             </DialogHeader>
-            <DialogBody className="edit-feed__body">
-              <TextField
-                label="Feed Title"
-                value={this.state.title}
-                onChange={(event) => this.setState({ title: event.target.value })}
-                ref={field => { this.titleInput = field && field.mdcApi.input_ }}
-              />
-              <TextFieldHelperText>
-                Enter a new feed title
-              </TextFieldHelperText>
-
-              <div className="edit-feed-dialog__tags-input">
+            <DialogBody className="edit-post__body">
+              <div className="edit-post-dialog__tags-input">
                 {this.renderTagsTitle()}
                 <TagsInput
                   value={this.state.tags}
@@ -222,7 +209,7 @@ export default class EditFeedDialog extends React.Component<Props, State> {
                 />
               </div>
             </DialogBody>
-            <DialogFooter className="edit-feed-dialog__footer">
+            <DialogFooter className="edit-post-dialog__footer">
               <Button onClick={this.props.onCancel}>
                 Cancel
               </Button>

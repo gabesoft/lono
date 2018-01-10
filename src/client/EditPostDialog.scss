@@ -5,11 +5,11 @@
 @import '@material/typography/mixins';
 
 
-.edit-feed-dialog__tags-input {
+.edit-post-dialog__tags-input {
   @include space-v(10px);
 }
 
-.edit-feed-dialog__tags-input-tags {
+.edit-post-dialog__tags-input-tags {
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -20,14 +20,14 @@
   }
 }
 
-.edit-feed-dialog__tags-input-input {
+.edit-post-dialog__tags-input-input {
   border: 0;
   border-bottom: 1px solid $material-color-grey-300;
   outline: none;
   padding: 0 0 8px;
 }
 
-.edit-feed-dialog__tags-input-title {
+.edit-post-dialog__tags-input-title {
   display: inline-block;
   transform: scale(.75);
   transform-origin: left top;

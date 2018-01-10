@@ -13,6 +13,7 @@
 @import './Tag';
 @import './AddFeedDialog';
 @import './EditFeedDialog';
+@import './EditPostDialog';
 
 body {
   background-color: $background-color;
@@ -22,4 +23,12 @@ mark {
   background: none;
   color: currentColor;
   text-decoration: underline;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+.margin-top-0 {
+  margin-top: 0;
 }
