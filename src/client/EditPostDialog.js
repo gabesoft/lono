@@ -50,15 +50,13 @@ const TAGS: Array<BaseSuggestion> = Object.freeze([
 
 type Props = {
   open: boolean,
-  title: string,
   tags: Array<string>,
   onClose: () => void,
-  onAccept: (title: string, tags: Array<string>) => void,
+  onAccept: (tags: Array<string>) => void,
   onCancel: () => void
 };
 
 type State = {
-  title: string,
   tags: Array<string>,
   value: string
 };
@@ -70,7 +68,6 @@ export default class EditPostDialog extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      title: props.title,
       tags: props.tags,
       value: ''
     };
@@ -213,7 +210,7 @@ export default class EditPostDialog extends React.Component<Props, State> {
               <Button onClick={this.props.onCancel}>
                 Cancel
               </Button>
-              <Button onClick={() => this.props.onAccept(this.state.title, this.state.tags)} raised>
+              <Button onClick={() => this.props.onAccept(this.state.tags)} raised>
                 Add
               </Button>
             </DialogFooter>
