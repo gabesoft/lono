@@ -1,5 +1,5 @@
-{
-  "feeds": [
+export default {
+  feeds: [
     {
       "lastReadDate": "2017-12-26T23:30:55.643Z",
       "image": null,
@@ -18301,7 +18301,7 @@
       "description": "Stories by Dan Abramov on Medium"
     }
   ],
-  "subscriptions": [
+  subscriptions: [
     {
       "_id": "56d7ddf3c788cb1d6eb919c1",
       "unreadCount": 2,
@@ -26213,4 +26213,4 @@
       ]
     }
   ]
-}
+};

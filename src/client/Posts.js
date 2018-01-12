@@ -2,7 +2,19 @@ import * as React from 'react';
 
 import posts from 'client/data-posts';
 
-export default class Posts extends React.Component<{||}> {
+type Props = {
+
+};
+
+type State = {
+
+};
+
+export default class Posts extends React.Component<Props, State> {
+  renderPosts() {
+
+  }
+
   render () {
     return (
       <div>
