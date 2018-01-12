@@ -60,7 +60,7 @@ export default class TagsInput extends React.Component<Props, State> {
 
   onFreeFormSelected(event: SyntheticEvent<HTMLElement>, value: string) {
     const tags = this.props.tags;
-    tags.push(value);
+    tags.push(value.trim());
     this.props.onTagsChange(tags);
     this.setState({ value: '' });
   }

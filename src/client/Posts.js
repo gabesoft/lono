@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import posts from 'client/data-posts';
+
 export default class Posts extends React.Component<{||}> {
   render () {
     return (
