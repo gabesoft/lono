@@ -1,0 +1,10 @@
+@import '@material/typography/mixins';
+@import './mixins';
+
+.delete-feed-dialog__header {
+  @include space-h(10px);
+}
+
+.delete-feed-dialog__content {
+  @include mdc-typography('headline');
+}

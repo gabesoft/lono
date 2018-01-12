@@ -6,6 +6,7 @@ import Post from 'client/Post';
 import Feed from 'client/Feed';
 import AddFeedDialog from 'client/AddFeedDialog';
 import EditFeedDialog from 'client/EditFeedDialog';
+import DeleteFeedDialog from 'client/DeleteFeedDialog';
 import EditPostDialog from 'client/EditPostDialog';
 
 import {
@@ -40,6 +41,7 @@ type State = {
   addFeedLoading: boolean,
   addFeedOpen: boolean,
   editFeedOpen: boolean,
+  deleteFeedOpen: boolean,
   editPostOpen: boolean,
   menu1IsOpen: boolean,
   menu2IsOpen: boolean,
@@ -63,6 +65,7 @@ export default class Styles extends React.Component<Props, State> {
       addFeedLoading: false,
       addFeedOpen: false,
       editFeedOpen: false,
+      deleteFeedOpen: false,
       editPostOpen: false,
       menu1IsOpen: false,
       menu2IsOpen: false,
@@ -172,10 +175,20 @@ export default class Styles extends React.Component<Props, State> {
             <Button onClick={() => this.setState({ editFeedOpen: true })}>
               Edit Feed
             </Button>
+            <Button onClick={() => this.setState({ deleteFeedOpen: true })}>
+              Delete Feed
+            </Button>
             <Button onClick={() => this.setState({ editPostOpen: true })}>
               Edit Post
             </Button>
 
+            <DeleteFeedDialog
+              open={this.state.deleteFeedOpen}
+              title="Tech stories from an Apple developer"
+              onCancel={() => this.setState({ deleteFeedOpen: false })}
+              onClose={() => this.setState({ deleteFeedOpen: false })}
+              onAccept={() => this.setState({ deleteFeedOpen: false })}
+            />
             <EditPostDialog
               open={this.state.editPostOpen}
               tags={['web', 'javascript' ]}

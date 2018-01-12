@@ -4,7 +4,7 @@ import Autosuggest, { filterSuggestions } from 'client/Autosuggest';
 import ReactTagsInput from 'react-tagsinput';
 import Tag from 'client/Tag';
 
-import uuid from 'uuid/v1';
+import uuid from 'uuid/v4';
 
 import {
   TextField
