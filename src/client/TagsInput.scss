@@ -1,0 +1,33 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import '@material/typography/mixins';
+
+.tags-input {
+  @include space-v(10px);
+}
+
+.tags-input__tags {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  > * {
+    margin: 3px;
+  }
+}
+
+.tags-input__input {
+  border: 0;
+  border-bottom: 1px solid $material-color-grey-300;
+  outline: none;
+  padding: 0 0 8px;
+  width: 140px;
+}
+
+.tags-input__title {
+  display: inline-block;
+  transform: scale(.75);
+  transform-origin: left top;
+}

@@ -3,32 +3,3 @@
 @import './mixins';
 @import './Icons';
 @import '@material/typography/mixins';
-
-
-.edit-post-dialog__tags-input {
-  @include space-v(10px);
-}
-
-.edit-post-dialog__tags-input-tags {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  > * {
-    margin: 3px;
-  }
-}
-
-.edit-post-dialog__tags-input-input {
-  border: 0;
-  border-bottom: 1px solid $material-color-grey-300;
-  outline: none;
-  padding: 0 0 8px;
-}
-
-.edit-post-dialog__tags-input-title {
-  display: inline-block;
-  transform: scale(.75);
-  transform-origin: left top;
-}

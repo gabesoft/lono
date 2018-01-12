@@ -37,7 +37,8 @@
     "react-router-dom": "^4.2.2",
     "react-tagsinput": "^3.19.0",
     "redux": "^3.7.2",
-    "rmwc": "0.0.1-rc13"
+    "rmwc": "0.0.1-rc13",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
