@@ -42,6 +42,12 @@ a {
   outline: none;
 }
 
+svg {
+  > path {
+    fill: $foreground-color;
+  }
+}
+
 mark {
   background: none;
   color: currentColor;

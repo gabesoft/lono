@@ -8,7 +8,9 @@
   @include layout-v;
   @include padding(5px 10px);
   @include space-v(15px);
-  @include flat-border;
+  @include flat-border($hide-on-hover: true);
+
+  border-radius: $border-radius;
 
   > * {
     width: 100%;
@@ -16,7 +18,7 @@
 }
 
 .post_new {
-  @include flat-border($unread-color-faded)
+  @include flat-border($unread-color-faded, $hide-on-hover: true)
 }
 
 .post__header,

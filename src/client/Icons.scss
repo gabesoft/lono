@@ -20,11 +20,11 @@
 }
 
 .icon_white {
-  @include icon-color($material-color-grey-50);
+  @include icon-color($background-color);
 }
 
 .icon_black {
-  @include icon-color($black-color);
+  @include icon-color($foreground-color);
 }
 
 .icon_success {
