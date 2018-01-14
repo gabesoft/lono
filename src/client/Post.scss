@@ -8,8 +8,7 @@
   @include layout-v;
   @include padding(5px 10px);
   @include space-v(15px);
-
-  background-color: $background-color;
+  @include flat-border;
 
   > * {
     width: 100%;

@@ -1,13 +1,13 @@
 import * as React from 'react';
 
+import posts from 'client/data-posts';
+
 import {
   Grid,
   GridCell
 } from 'rmwc';
 
 import Post from 'client/Post';
-
-import posts from 'client/data-posts';
 
 type Props = {
 
@@ -28,7 +28,7 @@ export default class Posts extends React.Component<Props, State> {
   renderPosts() {
     return this.state.posts.map(feed => {
       return (
-        <GridCell key={feed.postId} className="posts__post" span="4">
+        <GridCell key={feed.postId} className="posts__post" phone="4" tablet="4" desktop="3">
           <Post
             id={feed.postId}
             author={feed.post.author}

@@ -4,7 +4,7 @@ import {
   Elevation
 } from 'rmwc';
 
-const ELEVATION_UNFOCUSED: 1 = 1;
+const ELEVATION_UNFOCUSED: 0 = 0;
 const ELEVATION_FOCUSED: 4 = 4;
 
 type Props = {

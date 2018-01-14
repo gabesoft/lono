@@ -30,6 +30,7 @@
 }
 
 .headroom--scrolled {
-  padding: 0 15px;
+  padding: 0 $body-padding;
   transition: transform 400ms ease-in-out;
+  background-color: $mdc-theme-primary;
 }

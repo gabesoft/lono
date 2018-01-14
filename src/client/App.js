@@ -16,7 +16,7 @@ export default class App extends Component<{||}> {
   render() {
     return(
       <Router>
-        <div className="app">
+        <div className="app__content">
           <Header
             username="gabesoft"
             subscribedCount={35}

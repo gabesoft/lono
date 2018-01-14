@@ -19,18 +19,27 @@
 @import './EditPostDialog';
 
 .app {
-  background-color: $background-color;
-  color: $foreground-color;
+  background-color: $mdc-theme-primary;
+}
+
+.app__content {
   margin: auto;
-  max-width: $window-max-width;
+  max-width: $body-max-width;
 }
 
 body {
   background-color: $mdc-theme-primary;
+  margin: 0 $body-padding;
 
   * {
+    background-color: $background-color;
     box-sizing: border-box;
+    color: $foreground-color;
   }
+}
+
+a {
+  outline: none;
 }
 
 mark {

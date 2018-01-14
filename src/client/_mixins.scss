@@ -79,3 +79,12 @@
 @mixin layout-v($inline: false, $justify-content: space-between) {
   @include layout(column, $inline, $justify-content);
 }
+
+@mixin flat-border {
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: $border-radius;
+
+  &:hover {
+    border: 1px solid transparent;
+  }
+}
