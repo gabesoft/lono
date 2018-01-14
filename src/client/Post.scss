@@ -5,19 +5,28 @@
 @import '@material/typography/mixins';
 
 .post {
-  @include space-v(15px);
+  @include layout-v;
   @include padding(5px 10px);
+  @include space-v(15px);
 
-  background-color: $material-color-grey-100;
+  background-color: $background-color;
+
+  > * {
+    width: 100%;
+  }
 }
 
 .post__header,
 .post__footer {
   @include layout-h;
+
+  flex: 0 0 auto;
 }
 
 .post__header {
-  background-color: $mdc-theme-primary-light;
+  @include space-h(5px);
+
+  border-bottom: 1px solid $mdc-theme-secondary-dark;
 }
 
 .post__actions_menu-item {
@@ -33,26 +42,62 @@
 
   color: currentColor;
   display: block;
+  flex: 1 1 auto;
+  overflow: hidden;
   text-decoration: none;
+}
+
+.post__feed-info {
+  @include mdc-typography('subheading2');
+  @include layout-h;
+
+  width: 100%;
+}
+
+.post__avatar,
+.post__actions {
+  flex: 0 0 auto;
 }
 
 .post__feed-title {
   @include mdc-typography('subheading2');
-  @include space-h(10px);
+  @include ellipsis-h;
+
+  flex: 1 1 auto;
 }
 
 .post__title {
-  @include mdc-typography('headline');
+  @include mdc-typography('title');
+  @include ellipsis-v($line-count: 3);
+
+  line-height: 1.6rem;
 }
 
 .post__summary {
   @include mdc-typography('body1');
+  @include ellipsis-v($line-count: 3);
+
+  color: $foreground-color-light;
 }
 
 .post__status {
   color: $unread-color;
+
+  flex: 0 0 auto;
+}
+
+.post__date {
+  color: $foreground-color-light;
+  text-transform: lowercase;
+}
+
+.post__author {
+  text-transform: capitalize;
 }
 
 .post__date-author {
   @include bullet-h;
+  @include ellipsis-h;
+
+  flex: 1 1 auto;
 }

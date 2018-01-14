@@ -24,13 +24,13 @@ import {
   GridCell,
   ListItem,
   ListItemText,
-  Menu,
+  SimpleMenu,
   MenuItem,
   MenuAnchor,
   Icon,
-  PersistentDrawer,
-  PersistentDrawerHeader,
-  PersistentDrawerContent,
+  Drawer,
+  DrawerHeader,
+  DrawerContent,
   Snackbar,
   Theme,
   Typography
@@ -316,31 +316,31 @@ export default class Styles extends React.Component<Props, State> {
                 <Icon>{icon('dots-vertical')}</Icon>
               </Button>
 
-              <Menu
+              <SimpleMenu
                 open={this.state.menu1IsOpen}
                 onClose={() => this.setState({menu1IsOpen: false})}
               >
                 <MenuItem>Cookies</MenuItem>
                 <MenuItem>Pizza</MenuItem>
                 <MenuItem>Icecream</MenuItem>
-              </Menu>
+              </SimpleMenu>
             </MenuAnchor>
             <MenuAnchor>
               <Button
                 raised
                 onClick={() => this.setState({'menu2IsOpen': !this.state.menu2IsOpen})}
               >
-                Open Menu
+                Open SimpleMenu
               </Button>
 
-              <Menu
+              <SimpleMenu
                 open={this.state.menu2IsOpen}
                 onClose={() => this.setState({menu2IsOpen: false})}
               >
                 <MenuItem>Cookies</MenuItem>
                 <MenuItem>Pizza</MenuItem>
                 <MenuItem>Icecream</MenuItem>
-              </Menu>
+              </SimpleMenu>
             </MenuAnchor>
           </section>
         </GridCell>
@@ -451,14 +451,14 @@ export default class Styles extends React.Component<Props, State> {
               Toggle Drawer
             </Button>
 
-            <PersistentDrawer
+            <Drawer
               open={this.state.open}
               onClose={() => this.setState({open: false})}
             >
-              <PersistentDrawerHeader style={{ backgroundColor: '#f6f6f6' }}>
-                PersistentDrawerHeader
-              </PersistentDrawerHeader>
-              <PersistentDrawerContent>
+              <DrawerHeader style={{ backgroundColor: '#f6f6f6' }}>
+                DrawerHeader
+              </DrawerHeader>
+              <DrawerContent>
                 <ListItem>
                   <ListItemText>Cookies</ListItemText>
                 </ListItem>
@@ -468,8 +468,8 @@ export default class Styles extends React.Component<Props, State> {
                 <ListItem>
                   <ListItemText>Icecream</ListItemText>
                 </ListItem>
-              </PersistentDrawerContent>
-            </PersistentDrawer>
+              </DrawerContent>
+            </Drawer>
           </section>
         </GridCell>
       </Grid>

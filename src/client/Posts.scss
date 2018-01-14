@@ -1,0 +1,17 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import './Icons';
+@import '@material/typography/mixins';
+
+.posts {
+  background-color: $background-color;
+}
+
+.posts__post {
+  height: 260px;
+
+  > * {
+    height: 100%;
+  }
+}

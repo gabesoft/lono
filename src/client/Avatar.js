@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 type Props = {
-  text: string
+  text: string,
+  className?: string
 }
 
 const getInitials = (text: string=''): string => {
@@ -21,9 +22,10 @@ const getInitials = (text: string=''): string => {
 
 const Avatar = (props: Props) => {
   const initials = getInitials(props.text);
+  const className = `${props.className || ''} avatar`;
 
   return (
-    <div className="avatar">
+    <div className={className}>
       {initials}
     </div>
   );

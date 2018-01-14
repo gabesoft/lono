@@ -1,3 +1,4 @@
+@import './colors';
 
 @mixin space-v($value) {
   > * {
@@ -43,6 +44,20 @@
     width: $size;
   }
   border-radius: 50%;
+}
+
+@mixin ellipsis-h {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+@mixin ellipsis-v($line-count) {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-count;
+  display: -webkit-box;
+  overflow: hidden;
 }
 
 @mixin layout($dir, $inline: false, $justify-content: space-between) {

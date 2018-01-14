@@ -7,6 +7,7 @@
 @import './Buttons';
 @import './Autosuggest';
 @import './Post';
+@import './Posts';
 @import './Feed';
 @import './Header';
 @import './Search';
@@ -17,8 +18,19 @@
 @import './DeleteFeedDialog';
 @import './EditPostDialog';
 
-body {
+.app {
   background-color: $background-color;
+  color: $foreground-color;
+  margin: auto;
+  max-width: $window-max-width;
+}
+
+body {
+  background-color: $mdc-theme-primary;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 mark {

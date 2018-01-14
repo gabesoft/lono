@@ -1,6 +1,8 @@
 import * as React from 'react';
 
+import moment from 'moment';
 import icon from 'client/Icons';
+
 import Avatar from 'client/Avatar';
 import Elevated from 'client/Elevated';
 
@@ -10,7 +12,7 @@ import {
 
 import {
   Button,
-  Menu,
+  SimpleMenu,
   MenuAnchor,
   MenuItem
 } from 'rmwc';
@@ -60,23 +62,21 @@ export default class Post extends React.Component<Props, State> {
     return (
       <Elevated className="post">
         <div className="post__header">
-          <div className="post__feed-title">
-            <Avatar text={this.props.feedTitle} />
-            <span>{this.props.feedTitle}</span>
-          </div>
+          <Avatar className="post__avatar" text={this.props.feedTitle} />
+          <span className="post__feed-title">{this.props.feedTitle}</span>
           <div className="post__actions">
             <MenuAnchor>
               <Button onClick={() => this.setState({ actionsOpen: true })}>
                 {icon('dots-vertical')}
               </Button>
 
-              <Menu
+              <SimpleMenu
                 open={this.state.actionsOpen}
                 onClose={() => this.setState({ actionsOpen: false })}
               >
                 {this.renderMenuItem('open-in-new', 'Open in new window', handler(this.props.onOpenClick))}
                 {this.renderMenuItem('tag', 'Edit tags', handler(this.props.onEditTagsClick))}
-              </Menu>
+              </SimpleMenu>
             </MenuAnchor>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default class Post extends React.Component<Props, State> {
               {this.props.author}
             </span>
             <span className="post__date">
-              {'3 hours ago'}
+              {moment(this.props.date).fromNow()}
             </span>
           </div>
           <div className="post__status">

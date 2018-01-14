@@ -7,7 +7,7 @@ import Optional from 'client/Optional';
 
 import {
   Button,
-  Menu,
+  SimpleMenu,
   MenuAnchor,
   MenuItem
 } from 'rmwc';
@@ -83,7 +83,7 @@ export default class Feed extends React.Component<Props, State> {
                 {icon('dots-vertical')}
               </Button>
 
-              <Menu
+              <SimpleMenu
                 open={this.state.actionsOpen}
                 onClose={() => this.setState({ actionsOpen: false })}
               >
@@ -92,7 +92,7 @@ export default class Feed extends React.Component<Props, State> {
                 {this.renderMenuItem('rss', 'Open rss in new window', handler(this.props.onOpenRssClick))}
                 {this.renderSubscribeMenuItem()}
                 {this.renderMenuItem('trash', 'Delete feed', handler(this.props.onDeleteClick))}
-              </Menu>
+              </SimpleMenu>
             </MenuAnchor>
           </div>
         </div>
