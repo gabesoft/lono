@@ -25,7 +25,11 @@
 .post__header {
   @include space-h(5px);
 
-  border-bottom: 1px solid $mdc-theme-secondary-dark;
+  border-bottom: 1px solid $border-color;
+
+  &.post_new {
+    border-bottom: 1px solid $unread-color-faded;
+  }
 }
 
 .post__actions_menu-item {

@@ -81,7 +81,7 @@
 }
 
 @mixin flat-border {
-  border: 1px solid rgba(0, 0, 0, .1);
+  border: 1px solid $border-color;
   border-radius: $border-radius;
 
   &:hover {

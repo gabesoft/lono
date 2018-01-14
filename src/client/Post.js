@@ -51,6 +51,10 @@ export default class Post extends React.Component<Props, State> {
     );
   }
 
+  getClass(baseClass: string, newClass: string) {
+    return `${baseClass} ${this.props.isNew ? newClass : ''}`;
+  }
+
   render() {
     const handler= (fn: Function) => {
       return () => {
@@ -60,8 +64,8 @@ export default class Post extends React.Component<Props, State> {
     };
 
     return (
-      <Elevated className="post">
-        <div className="post__header">
+      <Elevated className={this.getClass('post', 'post_new')}>
+        <div className={this.getClass('post__header', 'post_new')}>
           <Avatar className="post__avatar" text={this.props.feedTitle} />
           <span className="post__feed-title">{this.props.feedTitle}</span>
           <div className="post__actions">

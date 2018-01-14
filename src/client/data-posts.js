@@ -26,7 +26,7 @@ const posts = Object.freeze([
       ]
     },
     {
-      "read": false,
+      "read": true,
       "_id": "5a42dd7810906305c8001620-57e9fb18d5ec56510904cac2",
       "createdAt": "2017-12-26T23:38:32.928076081Z",
       "post": {
@@ -1493,7 +1493,7 @@ const posts = Object.freeze([
       ]
     },
     {
-      "read": false,
+      "read": true,
       "_id": "5a41386810906305c8000f4e-57e9f803d5ec56510904c9f4",
       "createdAt": "2017-12-25T17:42:00.573503621Z",
       "post": {
