@@ -15,6 +15,7 @@
 }
 
 .autosuggest__suggestions-container {
+  background-color: $background-color-faded;
   border-radius: $border-radius;
   left: 0;
   position: absolute;
@@ -32,14 +33,13 @@
 }
 
 .autosuggest__suggestion_highlighted {
-  @include icon-color($foreground-color-strong);
+  @include icon-color($foreground-color-dark);
 
   background-color: $mdc-theme-secondary;
   border-radius: $border-radius;
 
   * {
-    background-color: $mdc-theme-secondary;
-    color: $foreground-color-strong;
+    color: $foreground-color-dark;
   }
 }
 

@@ -32,5 +32,12 @@
 .headroom--scrolled {
   padding: 0 $body-padding;
   transition: transform 400ms ease-in-out;
-  background-color: $mdc-theme-primary;
+}
+
+.mdc-simple-menu {
+  background-color: $background-color;
+}
+
+.mdc-dialog__surface {
+  background-color: $background-color;
 }

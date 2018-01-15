@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import icon from 'client/Icons';
+import Elevated from 'client/Elevated';
 
 type Props = {
   title: string,
@@ -30,10 +31,10 @@ export default class Tag extends React.Component<Props, State> {
   render() {
     const className = `${this.props.className || ''} tag`;
     return (
-      <div className={className}>
+      <Elevated className={className} elevatedClassName="tag_elevated">
         <span>{this.props.title}</span>
         {this.renderRemove()}
-      </div>
+      </Elevated>
     );
   }
 }

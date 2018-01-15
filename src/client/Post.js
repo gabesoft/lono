@@ -64,7 +64,10 @@ export default class Post extends React.Component<Props, State> {
     };
 
     return (
-      <Elevated className={this.getClass('post', 'post_new')}>
+      <Elevated
+        className={this.getClass('post', 'post_new')}
+        elevatedClassName="post_elevated"
+      >
         <div className={this.getClass('post__header', 'post__header_new')}>
           <Avatar className="post__avatar" text={this.props.feedTitle} />
           <span className="post__feed-title">{this.props.feedTitle}</span>

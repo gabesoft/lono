@@ -8,7 +8,7 @@
   @include layout-v;
   @include padding(5px 10px);
   @include space-v(15px);
-  @include flat-border($hide-on-hover: true);
+  @include flat-border;
 
   border-radius: $border-radius;
 
@@ -18,7 +18,11 @@
 }
 
 .post_new {
-  @include flat-border($unread-color-faded, $hide-on-hover: true)
+  @include flat-border($unread-color-faded)
+}
+
+.post_elevated {
+  @include transparent-border;
 }
 
 .post__header,

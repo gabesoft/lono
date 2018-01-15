@@ -3,7 +3,6 @@ import * as React from 'react';
 import {
   Button,
   Dialog,
-  DialogRoot,
   DialogSurface,
   DialogHeader,
   DialogHeaderTitle,
@@ -88,20 +87,18 @@ export default class AddFeedDialog extends React.Component<Props, State> {
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <DialogRoot className="add-feed-dialog">
-          <DialogSurface>
-            <DialogHeader className="add-feed-dialog__header">
-              {this.renderHeaderTitle()}
-              {this.renderHeaderError()}
-            </DialogHeader>
-            {this.renderBody()}
-            <DialogFooter className="add-feed-dialog__footer">
-              <Button onClick={this.props.onCancel}>Cancel</Button>
-              <Button onClick={() => this.props.onAccept(this.state.value)} raised>Add</Button>
-            </DialogFooter>
-          </DialogSurface>
-          <DialogBackdrop />
-        </DialogRoot>
+        <DialogSurface className="add-feed-dialog">
+          <DialogHeader className="add-feed-dialog__header">
+            {this.renderHeaderTitle()}
+            {this.renderHeaderError()}
+          </DialogHeader>
+          {this.renderBody()}
+          <DialogFooter className="add-feed-dialog__footer">
+            <Button onClick={this.props.onCancel}>Cancel</Button>
+            <Button onClick={() => this.props.onAccept(this.state.value)} raised>Add</Button>
+          </DialogFooter>
+        </DialogSurface>
+        <DialogBackdrop />
       </Dialog>
     );
   }

@@ -19,7 +19,7 @@
 @import './EditPostDialog';
 
 .app {
-  background-color: $mdc-theme-primary;
+  background-color: $background-color;
 }
 
 .app__content {
@@ -27,12 +27,15 @@
   max-width: $body-max-width;
 }
 
+html {
+  background-color: $mdc-theme-primary;
+}
+
 body {
   background-color: $mdc-theme-primary;
   margin: 0 $body-padding;
 
   * {
-    background-color: $background-color;
     box-sizing: border-box;
     color: $foreground-color;
   }
@@ -46,6 +49,11 @@ svg {
   > path {
     fill: $foreground-color;
   }
+}
+
+input {
+  background: none;
+  outline: none;
 }
 
 mark {

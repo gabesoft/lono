@@ -37,7 +37,7 @@ export default class Posts extends React.Component<Props, State> {
             summary={feed.post.summary}
             link={feed.post.link}
             date={feed.post.date}
-            isNew={!feed.read}
+            isNew={feed.read === false}
             onOpenClick={() => undefined}
             onEditTagsClick={() => undefined}
           />

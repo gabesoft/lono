@@ -5,7 +5,6 @@ import TagsInput from 'client/TagsInput';
 import {
   Button,
   Dialog,
-  DialogRoot,
   DialogSurface,
   DialogHeader,
   DialogHeaderTitle,
@@ -69,40 +68,38 @@ export default class EditFeedDialog extends React.Component<Props, State> {
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <DialogRoot className="edit-feed-dialog">
-          <DialogSurface>
-            <DialogHeader className="edit-feed-dialog__header">
-              <DialogHeaderTitle>Edit feed</DialogHeaderTitle>
-            </DialogHeader>
-            <DialogBody className="edit-feed__body">
-              <TextField
-                label="Feed Title"
-                value={this.state.title}
-                onChange={(event) => this.setState({ title: event.target.value })}
-                ref={field => { this.titleInput = field && field.mdcApi.input_ }}
-              />
-              <TextFieldHelperText>
-                Enter a new feed title
-              </TextFieldHelperText>
+        <DialogSurface className="edit-feed-dialog">
+          <DialogHeader className="edit-feed-dialog__header">
+            <DialogHeaderTitle>Edit feed</DialogHeaderTitle>
+          </DialogHeader>
+          <DialogBody className="edit-feed__body">
+            <TextField
+              label="Feed Title"
+              value={this.state.title}
+              onChange={(event) => this.setState({ title: event.target.value })}
+              ref={field => { this.titleInput = field && field.mdcApi.input_ }}
+            />
+            <TextFieldHelperText>
+              Enter a new feed title
+            </TextFieldHelperText>
 
-              <TagsInput
-                inputLabel="Feed Tags"
-                tags={this.state.tags}
-                suggestions={TAG_SUGGESTIONS}
-                onTagsChange={tags => this.setState({ tags })}
-              />
-            </DialogBody>
-            <DialogFooter className="edit-feed-dialog__footer">
-              <Button onClick={this.props.onCancel}>
-                Cancel
-              </Button>
-              <Button onClick={() => this.props.onAccept(this.state.title, this.state.tags)} raised>
-                Add
-              </Button>
-            </DialogFooter>
-          </DialogSurface>
-          <DialogBackdrop />
-        </DialogRoot>
+            <TagsInput
+              inputLabel="Feed Tags"
+              tags={this.state.tags}
+              suggestions={TAG_SUGGESTIONS}
+              onTagsChange={tags => this.setState({ tags })}
+            />
+          </DialogBody>
+          <DialogFooter className="edit-feed-dialog__footer">
+            <Button onClick={this.props.onCancel}>
+              Cancel
+            </Button>
+            <Button onClick={() => this.props.onAccept(this.state.title, this.state.tags)} raised>
+              Add
+            </Button>
+          </DialogFooter>
+        </DialogSurface>
+        <DialogBackdrop />
       </Dialog>
     );
   }

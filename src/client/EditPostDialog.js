@@ -5,7 +5,6 @@ import TagsInput from 'client/TagsInput';
 import {
   Button,
   Dialog,
-  DialogRoot,
   DialogSurface,
   DialogHeader,
   DialogHeaderTitle,
@@ -63,30 +62,28 @@ export default class EditPostDialog extends React.Component<Props, State> {
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <DialogRoot className="edit-post-dialog">
-          <DialogSurface>
-            <DialogHeader className="edit-post-dialog__header">
-              <DialogHeaderTitle>Edit post</DialogHeaderTitle>
-            </DialogHeader>
-            <DialogBody className="edit-post__body">
-              <TagsInput
-                inputLabel="Post Tags"
-                tags={this.state.tags}
-                suggestions={TAG_SUGGESTIONS}
-                onTagsChange={tags => this.setState({ tags })}
-              />
-            </DialogBody>
-            <DialogFooter className="edit-post-dialog__footer">
-              <Button onClick={this.props.onCancel}>
-                Cancel
-              </Button>
-              <Button onClick={() => this.props.onAccept(this.state.tags)} raised>
-                Add
-              </Button>
-            </DialogFooter>
-          </DialogSurface>
-          <DialogBackdrop />
-        </DialogRoot>
+        <DialogSurface className="edit-post-dialog">
+          <DialogHeader className="edit-post-dialog__header">
+            <DialogHeaderTitle>Edit post</DialogHeaderTitle>
+          </DialogHeader>
+          <DialogBody className="edit-post__body">
+            <TagsInput
+              inputLabel="Post Tags"
+              tags={this.state.tags}
+              suggestions={TAG_SUGGESTIONS}
+              onTagsChange={tags => this.setState({ tags })}
+            />
+          </DialogBody>
+          <DialogFooter className="edit-post-dialog__footer">
+            <Button onClick={this.props.onCancel}>
+              Cancel
+            </Button>
+            <Button onClick={() => this.props.onAccept(this.state.tags)} raised>
+              Add
+            </Button>
+          </DialogFooter>
+        </DialogSurface>
+        <DialogBackdrop />
       </Dialog>
     );
   }

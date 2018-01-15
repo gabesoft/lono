@@ -80,13 +80,11 @@
   @include layout(column, $inline, $justify-content);
 }
 
-@mixin flat-border($color: $border-color, $hide-on-hover: false) {
+@mixin flat-border($color: $border-color) {
   border: 1px solid $color;
   border-radius: $border-radius;
+}
 
-  @if $hide-on-hover {
-    &:hover {
-      border: 1px solid transparent;
-    }
-  }
+@mixin transparent-border {
+  border: 1px solid transparent;
 }

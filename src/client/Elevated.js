@@ -5,11 +5,12 @@ import {
 } from 'rmwc';
 
 const ELEVATION_UNFOCUSED: 0 = 0;
-const ELEVATION_FOCUSED: 4 = 4;
+const ELEVATION_FOCUSED: 3 = 3;
 
 type Props = {
   children?: React.Node,
-  className?: string
+  className?: string,
+  elevatedClassName?: string
 };
 
 type State = {
@@ -26,11 +27,15 @@ export default class Elevated extends React.Component<Props, State> {
   }
 
   render() {
+    const elevated = this.state.elevation === ELEVATION_FOCUSED;
+    const elevatedClassName = this.props.elevatedClassName || '';
+    const className = `${this.props.className || ''} ${elevated ? elevatedClassName : ''}`;
+
     return (
       <Elevation
         z={this.state.elevation}
         transition
-        className={this.props.className}
+        className={className}
         onMouseOver={() => this.setState({ elevation: ELEVATION_FOCUSED })}
         onFocus={() => this.setState({ elevation: ELEVATION_FOCUSED })}
         onMouseOut={() => this.setState({ elevation: ELEVATION_UNFOCUSED })}

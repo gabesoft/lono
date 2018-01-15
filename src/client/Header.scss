@@ -6,7 +6,7 @@
 .header {
   @include layout-h;
 
-  background-color: $background-color;
+  background-color: $background-color-faded;
   margin: auto;
   max-width: $body-max-width;
   padding: 10px 15px;

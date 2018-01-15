@@ -11,8 +11,8 @@
 .search__input {
   @include mdc-typography('headline');
 
-  background-color: $background-color;
-  border: 1px solid $material-color-grey-400;
+  border: 0;
+  border-bottom: 1px solid $border-color;
   border-radius: $border-radius;
   box-sizing: border-box;
   outline: none;
@@ -20,7 +20,7 @@
   width: 100%;
 
   &:focus {
-    border: 1px solid $mdc-theme-primary;
+    border-bottom: 2px solid $mdc-theme-primary-faded;
   }
 }
 
