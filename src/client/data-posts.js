@@ -1,4 +1,8 @@
-const posts = Object.freeze([
+import type {
+  UserPost
+} from 'client/CommonTypes';
+
+const posts: Array<UserPost> = Object.freeze([
     {
       "read": false,
       "_id": "5a42dd8210906305c8001621-57f87c58966d70b95f5e5fe7",

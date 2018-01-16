@@ -1,17 +1,22 @@
 import * as React from 'react';
 
-import type { Match } from 'react-router-dom';
+import type {
+  UserPost
+} from 'client/CommonTypes';
 
 type Props = {
-  match: Match
+  userPost: UserPost
 };
 
-export default class PostView extends React.Component<Props, {||}> {
+type State = {
+
+};
+
+export default class PostView extends React.Component<Props, State> {
   render () {
-    const postId = this.props.match.params.postId;
     return (
       <div>
-        <h1>Post View {postId}</h1>
+        <h1>Post View</h1>
       </div>
     );
   }

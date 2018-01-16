@@ -1,5 +1,9 @@
-export default {
-  feeds: [
+import type {
+  Feed,
+  Subscription
+} from 'client/CommonTypes';
+
+const feeds: Array<Feed> = [
     {
       "lastReadDate": "2017-12-26T23:30:55.643Z",
       "image": null,
@@ -18300,8 +18304,9 @@ export default {
       "lastPostDate": "2017-04-24T12:59:26.000Z",
       "description": "Stories by Dan Abramov on Medium"
     }
-  ],
-  subscriptions: [
+  ];
+
+const subscriptions: Array<Subscription> = [
     {
       "_id": "56d7ddf3c788cb1d6eb919c1",
       "unreadCount": 2,
@@ -26212,5 +26217,6 @@ export default {
         "programming"
       ]
     }
-  ]
-};
+  ];
+
+export default { feeds, subscriptions };

@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import icon from 'client/Icons';
 
-import Post from 'client/Post';
-import Feed from 'client/Feed';
 import AddFeedDialog from 'client/AddFeedDialog';
 import EditFeedDialog from 'client/EditFeedDialog';
 import DeleteFeedDialog from 'client/DeleteFeedDialog';
@@ -79,81 +77,6 @@ export default class Styles extends React.Component<Props, State> {
     };
   }
 
-  renderFeed1() {
-    return (
-      <Feed
-        id="56d7de07c788cb1d6eb91a6d"
-        author="Aria Stewart"
-        description="Musings about javascript and web technologies"
-        lastPostDate="30 minutes ago"
-        link="http://aredridel.dinhe.net/"
-        postCount={26}
-        title="All Confirmation Bias, All The Time"
-        unreadCount={4}
-        uri="http://aredridel.dinhe.net/atom.xml"
-        subscribed={this.state.feed1IsSubscribed}
-        onEditClick={() => undefined}
-        onOpenFeedClick={() => undefined}
-        onOpenRssClick={() => undefined}
-        onDeleteClick={() => undefined}
-        onSubscribeClick={() => this.setState({ feed1IsSubscribed: !this.state.feed1IsSubscribed })}
-      />
-    );
-  }
-
-  renderFeed2() {
-    return (
-      <Feed
-        id="56d7ddfbc788cb1d6eb919f1"
-        description="An Innovative Web - the future, now."
-        link="http://aninnovativeweb.tumblr.com/"
-        postCount={34}
-        title="An Innovative Web"
-        uri="http://aninnovativeweb.tumblr.com/rss"
-        subscribed={this.state.feed2IsSubscribed}
-        onEditClick={() => undefined}
-        onOpenFeedClick={() => undefined}
-        onOpenRssClick={() => undefined}
-        onDeleteClick={() => undefined}
-        onSubscribeClick={() => this.setState({ feed2IsSubscribed: !this.state.feed2IsSubscribed })}
-      />
-    );
-  }
-
-  renderPost1() {
-    return (
-      <Post
-        id="5a42092d10906305c8001248-56d7de17c788cb1d6eb91b0c"
-        author="Nikola Tore"
-        title="Job-hopping makes millennials better hires"
-        feedTitle="HackerEarth Blog"
-        summary="There is a long history for both hiring managers and recruiters rejecting 'job-hoppers'. Not only in the past but even today a big proportion of employers (43%) support that they would not consider a job-hopper for their open positions. For all those who are not familiar with the term, job-hopping is used to describe employees"
-        link="http://blog.hackerearth.com/job-hopping-millennials-hoppers-better-hire"
-        date="2017-12-26T08:14:36.000Z"
-        isNew={this.state.post1IsNew}
-        onOpenClick={() => this.setState({ post1IsNew: !this.state.post1IsNew })}
-        onEditTagsClick={() => this.setState({ post1IsNew: !this.state.post1IsNew  })}
-      />
-    );
-  }
-
-  renderPost2() {
-    return (
-      <Post
-        id="5a421b2310906305c80012b4-5814c43709a64c359672dd7a"
-        link="https://medium.freecodecamp.org/how-i-built-and-launched-a-chatbot-over-the-weekend-ad8efc522f33?source=rss----336d898217ee---4"
-        date="2017-12-26T09:01:36.000Z"
-        guid="https://medium.com/p/ad8efc522f33"
-        author="Mike Williams"
-        title="How I Built And Launched A Chatbot Over The Weekend"
-        feedTitle="Free Code Camp - Medium"
-        isNew={this.state.post2IsNew}
-        onOpenClick={() => this.setState({ post2IsNew: !this.state.post2IsNew })}
-        onEditTagsClick={() => this.setState({ post2IsNew: !this.state.post2IsNew })}
-      />
-    );
-  }
-
   onAddFeedAccept() {
     const loading: boolean = !this.state.addFeedLoading;
     const error = loading ? null : "Failed to add feed!";
@@ -212,20 +135,6 @@ export default class Styles extends React.Component<Props, State> {
               onClose={() => this.setState({ addFeedOpen: false })}
               onAccept={() => this.onAddFeedAccept()}
             />
-          </section>
-        </GridCell>
-
-        <GridCell span="12">
-          <section className="style-sections__feed">
-            {this.renderFeed1()}
-            {this.renderFeed2()}
-          </section>
-        </GridCell>
-
-        <GridCell span="12">
-          <section className="style-sections__post">
-            {this.renderPost1()}
-            {this.renderPost2()}
           </section>
         </GridCell>
 

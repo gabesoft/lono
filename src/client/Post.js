@@ -17,15 +17,12 @@ import {
   MenuItem
 } from 'rmwc';
 
+import type {
+  UserPost
+} from 'client/CommonTypes';
+
 type Props = {
-  id: string,
-  author: string,
-  title: string,
-  feedTitle: string,
-  summary?: string,
-  date: string,
-  isNew: boolean,
-  link: string,
+  userPost: UserPost,
   onOpenClick: (id: string) => void,
   onEditTagsClick: (id: string) => void
 };
@@ -52,14 +49,17 @@ export default class Post extends React.Component<Props, State> {
   }
 
   getClass(baseClass: string, newClass: string) {
-    return `${baseClass} ${this.props.isNew ? newClass : ''}`;
+    const isNew = !this.props.userPost.read;
+    return `${baseClass} ${isNew ? newClass : ''}`;
   }
 
   render() {
+    const userPost = this.props.userPost;
+    const isNew = !this.props.userPost.read;
     const handler= (fn: Function) => {
       return () => {
         this.setState({ actionsOpen: false });
-        fn(this.props.id);
+        fn(userPost.postId);
       }
     };
 
@@ -69,8 +69,8 @@ export default class Post extends React.Component<Props, State> {
         elevatedClassName="post_elevated"
       >
         <div className={this.getClass('post__header', 'post__header_new')}>
-          <Avatar className="post__avatar" text={this.props.feedTitle} />
-          <span className="post__feed-title">{this.props.feedTitle}</span>
+          <Avatar className="post__avatar" text={userPost.title} />
+          <span className="post__feed-title">{userPost.title}</span>
           <div className="post__actions">
             <MenuAnchor>
               <Button onClick={() => this.setState({ actionsOpen: true })}>
@@ -88,26 +88,26 @@ export default class Post extends React.Component<Props, State> {
           </div>
         </div>
 
-        <Link to={`/post/${this.props.id}`} className="post__content">
+        <Link to={`/post/${userPost._id}`} className="post__content">
           <div className="post__title">
-            {this.props.title}
+            {userPost.post.title}
           </div>
           <div className="post__summary">
-            {this.props.summary}
+            {userPost.post.summary}
           </div>
         </Link>
 
         <div className="post__footer">
           <div className="post__date-author">
             <span className="post__author">
-              {this.props.author}
+              {userPost.post.author}
             </span>
             <span className="post__date">
-              {moment(this.props.date).fromNow()}
+              {moment(userPost.post.date).fromNow()}
             </span>
           </div>
           <div className="post__status">
-            {this.props.isNew ? 'new' : null}
+            {isNew ? 'new' : null}
           </div>
         </div>
       </Elevated>

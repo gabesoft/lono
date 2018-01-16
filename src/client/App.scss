@@ -19,12 +19,13 @@
 @import './EditPostDialog';
 
 .app {
-  background-color: $background-color;
+  background-color: $mdc-theme-primary;
 }
 
 .app__content {
   margin: auto;
   max-width: $body-max-width;
+  background-color: $background-color;
 }
 
 html {

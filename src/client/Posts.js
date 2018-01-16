@@ -9,12 +9,16 @@ import {
 
 import Post from 'client/Post';
 
+import type {
+  UserPost
+} from 'client/CommonTypes';
+
 type Props = {
 
 };
 
 type State = {
-  posts: Array<Object>
+  posts: Array<UserPost>
 };
 
 export default class Posts extends React.Component<Props, State> {
@@ -26,18 +30,11 @@ export default class Posts extends React.Component<Props, State> {
   }
 
   renderPosts() {
-    return this.state.posts.map(feed => {
+    return this.state.posts.map(userPost => {
       return (
-        <GridCell key={feed.postId} className="posts__post" phone="4" tablet="4" desktop="3">
+        <GridCell key={userPost.postId} className="posts__post" phone="4" tablet="4" desktop="3">
           <Post
-            id={feed.postId}
-            author={feed.post.author}
-            title={feed.post.title}
-            feedTitle={feed.title}
-            summary={feed.post.summary}
-            link={feed.post.link}
-            date={feed.post.date}
-            isNew={feed.read === false}
+            userPost={userPost}
             onOpenClick={() => undefined}
             onEditTagsClick={() => undefined}
           />
