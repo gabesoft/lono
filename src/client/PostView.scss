@@ -1,0 +1,47 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import './Icons';
+@import '@material/typography/mixins';
+
+// TODO use gutter variables for all space-h, margins, etc
+
+.post-view {
+
+}
+
+.post-view__description {
+  @include mdc-typography('body1');
+}
+
+.post-view__title {
+  @include mdc-typography('display1');
+
+  text-align: center;
+  text-transform: capitalize;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.post-view__header {
+  @include layout-h;
+}
+
+.post-view__avatar-feed-title {
+  @include layout-h($justify-content: left);
+  @include space-h(5px);
+  @include ellipsis-h;
+
+  margin-right: 20px;
+}
+
+.post-view__feed-title {
+  @include mdc-typography('title');
+  @include ellipsis-h;
+}
+
+.post-view__author-date{
+  @include mdc-typography('subheading2');
+}

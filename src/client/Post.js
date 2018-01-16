@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import moment from 'moment';
 import icon from 'client/Icons';
 
 import Avatar from 'client/Avatar';
+import AuthorDate from 'client/AuthorDate';
 import Elevated from 'client/Elevated';
 
 import {
@@ -98,14 +98,11 @@ export default class Post extends React.Component<Props, State> {
         </Link>
 
         <div className="post__footer">
-          <div className="post__date-author">
-            <span className="post__author">
-              {userPost.post.author}
-            </span>
-            <span className="post__date">
-              {moment(userPost.post.date).fromNow()}
-            </span>
-          </div>
+          <AuthorDate
+            className="post__author-date"
+            date={userPost.post.date}
+            author={userPost.post.author}
+          />
           <div className="post__status">
             {isNew ? 'new' : null}
           </div>

@@ -12,12 +12,12 @@ $background-color: $material-color-grey-100;
 $background-color-light: $material-color-grey-50;
 $background-color-dark: $material-color-grey-200;
 $background-color-dark-plus: $material-color-grey-300;
-$background-color-faded: rgba($background-color, 0.95);
+$background-color-faded: rgba($background-color, .95);
 $foreground-color: $material-color-grey-800;
 $foreground-color-light: $material-color-grey-600;
 $foreground-color-dark: $material-color-grey-900;
 
-$mdc-theme-primary-faded: rgba($mdc-theme-primary, 0.3);
+$mdc-theme-primary-faded: rgba($mdc-theme-primary, .3);
 
 $unread-color: $mdc-theme-secondary;
 $unread-color-faded: rgba($unread-color, .3);

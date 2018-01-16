@@ -5,8 +5,10 @@
 @import './Icons';
 @import './Avatar';
 @import './Buttons';
+@import './AuthorDate';
 @import './Autosuggest';
 @import './Post';
+@import './PostView';
 @import './Posts';
 @import './Feed';
 @import './Header';
@@ -23,9 +25,10 @@
 }
 
 .app__content {
+  background-color: $background-color;
   margin: auto;
   max-width: $body-max-width;
-  background-color: $background-color;
+  min-height: 100vh;
 }
 
 html {

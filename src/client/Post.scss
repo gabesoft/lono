@@ -98,19 +98,3 @@
 
   flex: 0 0 auto;
 }
-
-.post__date {
-  color: $foreground-color-light;
-  text-transform: lowercase;
-}
-
-.post__author {
-  text-transform: capitalize;
-}
-
-.post__date-author {
-  @include bullet-h;
-  @include ellipsis-h;
-
-  flex: 1 1 auto;
-}

@@ -1,0 +1,17 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+
+.author-date {
+  @include bullet-h;
+  @include ellipsis-h;
+}
+
+.author-date__author {
+  text-transform: capitalize;
+}
+
+.author-date__date {
+  color: $foreground-color-light;
+  text-transform: lowercase;
+}
