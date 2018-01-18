@@ -35,11 +35,13 @@
 }
 
 .mdc-simple-menu {
-  background-color: $background-color;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 }
 
 .mdc-dialog__surface {
-  background-color: $background-color;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 }
 
 .mdc-button {

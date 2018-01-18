@@ -1,0 +1,30 @@
+@import '@material/theme/color-palette';
+@import './colors';
+
+body {
+  &.light-theme {
+    --foreground-color: $material-color-grey-800;
+    --foreground-color-accent: $material-color-grey-900;
+    --foreground-color-light: $material-color-grey-600;
+    --foreground-color-faded: $material-color-grey-500;
+
+    --background-color: $material-color-grey-100;
+    --background-color-secondary: $material-color-grey-200;
+    --background-color-faded: rgba($material-color-grey-100, .95);
+
+    --border-color: rgba($material-color-grey-800, 0.1);
+  }
+
+  &.dark-theme {
+    --foreground-color: $material-color-grey-300;
+    --foreground-color-accent: $material-color-grey-300;
+    --foreground-color-light: $material-color-grey-500;
+    --foreground-color-faded: $material-color-grey-600;
+
+    --background-color: $material-color-grey-900;
+    --background-color-secondary: lighten($material-color-grey-900, 5);
+    --background-color-faded: rgba($material-color-grey-900, .95);
+
+    --border-color: rgba($material-color-grey-300, 0.1);
+  }
+}

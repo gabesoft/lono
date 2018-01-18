@@ -2,6 +2,7 @@
 
 @import './base';
 @import './fonts';
+@import './themes';
 @import './typography';
 @import './vendor';
 @import './Styles';
@@ -29,7 +30,7 @@
 }
 
 .app__content {
-  background-color: $background-color;
+  background-color: var(--background-color);
   margin: auto;
   max-width: $body-max-width;
   min-height: 100vh;

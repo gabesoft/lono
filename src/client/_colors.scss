@@ -8,13 +8,15 @@ $warning-color: $material-color-yellow-600;
 $black-color: #000;
 $white-color: #FFF;
 
-$background-color: $material-color-grey-100;
-$background-color-light: $material-color-grey-50;
-$background-color-dark: $material-color-grey-200;
-$background-color-dark-plus: $material-color-grey-300;
-$background-color-faded: rgba($background-color, .95);
-$foreground-color: $material-color-grey-800;
-$foreground-color-light: $material-color-grey-600;
+$background-color: var(--background-color);
+$background-color-secondary: var(--background-color-secondary);
+
+$background-color-accent: var(--background-color-accent);
+$background-color-light: var(--background-color-light);
+$background-color-faded: var(--background-color-faded);
+
+$foreground-color: var(--foreground-color);
+$foreground-color-light: var(--foreground-color-light);
 $foreground-color-dark: $material-color-grey-900;
 
 $mdc-theme-primary-faded: rgba($mdc-theme-primary, .3);
@@ -22,9 +24,9 @@ $mdc-theme-primary-faded: rgba($mdc-theme-primary, .3);
 $unread-color: $mdc-theme-secondary;
 $unread-color-faded: rgba($unread-color, .3);
 
-$border-color: rgba($foreground-color, .1);
+$border-color: var(--border-color);
 
 $link-color: $mdc-theme-secondary-dark;
 $link-color-hover: $mdc-theme-primary;
 $link-background-color: $background-color;
-$link-background-color-hover: $background-color-dark;
+$link-background-color-hover: $background-color-secondary;

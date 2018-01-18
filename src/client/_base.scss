@@ -9,12 +9,15 @@ html {
 body {
   @include typography-base;
 
-  background-color: $mdc-theme-primary;
+  background-color: $background-color;
+  color: $foreground-color;
+
+  // background-color: $mdc-theme-primary;
   margin: 0 $body-padding;
 
   * {
     box-sizing: border-box;
-    color: $foreground-color;
+    // color: $foreground-color;
   }
 }
 
@@ -54,7 +57,7 @@ xmp,
 plaintext,
 listing,
 code {
-  background-color: $background-color-dark;
+  background-color: $background-color-secondary;
   font-family: 'CamingoCode-Regular';
   overflow: auto;
 }
