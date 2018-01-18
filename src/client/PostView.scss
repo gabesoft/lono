@@ -1,27 +1,29 @@
 @import './variables';
 @import './colors';
 @import './mixins';
+@import './typography';
 @import './Icons';
-@import '@material/typography/mixins';
 
 // TODO use gutter variables for all space-h, margins, etc
 
 .post-view {
-
-}
-
-.post-view__description {
-  @include mdc-typography('body1');
+  padding: 24px 32px;
 }
 
 .post-view__title {
-  @include mdc-typography('display1');
+  @include typography('display1');
 
   text-align: center;
   text-transform: capitalize;
 
   a {
     text-decoration: none;
+    color: $foreground-color;
+
+    &:hover {
+      color: $link-color-hover;
+      background-color: $background-color;
+    }
   }
 }
 
@@ -38,10 +40,10 @@
 }
 
 .post-view__feed-title {
-  @include mdc-typography('title');
+  @include typography('subheading2');
   @include ellipsis-h;
 }
 
-.post-view__author-date{
-  @include mdc-typography('subheading2');
+.post-view__author-date {
+  @include typography('subheading2');
 }

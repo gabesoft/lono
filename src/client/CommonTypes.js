@@ -1,9 +1,10 @@
 
 export type Post = {
-  createdAt: string,
-  updatedAt: string,
+  createdAt?: string,
+  updatedAt?: string,
 
-  author?: string,
+  __v?: number,
+  author?: ?string,
   date: string,
   description: string,
   guid: string,

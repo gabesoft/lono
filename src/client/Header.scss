@@ -1,7 +1,7 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import '@material/typography/mixins';
+@import './typography';
 
 .header {
   @include layout-h;
@@ -43,7 +43,7 @@
 
 .header__subscribed-count,
 .header__new-post-count {
-  @include mdc-typography('caption');
+  @include typography('caption');
 }
 
 .header__new-post-count {

@@ -1,14 +1,14 @@
 @import './mixins';
 @import './colors';
 @import './variables';
-@import '@material/typography/mixins';
+@import './typography';
 
 .add-feed-dialog__footer {
   @include space-h(5px);
 }
 
 .add-feed-dialog__error {
-  @include mdc-typography('subheading2');
+  @include typography('subheading2');
 
   color: $error-color;
 }

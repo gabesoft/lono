@@ -1,0 +1,70 @@
+@import './typography';
+@import './variables';
+@import './colors';
+
+html {
+  background-color: $mdc-theme-primary;
+}
+
+body {
+  @include typography-base;
+
+  background-color: $mdc-theme-primary;
+  margin: 0 $body-padding;
+
+  * {
+    box-sizing: border-box;
+    color: $foreground-color;
+  }
+}
+
+a {
+  color: $link-color;
+  background-color: $link-background-color;
+  outline: none;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $link-background-color-hover;
+    color: $link-color-hover;
+  }
+}
+
+svg {
+  > path {
+    fill: $foreground-color;
+  }
+}
+
+input {
+  @include typography-base;
+
+  background: none;
+  outline: none;
+}
+
+mark {
+  background: none;
+  color: currentColor;
+  text-decoration: underline;
+}
+
+pre,
+xmp,
+plaintext,
+listing,
+code {
+  background-color: $background-color-dark;
+  font-family: 'CamingoCode-Regular';
+  overflow: auto;
+}
+
+pre {
+  padding: 5px 10px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,7 +1,7 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import '@material/typography/mixins';
+@import './typography';
 
 .tags-input {
   @include space-v(10px);
@@ -16,6 +16,10 @@
   > * {
     margin: 3px;
   }
+}
+
+.tags-input__text-field {
+  margin-bottom: 0;
 }
 
 .tags-input__input {

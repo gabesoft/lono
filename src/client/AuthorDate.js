@@ -3,7 +3,7 @@ import * as React from 'react';
 import moment from 'moment';
 
 type Props = {
-  author?: string,
+  author?: ?string,
   date: string,
   className?: string
 };

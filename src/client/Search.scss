@@ -1,7 +1,7 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import '@material/typography/mixins';
+@import './typography';
 
 .search {
   display: flex;
@@ -9,7 +9,7 @@
 }
 
 .search__input {
-  @include mdc-typography('headline');
+  @include typography('headline');
 
   border: 0;
   border-bottom: 1px solid $border-color;
@@ -27,6 +27,6 @@
 
 .search__suggestion {
   @include space-h(10px);
-  @include mdc-typography('subheading2');
+  @include typography('subheading2');
   @include layout-h($justify-content: left);
 }

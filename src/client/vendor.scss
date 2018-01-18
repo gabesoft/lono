@@ -1,7 +1,7 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import '@material/typography/mixins';
+@import './typography';
 
 .headroom {
   left: 0;
@@ -40,4 +40,26 @@
 
 .mdc-dialog__surface {
   background-color: $background-color;
+}
+
+.mdc-button {
+  @include typography('button');
+}
+
+.mdc-text-field__input {
+  @include typography-base;
+}
+
+.mdc-typography {
+  @include typography-base;
+}
+
+@each $style in map-keys($typography-styles) {
+  .mdc-typography--#{$style} {
+    @include typography($style);
+  }
+
+  .mdc-typography--adjust-margin.mdc-typography--#{$style} {
+    @include typography-adjust-margin($style);
+  }
 }

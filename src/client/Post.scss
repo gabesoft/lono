@@ -2,7 +2,7 @@
 @import './colors';
 @import './mixins';
 @import './Icons';
-@import '@material/typography/mixins';
+@import './typography';
 
 .post {
   @include layout-v;
@@ -14,6 +14,10 @@
 
   > * {
     width: 100%;
+  }
+
+  a {
+    background-color: $background-color;
   }
 }
 
@@ -44,10 +48,15 @@
 
 .post__actions_menu-item {
   @include space-h(5px);
+
+  a {
+    @include layout-h;
+    @include space-h(5px);
+  }
 }
 
 .post__footer {
-  @include mdc-typography('caption');
+  @include typography('caption');
 }
 
 .post__content {
@@ -61,7 +70,7 @@
 }
 
 .post__feed-info {
-  @include mdc-typography('subheading2');
+  @include typography('subheading2');
   @include layout-h;
 
   width: 100%;
@@ -73,21 +82,21 @@
 }
 
 .post__feed-title {
-  @include mdc-typography('subheading2');
+  @include typography('subheading2');
   @include ellipsis-h;
 
   flex: 1 1 auto;
 }
 
 .post__title {
-  @include mdc-typography('title');
+  @include typography('title');
   @include ellipsis-v($line-count: 3);
 
   line-height: 1.6rem;
 }
 
 .post__summary {
-  @include mdc-typography('body1');
+  @include typography('body1');
   @include ellipsis-v($line-count: 3);
 
   color: $foreground-color-light;

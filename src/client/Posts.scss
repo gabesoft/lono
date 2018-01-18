@@ -2,7 +2,7 @@
 @import './colors';
 @import './mixins';
 @import './Icons';
-@import '@material/typography/mixins';
+@import './typography';
 
 .posts {
   background-color: $background-color;

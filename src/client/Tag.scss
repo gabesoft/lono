@@ -2,12 +2,12 @@
 @import './colors';
 @import './mixins';
 @import './Icons';
-@import '@material/typography/mixins';
+@import './typography';
 
 .tag {
   @include layout-h(true);
   @include space-h(3px);
-  @include mdc-typography('body1');
+  @include typography('body1');
   @include flat-border;
 
   background-color: $background-color-dark;

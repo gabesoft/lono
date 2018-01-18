@@ -20,9 +20,11 @@ type State = {
 
 };
 
-// TODO: extract dateAuthor into own component
-
 export default class PostView extends React.Component<Props, State> {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     const userPost = this.props.userPost;
     const post = userPost.post;
@@ -30,6 +32,7 @@ export default class PostView extends React.Component<Props, State> {
       dangerouslySetInnerHTML: { __html: post.description }
     });
 
+    // TODO make the feed title a link to the feed
     return (
       <Grid className="post-view">
         <GridCell className="post-view__header" span="12">

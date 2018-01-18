@@ -85,7 +85,7 @@ export default class TagsInput extends React.Component<Props, State> {
     } else {
       return (
         <TextField {...props}
-          className="margin-bottom-0"
+          className="tags-input__text-field"
           ref={field => { this.tagsInput = field && field.mdcApi.input_ }} />
       );
     }

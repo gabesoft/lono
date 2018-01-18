@@ -2,7 +2,7 @@
 @import './colors';
 @import './mixins';
 @import './Icons';
-@import '@material/typography/mixins';
+@import './typography';
 
 .feed {
   @include space-v(15px);
@@ -25,16 +25,16 @@
 }
 
 .feed__title {
-  @include mdc-typography('headline');
+  @include typography('headline');
 }
 
 .feed__avatar-author {
-  @include mdc-typography('subheading2');
+  @include typography('subheading2');
   @include space-h(10px);
 }
 
 .feed__description {
-  @include mdc-typography('body1');
+  @include typography('body1');
 }
 
 .feed__post-counts {
@@ -46,7 +46,7 @@
 }
 
 .feed__footer {
-  @include mdc-typography('caption');
+  @include typography('caption');
 }
 
 .feed__actions_menu-item {

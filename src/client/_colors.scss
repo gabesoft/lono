@@ -23,3 +23,8 @@ $unread-color: $mdc-theme-secondary;
 $unread-color-faded: rgba($unread-color, .3);
 
 $border-color: rgba($foreground-color, .1);
+
+$link-color: $mdc-theme-secondary-dark;
+$link-color-hover: $mdc-theme-primary;
+$link-background-color: $background-color;
+$link-background-color-hover: $background-color-dark;

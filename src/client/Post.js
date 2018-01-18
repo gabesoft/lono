@@ -23,7 +23,6 @@ import type {
 
 type Props = {
   userPost: UserPost,
-  onOpenClick: (id: string) => void,
   onEditTagsClick: (id: string) => void
 };
 
@@ -39,11 +38,27 @@ export default class Post extends React.Component<Props, State> {
     };
   }
 
-  renderMenuItem(iconName: string, text: string, clickHandler: Function) {
+  renderTagsMenuItem() {
     return (
-      <MenuItem className="post__actions_menu-item" onClick={clickHandler}>
-        {icon(iconName)}
-        <span>{text}</span>
+      <MenuItem
+        className="post__actions_menu-item"
+        onClick={this.props.onEditTagsClick}>
+        {icon('tag')}
+        <span>Edit tags</span>
+      </MenuItem>
+    );
+  }
+
+  renderOpenMenuItem() {
+    return (
+      <MenuItem
+        className="post__actions_menu-item"
+        onClick={() => this.setState({ actionsOpen: false })}
+      >
+        <a href={this.props.userPost.post.link} target="_blank">
+          {icon('open-in-new')}
+          <span>Open in new window</span>
+        </a>
       </MenuItem>
     );
   }
@@ -55,13 +70,11 @@ export default class Post extends React.Component<Props, State> {
 
   render() {
     const userPost = this.props.userPost;
-    const isNew = !this.props.userPost.read;
-    const handler= (fn: Function) => {
-      return () => {
-        this.setState({ actionsOpen: false });
-        fn(userPost.postId);
-      }
-    };
+    const post = userPost.post;
+    const isNew = !userPost.read;
+    const parser = (new DOMParser).parseFromString(userPost.post.summary || '', 'text/html');
+    const summaryText = parser.documentElement && parser.documentElement.textContent;
+    const summary = (!summaryText || summaryText == 'null') ? '' : summaryText;
 
     return (
       <Elevated
@@ -81,8 +94,8 @@ export default class Post extends React.Component<Props, State> {
                 open={this.state.actionsOpen}
                 onClose={() => this.setState({ actionsOpen: false })}
               >
-                {this.renderMenuItem('open-in-new', 'Open in new window', handler(this.props.onOpenClick))}
-                {this.renderMenuItem('tag', 'Edit tags', handler(this.props.onEditTagsClick))}
+                {this.renderOpenMenuItem()}
+                {this.renderTagsMenuItem()}
               </SimpleMenu>
             </MenuAnchor>
           </div>
@@ -90,18 +103,18 @@ export default class Post extends React.Component<Props, State> {
 
         <Link to={`/post/${userPost._id}`} className="post__content">
           <div className="post__title">
-            {userPost.post.title}
+            {post.title}
           </div>
           <div className="post__summary">
-            {userPost.post.summary}
+            {summary}
           </div>
         </Link>
 
         <div className="post__footer">
           <AuthorDate
             className="post__author-date"
-            date={userPost.post.date}
-            author={userPost.post.author}
+            date={post.date}
+            author={post.author}
           />
           <div className="post__status">
             {isNew ? 'new' : null}

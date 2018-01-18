@@ -1,4 +1,4 @@
-@import '@material/typography/mixins';
+@import './typography';
 @import './mixins';
 
 .delete-feed-dialog__header {
@@ -6,5 +6,5 @@
 }
 
 .delete-feed-dialog__content {
-  @include mdc-typography('headline');
+  @include typography('headline');
 }

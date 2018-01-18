@@ -52,6 +52,7 @@ rfresh:
 public: public-dir
 	@cp public/icons/*.{png,ico} $(PUBLIC)/
 	@cp public/*.{png,html,json} $(PUBLIC)/
+	@cp -r public/webfonts $(PUBLIC)/webfonts
 
 # Create the public directory
 public-dir:
