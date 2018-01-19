@@ -1,33 +1,40 @@
 @import '@material/theme/color-palette';
-@import './colors';
+
+$black-color: #000;
+$white-color: #FFF;
+
+// all theme maps are keyed by the background color
+
+$background-color-light: darken($white-color, 10);
+$background-color-dark: darken($black-color, 16);
 
 $background-colors: (
   light: (
-  primary: darken(#FFF, 10),
-  secondary: darken(#FFF, 15)
-),
+    primary: $background-color-light,
+    secondary: darken($white-color, 15),
+    faded: rgba($background-color-light, .95)
+  ),
   dark: (
-    primary: lighten(#000, 16),
-    secondary: lighten(#000, 20),
+    primary: $background-color-dark,
+    secondary: lighten($black-color, 20),
+    faded: rgba($background-color-dark, .95)
   )
 );
 
 $foreground-colors: (
-  // for light background
-  dark: (
-    primary: rgba(black, .87),
-    secondary: rgba(black, .54),
-    hint: rgba(black, .38),
-    disabled: rgba(black, .38),
-    icon: rgba(black, .38)
-  ),
-  // for dark background
   light: (
-    primary: rgba(white, .8),
-    secondary: rgba(white, .5),
-    hint: rgba(white, .3),
-    disabled: rgba(white, .3),
-    icon: rgba(white, .3)
+    primary: rgba($black-color, .87),
+    secondary: rgba($black-color, .54),
+    hint: rgba($black-color, .38),
+    disabled: rgba($black-color, .38),
+    icon: rgba($black-color, .38)
+  ),
+  dark: (
+    primary: rgba($white-color, .8),
+    secondary: rgba($white-color, .5),
+    hint: rgba($white-color, .3),
+    disabled: rgba($white-color, .3),
+    icon: rgba($white-color, .3)
   )
 );
 
@@ -52,19 +59,19 @@ $theme-colors: (
 
 $theme-foreground-types: (
   light: (
-    primary: light,
-    primary-light: dark,
-    primary-dark: light,
-    secondary: dark,
-    secondary-light: dark,
-    secondary-dark: dark
+    primary: dark,
+    primary-light: light,
+    primary-dark: dark,
+    secondary: light,
+    secondary-light: light,
+    secondary-dark: light
   ),
   dark: (
-    primary: dark,
-    primary-light: dark,
+    primary: light,
+    primary-light: light,
     primary-dark: light,
-    secondary: dark,
-    secondary-light: dark,
+    secondary: light,
+    secondary-light: light,
     secondary-dark: dark
   )
 );
@@ -75,26 +82,38 @@ $theme-colors-dark: map-get($theme-colors, dark);
 $foreground-colors-light: map-get($foreground-colors, light);
 $foreground-colors-dark: map-get($foreground-colors, dark);
 
-// for light background
-$border-colors-dark: (
-  normal: rgba(map-get($foreground-colors-dark, primary), .5),
-  strong: rgba(map-get($foreground-colors-dark, secondary), .3),
+$border-colors: (
+  light: (
+    normal: rgba(map-get($foreground-colors-dark, primary), .5),
+    strong: rgba(map-get($foreground-colors-dark, secondary), .3),
+  ),
+  dark: (
+    normal: rgba(map-get($foreground-colors-light, primary), .5),
+    strong: rgba(map-get($foreground-colors-light, secondary), .3),
+  )
 );
 
-// for dark background
-$border-colors-light: (
-  normal: rgba(map-get($foreground-colors-light, primary), .5),
-  strong: rgba(map-get($foreground-colors-light, secondary), .3),
+$border-colors-light: map-get($border-colors, light);
+$border-colors-dark: map-get($border-colors, dark);
+
+$foreground-status-colors: (
+  light: (
+    success: $material-color-green-600,
+    warning: $material-color-yellow-600,
+    error: $material-color-red-600
+  ),
+  dark: (
+    success: $material-color-green-600,
+    warning: $material-color-yellow-600,
+    error: $material-color-red-600
+  )
 );
+
+$foreground-status-colors-light: map-get($foreground-status-colors, light);
+$foreground-status-colors-dark: map-get($foreground-status-colors, dark);
 
 $background-colors-light: map-get($background-colors, light);
 $background-colors-dark: map-get($background-colors, dark);
-$background-color-light-primary: map-get($background-colors-light, primary);
-$background-color-light-secondary: map-get($background-colors-light, secondary);
-$background-color-light-faded: rgba($background-color-light-primary, .95);
-$background-color-dark-primary: map-get($background-colors-dark, primary);
-$background-color-dark-secondary: map-get($background-colors-dark, secondary);
-$background-color-dark-faded: rgba($background-color-dark-primary, .95);
 
 @function get-foreground-color-for-theme($theme, $text-style, $background) {
   $foreground-types: map-get($theme-foreground-types, $background);
@@ -103,79 +122,89 @@ $background-color-dark-faded: rgba($background-color-dark-primary, .95);
   @return map-get($colors, $text-style);
 }
 
-@mixin create-theme($theme-colors, $foreground-colors, $border-colors, $background-primary, $background-secondary, $background-faded, $background) {
-  @each $theme in map-keys($theme-colors) {
-    --mdc-theme-#{$theme}: #{map-get($theme-colors, $theme)};
+@mixin create-theme($background) {
+  $theme-for-background: map-get($theme-colors, $background);
+  @each $theme in map-keys($theme-for-background) {
+    --mdc-theme-#{$theme}: #{map-get($theme-for-background, $theme)};
   }
-  @each $border in map-keys($border-colors) {
-    --border-color-#{$border}: #{map-get($border-colors, $border)};
-  }
-  @each $style in map-keys($foreground-colors) {
-    --foreground-color-#{$style}: #{map-get($foreground-colors, $style)};
-    --mdc-theme-text-#{$style}-on-background: #{map-get($foreground-colors, $style)};
 
-    @each $theme in map-keys($theme-colors) {
+  $foreground-for-background: map-get($foreground-colors, $background);
+  @each $style in map-keys($foreground-for-background) {
+    --foreground-color-#{$style}: #{map-get($foreground-for-background, $style)};
+    --mdc-theme-text-#{$style}-on-background: #{map-get($foreground-for-background, $style)};
+
+    @each $theme in map-keys($theme-for-background) {
       --mdc-theme-text-#{$style}-on-#{$theme}: #{get-foreground-color-for-theme($theme, $style, $background)}
     }
   }
 
-  --background-color: $background-primary;
-  --background-color-secondary: $background-secondary;
-  --background-color-faded: $background-faded;
+  // these are only for mdc components (mdc background is always set to light)
+  @each $style in map-keys($foreground-for-background) {
+    --mdc-theme-text-#{$style}-on-light: #{map-get($foreground-for-background, $style)};
+  }
+
+  $border-for-background: map-get($border-colors, $background);
+  @each $border in map-keys($border-for-background) {
+    --border-color-#{$border}: #{map-get($border-for-background, $border)};
+  }
+
+  $status-for-background: map-get($foreground-status-colors, $background);
+  @each $color in map-keys($status-for-background) {
+    --status-color-#{$color}: #{map-get($status-for-background, $color)};
+  }
+
+  $colors-for-background: map-get($background-colors, $background);
+  --background-color: map-get($colors-for-background, primary);
+  --background-color-primary: map-get($colors-for-background, primary);
+  --background-color-secondary: map-get($colors-for-background, secondary);
+  --background-color-faded: map-get($colors-for-background, faded);
 }
 
 body {
-  --light-background: $background-color-light-primary;
-  --dark-background: $background-color-dark-primary;
+  --light-background: map-get($background-colors-light, primary);
+  --dark-background: map-get($background-colors-dark, primary);
 
-  @each $style in map-keys($foreground-colors-light) {
-    --mdc-theme-text-#{$style}-on-dark: #{map-get($foreground-colors-light, $style)};
-  }
-
-  @each $style in map-keys($foreground-colors-dark) {
-    --mdc-theme-text-#{$style}-on-light: #{map-get($foreground-colors-dark, $style)};
-  }
-
-  // set default theme to light
-  @include create-theme($theme-colors-light,
-                        $foreground-colors-dark,
-                        $border-colors-light,
-                        $background-color-light-primary,
-                        $background-color-light-secondary,
-                        $background-color-light-faded,
-                        light);
+  // use light as the default theme
+  @include create-theme(light);
 
   &.light-theme {
-    @include create-theme($theme-colors-light,
-                          $foreground-colors-dark,
-                          $border-colors-light,
-                          $background-color-light-primary,
-                          $background-color-light-secondary,
-                          $background-color-light-faded,
-                          light);
+    @include create-theme(light);
   }
 
   &.dark-theme {
-    @include create-theme($theme-colors-dark,
-                          $foreground-colors-light,
-                          $border-colors-dark,
-                          $background-color-dark-primary,
-                          $background-color-dark-secondary,
-                          $background-color-dark-faded,
-                          dark);
+    @include create-theme(dark);
   }
-}
-
-.dark-theme-bg {
-  background-color: $background-color-dark-primary;
-}
-
-.light-theme-bg {
-  background-color: $background-color-light-primary;
 }
 
 @each $theme in map-keys($theme-colors-light) {
   .#{$theme}-theme-bg {
     background-color: var(--mdc-theme-#{$theme});
   }
+}
+
+@each $style in map-keys($background-colors-light) {
+  .background-color-#{$style}-bg {
+    background-color: var(--background-color-#{$style});
+  }
+}
+
+@each $style in map-keys($foreground-colors-light) {
+  .foreground-color-#{$style}-fg {
+    color: var(--foreground-color-#{$style});
+  }
+}
+
+@each $color in map-keys($foreground-status-colors-light) {
+  .mdc-theme--status-color-#{$color},
+  .status-color-#{$color}-fg {
+    color: var(--status-color-#{$color});
+  }
+}
+
+.light-theme-bg {
+  background-color: map-get($background-colors-light, primary);
+}
+
+.dark-theme-bg {
+  background-color: map-get($background-colors-dark, primary);
 }

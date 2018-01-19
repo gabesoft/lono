@@ -1,12 +1,11 @@
 @import './variables';
 @import '@material/theme/color-palette';
 
+/* TODO make some mixins to make setting background/foreground colors easy @include theme('primary', 'secondary') -- foreground, background */
+
 $success-color: $material-color-green-600;
 $error-color: $material-color-red-600;
 $warning-color: $material-color-yellow-600;
-
-$black-color: #000;
-$white-color: #FFF;
 
 $background-color: var(--background-color);
 $background-color-secondary: var(--background-color-secondary);

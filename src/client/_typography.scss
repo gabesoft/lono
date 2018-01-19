@@ -1,3 +1,5 @@
+// sass-lint:disable no-color-keywords
+
 $base-font-family: Proza Libre, sans-serif;
 $buttons-font-family: Roboto, sans-serif;
 $code-font-family: 'CamingoCode-Regular';
@@ -8,7 +10,7 @@ $typography-font-weight-values: (
   regular: 400,
   medium: 500,
   bold: 700,
-  black: 800 // sass-lint:disable-line no-color-keywords
+  black: 800
 );
 
 $typography-styles: (

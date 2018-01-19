@@ -139,6 +139,7 @@ export default class Styles extends React.Component<Props, State> {
     });
   }
 
+  // TODO: add borders, status colors, and secondary background
   render() {
     return(
       <Grid className="style-sections">
@@ -164,25 +165,28 @@ export default class Styles extends React.Component<Props, State> {
 
         <GridCell span="12">
           <section className="style-sections__themes-text-on-light">
-            <div className="light-theme-bg">
+            <div className="background-color-primary-bg">
               {this.renderThemes([
                  'text-primary-on-light',
                  'text-secondary-on-light',
                  'text-hint-on-light',
                  'text-disabled-on-light',
-                 'text-icon-on-light'
+                 'text-icon-on-light',
+                 'status-color-success',
+                 'status-color-error',
+                 'status-color-warning'
               ])}
             </div>
-          </section>
-
-          <section className="style-sections__themes-text-on-dark">
-            <div className="dark-theme-bg">
+            <div className="background-color-secondary-bg">
               {this.renderThemes([
-                 'text-primary-on-dark',
-                 'text-secondary-on-dark',
-                 'text-hint-on-dark',
-                 'text-disabled-on-dark',
-                 'text-icon-on-dark'
+                 'text-primary-on-light',
+                 'text-secondary-on-light',
+                 'text-hint-on-light',
+                 'text-disabled-on-light',
+                 'text-icon-on-light',
+                 'status-color-success',
+                 'status-color-error',
+                 'status-color-warning'
               ])}
             </div>
           </section>
