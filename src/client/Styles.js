@@ -17,18 +17,19 @@ import {
   CardSubtitle,
   CardSupportingText,
   CardTitle,
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
   Fab,
   Grid,
   GridCell,
+  Icon,
   ListItem,
   ListItemText,
-  SimpleMenu,
-  MenuItem,
   MenuAnchor,
-  Icon,
-  Drawer,
-  DrawerHeader,
-  DrawerContent,
+  MenuItem,
+  Radio,
+  SimpleMenu,
   Snackbar,
   Theme,
   Typography
@@ -49,7 +50,8 @@ type State = {
   post1IsNew: boolean,
   post2IsNew: boolean,
   feed1IsSubscribed: boolean,
-  feed2IsSubscribed: boolean
+  feed2IsSubscribed: boolean,
+  theme: string,
 };
 
 type Props = {};
@@ -73,8 +75,18 @@ export default class Styles extends React.Component<Props, State> {
       post1IsNew: true,
       post2IsNew: false,
       feed1IsSubscribed: false,
-      feed2IsSubscribed: true
+      feed2IsSubscribed: true,
+      theme: 'dark'
     };
+  }
+
+  componentDidMount() {
+    const body = document.body;
+
+    if (body) {
+      const isDark = body.classList.contains('dark-theme');
+      this.setState({ theme: isDark ? 'dark' : 'light' });
+    }
   }
 
   onAddFeedAccept() {
@@ -87,9 +99,162 @@ export default class Styles extends React.Component<Props, State> {
     });
   }
 
+  onThemeChanged(event: SyntheticEvent<HTMLElement>, theme: string) {
+    if (!event.target.value) {
+      return;
+    }
+
+    const isLight = theme === 'light';
+    const isDark =  !isLight;
+    const body = document.body;
+
+    if (body) {
+      body.classList.toggle('light-theme', isLight);
+      body.classList.toggle('dark-theme', isDark);
+    }
+
+    this.setState({ theme });
+  }
+
+  renderThemes(themes: Array<string>) {
+    return themes.map((theme, i) => (
+      <Theme use={theme} key={i}>
+        {theme}
+      </Theme>
+    ));
+  }
+
+  renderThemesWithBackground(themes: Array<string>) {
+    return themes.map((theme, i) => {
+      const background = theme.replace(/text-[^-]*-on-/, '');
+      const className = `${background}-theme-bg`;
+
+      return (
+        <span className={className} key={i}>
+          <Theme use={theme}>
+            {theme}
+          </Theme>
+        </span>
+      )
+    });
+  }
+
   render() {
     return(
       <Grid className="style-sections">
+        <GridCell span="12">
+          <section className="style-sections__theme-select">
+            <Radio
+              label="Dark Theme"
+              value="dark"
+              name="themeGroup"
+              checked={this.state.theme === 'dark'}
+              onChange={event => this.onThemeChanged(event, 'dark')}
+            />
+
+            <Radio
+              label="Light Theme"
+              value="light"
+              name="themeGroup"
+              checked={this.state.theme === 'light'}
+              onChange={event => this.onThemeChanged(event, 'light')}
+            />
+          </section>
+        </GridCell>
+
+        <GridCell span="12">
+          <section className="style-sections__themes-text-on-light">
+            <div className="light-theme-bg">
+              {this.renderThemes([
+                 'text-primary-on-light',
+                 'text-secondary-on-light',
+                 'text-hint-on-light',
+                 'text-disabled-on-light',
+                 'text-icon-on-light'
+              ])}
+            </div>
+          </section>
+
+          <section className="style-sections__themes-text-on-dark">
+            <div className="dark-theme-bg">
+              {this.renderThemes([
+                 'text-primary-on-dark',
+                 'text-secondary-on-dark',
+                 'text-hint-on-dark',
+                 'text-disabled-on-dark',
+                 'text-icon-on-dark'
+              ])}
+            </div>
+          </section>
+
+          <section className="style-sections__themes-on-background">
+            {this.renderThemes([
+               'primary',
+               'primary-light',
+               'primary-dark',
+               'secondary',
+               'secondary-light',
+               'secondary-dark',
+               'text-primary-on-background',
+               'text-secondary-on-background',
+               'text-hint-on-background',
+               'text-disabled-on-background',
+               'text-icon-on-background'
+            ])}
+          </section>
+
+          <section className="style-sections__themes-bg">
+            {this.renderThemes([
+               'primary-bg',
+               'primary-light-bg',
+               'primary-dark-bg',
+               'secondary-bg',
+               'secondary-light-bg',
+               'secondary-dark-bg',
+            ])}
+          </section>
+
+          <section className="style-sections__themes-text-on-theme-bg">
+            {this.renderThemesWithBackground([
+               'text-primary-on-primary',
+               'text-secondary-on-primary',
+               'text-hint-on-primary',
+               'text-disabled-on-primary',
+               'text-icon-on-primary',
+
+               'text-primary-on-primary-light',
+               'text-secondary-on-primary-light',
+               'text-hint-on-primary-light',
+               'text-disabled-on-primary-light',
+               'text-icon-on-primary-light',
+
+               'text-primary-on-primary-dark',
+               'text-secondary-on-primary-dark',
+               'text-hint-on-primary-dark',
+               'text-disabled-on-primary-dark',
+               'text-icon-on-primary-dark',
+
+               'text-primary-on-secondary',
+               'text-secondary-on-secondary',
+               'text-hint-on-secondary',
+               'text-disabled-on-secondary',
+               'text-icon-on-secondary',
+
+               'text-primary-on-secondary-light',
+               'text-secondary-on-secondary-light',
+               'text-hint-on-secondary-light',
+               'text-disabled-on-secondary-light',
+               'text-icon-on-secondary-light',
+
+               'text-primary-on-secondary-dark',
+               'text-secondary-on-secondary-dark',
+               'text-hint-on-secondary-dark',
+               'text-disabled-on-secondary-dark',
+               'text-icon-on-secondary-dark'
+            ])}
+          </section>
+        </GridCell>
+
         <GridCell span="12">
           <section className="style-sections__modals">
             <Button onClick={() => this.setState({ addFeedOpen: true, addFeedLoading: false })}>
@@ -198,7 +363,7 @@ export default class Styles extends React.Component<Props, State> {
 
         <GridCell>
           <section className="style-sections__cards">
-            <Card style={{width: '320px'}}>
+            <Card>
               <CardMedia style={{
                 backgroundImage: 'url(https://material-components-web.appspot.com/images/16-9.jpg)',
                 height: '12.313rem'
@@ -288,69 +453,6 @@ export default class Styles extends React.Component<Props, State> {
           </section>
         </GridCell>
 
-        <GridCell span="12">
-          <section className="style-sections__themes">
-            <div>
-              <div style={{ backgroundColor: '#ddd' }}>
-                {[
-                   'primary',
-                   'primary-light',
-                   'primary-dark',
-                   'secondary',
-                   'secondary-light',
-                   'secondary-dark',
-                   'background',
-                   'dark',
-                   'primary-bg',
-                   'primary-light-bg',
-                   'primary-dark-bg',
-                   'secondary-bg',
-                   'secondary-light-bg',
-                   'secondary-dark-bg',
-                   'text-primary-on-background',
-                   'text-secondary-on-background',
-                   'text-hint-on-background',
-                   'text-disabled-on-background',
-                   'text-icon-on-background',
-                   'text-primary-on-light',
-                   'text-secondary-on-light',
-                   'text-hint-on-light',
-                   'text-disabled-on-light',
-                   'text-icon-on-light'
-                ].map((theme, i) => (
-                  <Theme use={theme} key={i}>
-                    {theme}
-                  </Theme>
-                ))}
-              </div>
-              <div style={{ backgroundColor: '#333' }}>
-                {[
-                   'text-primary-on-primary',
-                   'text-secondary-on-primary',
-                   'text-hint-on-primary',
-                   'text-disabled-on-primary',
-                   'text-icon-on-primary',
-                   'text-primary-on-secondary',
-                   'text-secondary-on-secondary',
-                   'text-hint-on-secondary',
-                   'text-disabled-on-secondary',
-                   'text-icon-on-secondary',
-                   'text-primary-on-dark',
-                   'text-secondary-on-dark',
-                   'text-hint-on-dark',
-                   'text-disabled-on-dark',
-                   'text-icon-on-dark'
-                ].map((theme, i) => (
-                  <Theme use={theme} key={i}>
-                    {theme}
-                  </Theme>
-                ))}
-              </div>
-            </div>
-
-          </section>
-        </GridCell>
-
         <GridCell>
           <section className="style-sections__drawers">
             <Button
@@ -364,7 +466,7 @@ export default class Styles extends React.Component<Props, State> {
               open={this.state.open}
               onClose={() => this.setState({open: false})}
             >
-              <DrawerHeader style={{ backgroundColor: '#f6f6f6' }}>
+              <DrawerHeader>
                 DrawerHeader
               </DrawerHeader>
               <DrawerContent>

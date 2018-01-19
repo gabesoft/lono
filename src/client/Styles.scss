@@ -10,51 +10,33 @@
   @include space-v(20px);
 }
 
-.style-sections__header {
-  background-color: $material-color-grey-200;
-}
-
 .style-sections__typography {
-  background-color: $material-color-grey-300;
-
   span {
     display: block;
   }
 }
 
 .style-sections__buttons {
-  background-color: $material-color-grey-400;
-
   button {
     margin: 0 2px;
   }
 }
 
-.style-sections__cards {
-  background-color: $material-color-grey-500;
-}
-
-.style-sections__menus {
-  background-color: $material-color-grey-600;
-}
-
-.style-sections__snackbars {
-  background-color: $material-color-grey-700;
-}
-
+.style-sections__themes-text-on-light,
+.style-sections__themes-text-on-dark,
+.style-sections__themes-on-background,
+.style-sections__themes-text-on-theme-bg,
+.style-sections__themes-bg,
 .style-sections__themes {
-  background-color: $material-color-grey-800;
-
-  span {
+  .light-theme-bg > span,
+  .dark-theme-bg > span,
+  > span {
     display: inline-block;
-    height: 96px;
+    height: 120px;
     margin: 4px;
-    padding: 16px;
+    padding: 4px;
+    text-align: left;
     vertical-align: top;
-    width: 96px;
+    width: 120px;
   }
-}
-
-.style-sections__drawers {
-  background-color: $material-color-grey-900;
 }

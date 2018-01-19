@@ -15,18 +15,20 @@ $background-color-accent: var(--background-color-accent);
 $background-color-light: var(--background-color-light);
 $background-color-faded: var(--background-color-faded);
 
-$foreground-color: var(--foreground-color);
-$foreground-color-light: var(--foreground-color-light);
+/* TODO rename to match the variables in themes.scss */
+$foreground-color: var(--foreground-color-primary);
+$foreground-color-light: var(--foreground-color-secondary);
 $foreground-color-dark: $material-color-grey-900;
 
-$mdc-theme-primary-faded: rgba($mdc-theme-primary, .3);
+$mdc-theme-primary-faded: red;//rgba($mdc-theme-primary, .3);
 
+/* TODO need different unread-colors per theme */
 $unread-color: $mdc-theme-secondary;
-$unread-color-faded: rgba($unread-color, .3);
+$unread-color-faded: $unread-color; // rgba($unread-color, .2);
 
 $border-color: var(--border-color);
 
-$link-color: $mdc-theme-secondary-dark;
-$link-color-hover: $mdc-theme-primary;
+$link-color: $mdc-theme-primary;
+$link-color-hover: $mdc-theme-secondary;
 $link-background-color: $background-color;
 $link-background-color-hover: $background-color-secondary;

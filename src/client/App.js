@@ -13,14 +13,6 @@ import Styles from 'client/Styles';
 import Header from 'client/Header';
 
 export default class App extends Component<{||}> {
-  componentDidMount() {
-    const body = document.body;
-    if (body) {
-      body.classList.toggle('light-theme', false);
-      body.classList.toggle('dark-theme', true);
-    }
-  }
-
   render() {
     return(
       <Router>

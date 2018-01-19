@@ -50,6 +50,16 @@
 
 .mdc-text-field__input {
   @include typography-base;
+
+  border-bottom: 1px solid $border-color;
+
+  &:hover {
+    border-bottom: 1px solid $foreground-color;
+  }
+}
+
+.mdc-text-field__label {
+  color: $foreground-color;
 }
 
 .mdc-typography {

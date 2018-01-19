@@ -5,15 +5,28 @@
 @import './typography';
 
 .post-view__description {
+  $width: 800px;
+
   @include typography('post-view');
 
   margin: auto;
   max-width: 100%;
   overflow: auto;
-  width: 800px;
+  width: $width;
 
   img {
     max-width: 100%;
+  }
+
+  table {
+    overflow-x: auto;
+    display: block;
+    // margin: auto;
+  }
+
+  pre {
+    // margin: auto;
+    overflow: auto;
   }
 
   img,

@@ -5,7 +5,7 @@ import {
 } from 'rmwc';
 
 const ELEVATION_UNFOCUSED: 0 = 0;
-const ELEVATION_FOCUSED: 3 = 3;
+const ELEVATION_FOCUSED: 4 = 4;
 
 type Props = {
   children?: React.Node,

@@ -1,14 +1,14 @@
 @import './variables';
+@import './typography';
 @import './colors';
 @import './mixins';
 
 .avatar {
   @include round(32px);
+  @include typography('avatar');
 
-  align-items: center;
   background-color: $mdc-theme-primary;
-  color: $material-color-grey-100;
-  display: inline-flex;
-  justify-content: center;
+  color: $background-color;
   text-transform: uppercase;
+  text-align: center;
 }

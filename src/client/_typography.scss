@@ -129,6 +129,16 @@ $typography-styles: (
     margin: -.25rem 0 .75rem 0, // -4sp 0 12sp 0
     text-decoration: inherit,
     text-transform: inherit
+  ),
+  avatar: (
+    font-size: 1.2rem,
+    line-height: 1.8em,
+    font-family: $buttons-font-family,
+    font-weight: map-get($typography-font-weight-values, black),
+    letter-spacing: .04em,
+    margin: -.25rem 0 .75rem 0, // -4sp 0 12sp 0
+    text-decoration: inherit,
+    text-transform: inherit
   )
 );
 

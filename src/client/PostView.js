@@ -28,6 +28,8 @@ export default class PostView extends React.Component<Props, State> {
   render() {
     const userPost = this.props.userPost;
     const post = userPost.post;
+
+    // TODO: strip all inline styles from description
     const description = React.createElement('div', {
       dangerouslySetInnerHTML: { __html: post.description }
     });

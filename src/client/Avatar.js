@@ -7,9 +7,9 @@ type Props = {
 
 const getInitials = (text: string=''): string => {
   const words = text
-          .replace(/\W/g, ' ')
-          .split(/\s+/)
-          .filter(Boolean);
+    .replace(/\W/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean);
 
   if (words.length === 0) {
     return '- -';

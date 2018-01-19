@@ -1,4 +1,4 @@
-@import '@material/theme/color-palette';
+@import './variables';
 
 @import './base';
 @import './fonts';
@@ -24,10 +24,6 @@
 @import './EditFeedDialog';
 @import './DeleteFeedDialog';
 @import './EditPostDialog';
-
-.app {
-  background-color: $mdc-theme-primary;
-}
 
 .app__content {
   background-color: var(--background-color);

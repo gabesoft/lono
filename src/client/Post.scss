@@ -16,8 +16,10 @@
     width: 100%;
   }
 
-  a {
-    background-color: var(--background-color);
+  a,
+  a:hover {
+    background-color: $background-color;
+    color: currentColor;
   }
 }
 
