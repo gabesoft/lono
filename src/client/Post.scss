@@ -23,12 +23,9 @@
   }
 }
 
-.post_new {
-  @include border-normal;
-}
-
 .post_elevated {
-  @include border-transparent;
+  border: 0;
+  margin: $border-width;
 }
 
 .post__header,

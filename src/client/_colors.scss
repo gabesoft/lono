@@ -1,6 +1,5 @@
 @import './variables';
 @import './icons';
-@import '@material/theme/color-palette';
 
 $theme-color-primary: var(--mdc-theme-primary);
 $theme-color-primary-light: var(--mdc-theme-primary-light);
@@ -28,7 +27,7 @@ $foreground-color-hint: var(--foreground-color-hint);
 $foreground-color-disabled: var(--foreground-color-disabled);
 $foreground-color-icon: var(--foreground-color-icon);
 
-$unread-color: $mdc-theme-secondary;
+$unread-color: $theme-color-secondary;
 
 $link-color: $theme-color-primary;
 $link-color-hover: $theme-color-primary-off;
@@ -70,19 +69,24 @@ $border-color-strong: var(--border-color-strong);
   }
 }
 
-@mixin border-simple($color, $border-type: border) {
+@mixin border-simple($color, $border-type...) {
   border: 0;
-  #{$border-type}: 1px solid $color;
+  @if (length($border-type) == 0) {
+    $border-type: append($border-type, border);
+  }
+  @each $border in $border-type {
+    #{$border}: $border-width solid $color;
+  }
 }
 
-@mixin border-normal($border-type: border) {
-  @include border-simple($border-color-normal, $border-type);
+@mixin border-normal($border-type...) {
+  @include border-simple($border-color-normal, $border-type...);
 }
 
-@mixin border-strong($border-type: border) {
-  @include border-simple($border-color-strong, $border-type);
+@mixin border-strong($border-type...) {
+  @include border-simple($border-color-strong, $border-type...);
 }
 
-@mixin border-transparent($border-type: border) {
-  @include border-simple(transparent, $border-type);
+@mixin border-transparent($border-type...) {
+  @include border-simple(transparent, $border-type...);
 }

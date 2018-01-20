@@ -4,6 +4,8 @@ import icon from 'client/Icons';
 
 import Autosuggest, { filterSuggestions } from 'client/Autosuggest';
 
+import { TextField } from 'rmwc';
+
 import type {
   BaseSuggestion
 } from 'client/Autosuggest'
@@ -68,15 +70,6 @@ export default class Search extends React.Component<Props, State> {
     };
   }
 
-  renderSuggestion(suggestion: Suggestion, name: React.Node) {
-    return (
-      <div className="search__suggestion">
-        {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
-        {name}
-      </div>
-    );
-  }
-
   getSuggestions(value: string = ''): Array<Suggestion> {
     const input = value.toLowerCase();
     const length = input.length;
@@ -92,6 +85,21 @@ export default class Search extends React.Component<Props, State> {
     this.setState({ value });
   }
 
+  renderSuggestion(suggestion: Suggestion, name: React.Node) {
+    return (
+      <div className="search__suggestion">
+        {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
+        {name}
+      </div>
+    );
+  }
+
+  renderInput(props: Object) {
+    return (
+      <TextField {...props} />
+    );
+  }
+
   render() {
     const className = `search ${this.props.className || ''}`;
 
@@ -104,6 +112,7 @@ export default class Search extends React.Component<Props, State> {
           inputName="search"
           onInputChange={event => this.setState({ value: event.target.value })}
           onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+          renderInputComponent={this.renderInput.bind(this)}
           renderSuggestion={this.renderSuggestion.bind(this)}
           value={this.state.value}
         />

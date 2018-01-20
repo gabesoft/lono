@@ -7,8 +7,6 @@
 .feed {
   @include space-v(15px);
   @include padding(5px 10px);
-
-  background-color: $material-color-grey-100;
 }
 
 .feed__header,
@@ -17,7 +15,7 @@
 }
 
 .feed__header {
-  background-color: $mdc-theme-secondary-dark;
+  @include theme-color($background: secondary);
 }
 
 .feed__content {

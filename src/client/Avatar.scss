@@ -6,9 +6,8 @@
 .avatar {
   @include round(32px);
   @include typography('avatar');
+  @include theme-color($theme-background: primary);
 
-  background-color: $mdc-theme-primary;
-  color: $background-color;
   text-transform: uppercase;
   text-align: center;
 }

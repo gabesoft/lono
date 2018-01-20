@@ -44,21 +44,8 @@
   color: var(--foreground-color);
 }
 
-.mdc-button {
-  @include typography('button');
-}
-
 .mdc-text-field__input {
   @include typography-base;
-  @include border-normal(border-bottom);
-
-  &:hover {
-    @include border-simple($foreground-color, border-bottom);
-  }
-}
-
-.mdc-text-field__label {
-  color: $foreground-color;
 }
 
 .mdc-typography {
