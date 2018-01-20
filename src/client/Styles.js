@@ -144,7 +144,7 @@ export default class Styles extends React.Component<Props, State> {
     return(
       <Grid className="style-sections">
         <GridCell span="12">
-          <section className="style-sections__theme-select">
+          <section className="style-sections__theme-select border-normal">
             <Radio
               label="Dark Theme"
               value="dark"
@@ -164,7 +164,7 @@ export default class Styles extends React.Component<Props, State> {
         </GridCell>
 
         <GridCell span="12">
-          <section className="style-sections__themes-text-on-light">
+          <section className="style-sections__themes-text-on-light border-strong">
             <div className="background-color-primary-bg">
               {this.renderThemes([
                  'text-primary-on-light',

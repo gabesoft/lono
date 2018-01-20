@@ -1,7 +1,6 @@
 @import './variables';
+@import './icons';
 @import '@material/theme/color-palette';
-
-/* TODO make some mixins to make setting background/foreground colors easy @include theme('primary', 'secondary') -- foreground, background */
 
 $success-color: $material-color-green-600;
 $error-color: $material-color-red-600;
@@ -25,9 +24,52 @@ $mdc-theme-primary-faded: red;//rgba($mdc-theme-primary, .3);
 $unread-color: $mdc-theme-secondary;
 $unread-color-faded: $unread-color; // rgba($unread-color, .2);
 
-$border-color: var(--border-color);
-
 $link-color: $mdc-theme-primary;
-$link-color-hover: $mdc-theme-secondary;
+$link-color-hover: $mdc-theme-primary-light;
 $link-background-color: $background-color;
 $link-background-color-hover: $background-color-secondary;
+
+$border-color-normal: var(--border-color-normal);
+$border-color-strong: var(--border-color-strong);
+
+@mixin status-color($status) {
+  color: var(--status-color-#{$status});
+}
+
+@mixin theme-color($background: primary, $foreground: primary, $theme-background: null, $theme-foreground: null) {
+  @if ($theme-background) {
+    @include icon-color(var(--mdc-theme-text-#{$foreground}-on-#{$theme-background}));
+
+    background-color: var(--mdc-theme-#{$theme-background});
+    color: var(--mdc-theme-text-#{$foreground}-on-#{$theme-background});
+  }
+  @else {
+    @include icon-color(var(--mdc-theme-text-#{$foreground}-on-background));
+
+    background-color: var(--background-color-#{$background});
+    color: var(--mdc-theme-text-#{$foreground}-on-background);
+  }
+
+  @if ($theme-foreground) {
+    @include icon-color(var(--mdc-theme-#{$theme-foreground}));
+
+    color: var(--mdc-theme-#{$theme-foreground});
+  }
+}
+
+@mixin border-simple($color, $border-type: border) {
+  border: 0;
+  #{$border-type}: 1px solid $color;
+}
+
+@mixin border-normal($border-type: border) {
+  @include border-simple($border-color-normal, $border-type);
+}
+
+@mixin border-strong($border-type: border) {
+  @include border-simple($border-color-strong, $border-type);
+}
+
+@mixin border-transparent($border-type: border) {
+  @include border-simple(transparent, $border-type);
+}

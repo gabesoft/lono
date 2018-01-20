@@ -1,14 +1,14 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import './Icons';
+@import './icons';
 @import './typography';
 
 .post {
   @include layout-v;
   @include padding(5px 10px);
   @include space-v(15px);
-  @include flat-border;
+  @include border-normal;
 
   border-radius: $border-radius;
 
@@ -24,11 +24,11 @@
 }
 
 .post_new {
-  @include flat-border($unread-color-faded)
+  @include border-normal;
 }
 
 .post_elevated {
-  @include transparent-border;
+  @include border-transparent;
 }
 
 .post__header,
@@ -40,12 +40,11 @@
 
 .post__header {
   @include space-h(5px);
-
-  border-bottom: 1px solid $border-color;
+  @include border-normal(border-bottom);
 }
 
 .post__header_new {
-  border-bottom: 1px solid $unread-color-faded;
+  @include border-normal(border-bottom);
 }
 
 .post__actions_menu-item {

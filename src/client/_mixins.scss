@@ -79,11 +79,3 @@
 @mixin layout-v($inline: false, $justify-content: space-between) {
   @include layout(column, $inline, $justify-content);
 }
-
-@mixin flat-border($color: $border-color) {
-  border: 1px solid $color;
-}
-
-@mixin transparent-border {
-  @include flat-border(transparent);
-}

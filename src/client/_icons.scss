@@ -1,0 +1,18 @@
+@mixin icon-translate($xvalue: 0, $yvalue: 0) {
+  svg {
+    transform: translate($xvalue, $yvalue);
+  }
+}
+
+@mixin icon-color($color) {
+  svg > path {
+    fill: $color;
+  }
+}
+
+@mixin icon-size($size) {
+  svg {
+    height: $size;
+    width: $size;
+  }
+}

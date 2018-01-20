@@ -1,7 +1,7 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import './Icons';
+@import './icons';
 @import './typography';
 
 .autosuggest__container {
@@ -25,13 +25,14 @@
 
 .autosuggest__suggestions-list {
   @include space-v(5px);
-  @include flat-border;
+  @include border-normal;
 
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+/* TODO use primary-text-on-secondary color */
 .autosuggest__suggestion_highlighted {
   @include icon-color($foreground-color-dark);
 

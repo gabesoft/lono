@@ -5,36 +5,41 @@ $white-color: #FFF;
 
 // all theme maps are keyed by the background color
 
-$background-color-light: darken($white-color, 10);
-$background-color-dark: darken($black-color, 16);
+/* TODO need selection colors also */
+
+$background-color-light: #F5F5F5;
+$background-color-light-secondary: #E0E0E0;
+
+$background-color-dark: #303030;
+$background-color-dark-secondary: #424242;
 
 $background-colors: (
   light: (
     primary: $background-color-light,
-    secondary: darken($white-color, 15),
-    faded: rgba($background-color-light, .95)
+    secondary: $background-color-light-secondary,
+    faded: rgba($background-color-light-secondary, .95)
   ),
   dark: (
     primary: $background-color-dark,
-    secondary: lighten($black-color, 20),
-    faded: rgba($background-color-dark, .95)
+    secondary: $background-color-dark-secondary,
+    faded: rgba($background-color-dark-secondary, .95)
   )
 );
 
 $foreground-colors: (
   light: (
-    primary: rgba($black-color, .87),
+    primary: rgba($black-color, .89),
     secondary: rgba($black-color, .54),
     hint: rgba($black-color, .38),
     disabled: rgba($black-color, .38),
-    icon: rgba($black-color, .38)
+    icon: rgba($black-color, .80)
   ),
   dark: (
     primary: rgba($white-color, .8),
-    secondary: rgba($white-color, .5),
-    hint: rgba($white-color, .3),
-    disabled: rgba($white-color, .3),
-    icon: rgba($white-color, .3)
+    secondary: rgba($white-color, .4),
+    hint: rgba($white-color, .2),
+    disabled: rgba($white-color, .2),
+    icon: rgba($white-color, .5)
   )
 );
 
@@ -43,17 +48,17 @@ $theme-colors: (
     primary: #6D4C41,
     primary-light: #9C786C,
     primary-dark: #40241A,
-    secondary: #64B5F6,
-    secondary-light: #9BE7FF,
-    secondary-dark: #2286C3
+    secondary: #00b0ff,
+    secondary-light: #69e2ff,
+    secondary-dark: #0081cb
   ),
   dark: (
-    primary: #4FC2F7,
-    primary-light: #8BF5FF,
-    primary-dark: #0092C4,
-    secondary: #FF4081,
-    secondary-light: #FF79B0,
-    secondary-dark: #C60055
+    primary: #00838f,
+    primary-light: #4fb3be,
+    primary-dark: #005661,
+    secondary: #ff9100,
+    secondary-light: #ffc246,
+    secondary-dark: #c56200
   )
 );
 
@@ -69,11 +74,16 @@ $theme-foreground-types: (
   dark: (
     primary: light,
     primary-light: light,
-    primary-dark: light,
+    primary-dark: dark,
     secondary: light,
     secondary-light: light,
-    secondary-dark: dark
+    secondary-dark: light
   )
+);
+
+$image-opacities: (
+  light: 1,
+  dark: 0.7
 );
 
 $theme-colors-light: map-get($theme-colors, light);
@@ -84,12 +94,12 @@ $foreground-colors-dark: map-get($foreground-colors, dark);
 
 $border-colors: (
   light: (
-    normal: rgba(map-get($foreground-colors-dark, primary), .5),
-    strong: rgba(map-get($foreground-colors-dark, secondary), .3),
+    normal: rgba(map-get($foreground-colors-light, primary), .1),
+    strong: rgba(map-get($foreground-colors-light, secondary), .2),
   ),
   dark: (
-    normal: rgba(map-get($foreground-colors-light, primary), .5),
-    strong: rgba(map-get($foreground-colors-light, secondary), .3),
+    normal: rgba(map-get($foreground-colors-dark, primary), .1),
+    strong: rgba(map-get($foreground-colors-dark, secondary), .2),
   )
 );
 
@@ -99,7 +109,7 @@ $border-colors-dark: map-get($border-colors, dark);
 $foreground-status-colors: (
   light: (
     success: $material-color-green-600,
-    warning: $material-color-yellow-600,
+    warning: $material-color-yellow-700,
     error: $material-color-red-600
   ),
   dark: (
@@ -158,6 +168,8 @@ $background-colors-dark: map-get($background-colors, dark);
   --background-color-primary: map-get($colors-for-background, primary);
   --background-color-secondary: map-get($colors-for-background, secondary);
   --background-color-faded: map-get($colors-for-background, faded);
+
+  --image-opacity: map-get($image-opacities, $background);
 }
 
 body {
@@ -191,6 +203,12 @@ body {
 @each $style in map-keys($foreground-colors-light) {
   .foreground-color-#{$style}-fg {
     color: var(--foreground-color-#{$style});
+  }
+}
+
+@each $border in map-keys($border-colors-light) {
+  .border-#{$border} {
+    border: 1px solid var(--border-color-#{$border});
   }
 }
 

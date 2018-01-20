@@ -41,8 +41,6 @@ export default class App extends Component<{||}> {
             </li>
           </ul>
 
-          <hr/>
-
           <Route exact path="/" component={Home} />
           <Route path="/feeds" component={Feeds} />
           <Route path="/posts" component={Posts} />

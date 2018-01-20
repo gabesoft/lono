@@ -1,7 +1,7 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import './Icons';
+@import './icons';
 @import './typography';
 
 .post-view__description {
@@ -21,12 +21,14 @@
   table {
     overflow-x: auto;
     display: block;
-    // margin: auto;
   }
 
   pre {
-    // margin: auto;
     overflow: auto;
+  }
+
+  img {
+    opacity: var(--image-opacity);
   }
 
   img,

@@ -1,16 +1,16 @@
 @import './variables';
 @import './colors';
 @import './mixins';
-@import './Icons';
+@import './icons';
 @import './typography';
 
 .tag {
   @include layout-h(true);
   @include space-h(3px);
   @include typography('body1');
-  @include flat-border;
+  @include border-normal;
+  @include theme-color(secondary, primary);
 
-  background-color: $background-color-secondary;
   border-radius: 50px;
   padding: 3px 3px 3px 12px;
   white-space: nowrap;
@@ -18,15 +18,14 @@
 }
 
 .tag_elevated {
-  @include transparent-border;
+  @include border-transparent;
 }
 
 .tag__remove {
   @include layout-h(true);
   @include icon-size(16px);
-  @include icon-color($background-color-light);
+  @include theme-color($theme-background: primary);
 
-  background-color: $foreground-color-light;
   border: 0;
   border-radius: 50%;
   cursor: pointer;
@@ -35,6 +34,6 @@
 
   &:hover,
   &:focus {
-    @include icon-color($mdc-theme-secondary);
+    @include theme-color($theme-background: primary-dark);
   }
 }
