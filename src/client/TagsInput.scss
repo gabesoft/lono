@@ -24,6 +24,7 @@
 
 .tags-input__input {
   @include border-normal(border-bottom);
+  @include theme-color;
 
   outline: none;
   padding: 0 0 8px;
@@ -31,6 +32,8 @@
 }
 
 .tags-input__title {
+  @include theme-color;
+
   display: inline-block;
   transform: scale(.75);
   transform-origin: left top;

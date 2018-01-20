@@ -32,16 +32,10 @@
   padding: 0;
 }
 
-/* TODO use primary-text-on-secondary color */
 .autosuggest__suggestion_highlighted {
-  @include icon-color($foreground-color-dark);
+  @include theme-color($theme-background: secondary);
 
-  background-color: $mdc-theme-secondary;
   border-radius: $border-radius;
-
-  * {
-    color: $foreground-color-dark;
-  }
 }
 
 .autosuggest__suggestion {

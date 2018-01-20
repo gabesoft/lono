@@ -40,11 +40,7 @@
 
 .post__header {
   @include space-h(5px);
-  @include border-normal(border-bottom);
-}
-
-.post__header_new {
-  @include border-normal(border-bottom);
+  @include theme-color($background: secondary);
 }
 
 .post__actions_menu-item {
@@ -99,12 +95,10 @@
 .post__summary {
   @include typography('body1');
   @include ellipsis-v($line-count: 3);
-
-  color: $foreground-color-light;
+  @include theme-color($foreground: secondary);
 }
 
 .post__status {
   color: $unread-color;
-
   flex: 0 0 auto;
 }

@@ -2,24 +2,16 @@
 @import './variables';
 @import './colors';
 
-html {
-  // background-color: $mdc-theme-primary;
-  // background-color: transparent;
-}
-
 body {
   @include typography-base;
+  @include selection-color;
+  @include theme-color;
 
-  // background-color: $background-color;
-  background-color: $mdc-theme-primary;
-  color: $foreground-color;
-
-  // background-color: $mdc-theme-primary;
+  background-color: $theme-color-primary;
   margin: 0 $body-padding;
 
   * {
     box-sizing: border-box;
-    // color: $foreground-color;
   }
 }
 
@@ -30,9 +22,8 @@ a {
   text-decoration: none;
 
   &:hover {
-    // background-color: $link-background-color-hover;
     color: $link-color-hover;
-    // text-decoration: underline;
+    background-color: $link-background-color-hover;
   }
 }
 

@@ -32,7 +32,9 @@ import type {
 
 export default class TagsInput extends React.Component<Props, State> {
   tagsInput: ?HTMLElement
+  prevInput: ?HTMLElement
   titleInput: ?HTMLElement
+  inputChanged: boolean
   inputId: string
 
   constructor(props: Props) {
@@ -44,9 +46,9 @@ export default class TagsInput extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    const zeroOrOneTag = this.props.tags.length <= 1;
-    if (zeroOrOneTag && this.tagsInput && this.tagsInput.focus) {
+    if (this.inputChanged && this.tagsInput && this.tagsInput.focus) {
       this.tagsInput.focus();
+      this.inputChanged = false;
     }
   }
 
@@ -74,11 +76,19 @@ export default class TagsInput extends React.Component<Props, State> {
     );
   }
 
+  updateTagsInput(input: HTMLElement) {
+    if (!this.inputChanged) {
+      this.inputChanged = this.prevInput !== null && input !== null && this.prevInput !== input;
+    }
+    this.prevInput = this.tagsInput;
+    this.tagsInput = input;
+  }
+
   renderInput(props: Object) {
     if (this.props.tags.length > 0) {
       return (
         <input {...props}
-          ref={input => { this.tagsInput = input }}
+          ref={input => this.updateTagsInput(input)}
           className="tags-input__input"
         />
       );
@@ -86,7 +96,7 @@ export default class TagsInput extends React.Component<Props, State> {
       return (
         <TextField {...props}
           className="tags-input__text-field"
-          ref={field => { this.tagsInput = field && field.mdcApi.input_ }} />
+          ref={field => this.updateTagsInput(field && field.mdcApi.input_)} />
       );
     }
   }

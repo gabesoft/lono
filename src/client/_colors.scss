@@ -2,9 +2,17 @@
 @import './icons';
 @import '@material/theme/color-palette';
 
-$success-color: $material-color-green-600;
-$error-color: $material-color-red-600;
-$warning-color: $material-color-yellow-600;
+$theme-color-primary: var(--mdc-theme-primary);
+$theme-color-primary-light: var(--mdc-theme-primary-light);
+$theme-color-primary-dark: var(--mdc-theme-primary-dark);
+$theme-color-primary-off: var(--mdc-theme-primary-off);
+$theme-color-secondary: var(--mdc-theme-secondary);
+$theme-color-secondary-light: var(--mdc-theme-secondary-light);
+$theme-color-secondary-dark: var(--mdc-theme-secondary-dark);
+
+$success-color: var(--status-color-success);
+$error-color: var(--status-color-error);
+$warning-color: var(--status-color-warning);
 
 $background-color: var(--background-color);
 $background-color-secondary: var(--background-color-secondary);
@@ -13,19 +21,17 @@ $background-color-accent: var(--background-color-accent);
 $background-color-light: var(--background-color-light);
 $background-color-faded: var(--background-color-faded);
 
-/* TODO rename to match the variables in themes.scss */
 $foreground-color: var(--foreground-color-primary);
-$foreground-color-light: var(--foreground-color-secondary);
-$foreground-color-dark: $material-color-grey-900;
+$foreground-color-primary: var(--foreground-color-primary);
+$foreground-color-secondary: var(--foreground-color-secondary);
+$foreground-color-hint: var(--foreground-color-hint);
+$foreground-color-disabled: var(--foreground-color-disabled);
+$foreground-color-icon: var(--foreground-color-icon);
 
-$mdc-theme-primary-faded: red;//rgba($mdc-theme-primary, .3);
-
-/* TODO need different unread-colors per theme */
 $unread-color: $mdc-theme-secondary;
-$unread-color-faded: $unread-color; // rgba($unread-color, .2);
 
-$link-color: $mdc-theme-primary;
-$link-color-hover: $mdc-theme-primary-light;
+$link-color: $theme-color-primary;
+$link-color-hover: $theme-color-primary-off;
 $link-background-color: $background-color;
 $link-background-color-hover: $background-color-secondary;
 
@@ -54,6 +60,13 @@ $border-color-strong: var(--border-color-strong);
     @include icon-color(var(--mdc-theme-#{$theme-foreground}));
 
     color: var(--mdc-theme-#{$theme-foreground});
+  }
+}
+
+@mixin selection-color() {
+  ::selection {
+    background: var(--selection-color-background);
+    color: var(--selection-color-foreground);
   }
 }
 

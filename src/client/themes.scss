@@ -35,7 +35,7 @@ $foreground-colors: (
     icon: rgba($black-color, .80)
   ),
   dark: (
-    primary: rgba($white-color, .8),
+    primary: rgba($white-color, .7),
     secondary: rgba($white-color, .4),
     hint: rgba($white-color, .2),
     disabled: rgba($white-color, .2),
@@ -119,11 +119,27 @@ $foreground-status-colors: (
   )
 );
 
+$theme-primary-off: (
+  light: primary-dark,
+  dark: primary-light
+);
+
 $foreground-status-colors-light: map-get($foreground-status-colors, light);
 $foreground-status-colors-dark: map-get($foreground-status-colors, dark);
 
 $background-colors-light: map-get($background-colors, light);
 $background-colors-dark: map-get($background-colors, dark);
+
+$selection-colors: (
+  light: (
+    background: map-get($background-colors-dark, primary),
+    foreground: map-get($foreground-colors-dark, primary)
+    ),
+  dark: (
+    background: map-get($background-colors-light, primary),
+    foreground: map-get($foreground-colors-light, primary)
+  )
+);
 
 @function get-foreground-color-for-theme($theme, $text-style, $background) {
   $foreground-types: map-get($theme-foreground-types, $background);
@@ -132,8 +148,14 @@ $background-colors-dark: map-get($background-colors, dark);
   @return map-get($colors, $text-style);
 }
 
+@function reverse-background($background) {
+  @return if($background == dark, light, dark);
+}
+
 @mixin create-theme($background) {
+  $theme-off: map-get($theme-primary-off, $background);
   $theme-for-background: map-get($theme-colors, $background);
+  --mdc-theme-primary-off: #{map-get($theme-for-background, $theme-off)};
   @each $theme in map-keys($theme-for-background) {
     --mdc-theme-#{$theme}: #{map-get($theme-for-background, $theme)};
   }
@@ -142,15 +164,20 @@ $background-colors-dark: map-get($background-colors, dark);
   @each $style in map-keys($foreground-for-background) {
     --foreground-color-#{$style}: #{map-get($foreground-for-background, $style)};
     --mdc-theme-text-#{$style}-on-background: #{map-get($foreground-for-background, $style)};
+    --mdc-theme-text-#{$style}-on-primary-off: #{get-foreground-color-for-theme($theme-off, $style, $background)};
 
     @each $theme in map-keys($theme-for-background) {
       --mdc-theme-text-#{$style}-on-#{$theme}: #{get-foreground-color-for-theme($theme, $style, $background)}
     }
   }
 
-  // these are only for mdc components (mdc background is always set to light)
   @each $style in map-keys($foreground-for-background) {
     --mdc-theme-text-#{$style}-on-light: #{map-get($foreground-for-background, $style)};
+  }
+
+  $foreground-for-reverse-background: map-get($foreground-colors, reverse-background($background));
+  @each $style in map-keys($foreground-for-reverse-background) {
+    --mdc-theme-text-#{$style}-on-dark: #{map-get($foreground-for-reverse-background, $style)};
   }
 
   $border-for-background: map-get($border-colors, $background);
@@ -161,6 +188,11 @@ $background-colors-dark: map-get($background-colors, dark);
   $status-for-background: map-get($foreground-status-colors, $background);
   @each $color in map-keys($status-for-background) {
     --status-color-#{$color}: #{map-get($status-for-background, $color)};
+  }
+
+  $selection-for-background: map-get($selection-colors, $background);
+  @each $property in map-keys($selection-for-background) {
+    --selection-color-#{$property}: #{map-get($selection-for-background, $property)};
   }
 
   $colors-for-background: map-get($background-colors, $background);
