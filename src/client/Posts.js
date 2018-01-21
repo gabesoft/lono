@@ -30,9 +30,9 @@ export default class Posts extends React.Component<Props, State> {
   }
 
   renderPosts() {
-    return this.state.posts.map(userPost => {
+    return this.state.posts.map((userPost, i) => {
       return (
-        <GridCell key={userPost.postId} className="posts__post" phone="4" tablet="4" desktop="3">
+        <GridCell key={i} className="posts__post" phone="4" tablet="4" desktop="3">
           <Post
             userPost={userPost}
             onOpenClick={() => undefined}

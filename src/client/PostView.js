@@ -25,13 +25,39 @@ export default class PostView extends React.Component<Props, State> {
     window.scrollTo(0, 0);
   }
 
+  processDescription(document: Document) {
+    const images = document.getElementsByTagName('img');
+    const allElements = document.body && document.body.querySelectorAll('*') || [];
+
+    for (let img of images) {
+      const dataSrc = img.getAttribute('data-src');
+
+      if (dataSrc && !img.hasAttribute('src')) {
+        img.src = dataSrc;
+      }
+
+      if (img.hasAttribute('src')) {
+        img.removeAttribute('srcset');
+      }
+    }
+
+    for (let element of allElements) {
+      element.removeAttribute('style');
+    }
+
+    return document;
+  }
+
   render() {
     const userPost = this.props.userPost;
     const post = userPost.post;
 
-    // TODO: strip all inline styles from description
+    const descriptionDocument = (new DOMParser).parseFromString(post.description, 'text/html');
+    const cleanedDocument = this.processDescription(descriptionDocument);
+    const html = (new XMLSerializer).serializeToString(cleanedDocument);
+
     const description = React.createElement('div', {
-      dangerouslySetInnerHTML: { __html: post.description }
+      dangerouslySetInnerHTML: { __html: html }
     });
 
     // TODO make the feed title a link to the feed

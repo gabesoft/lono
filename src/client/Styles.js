@@ -139,7 +139,6 @@ export default class Styles extends React.Component<Props, State> {
     });
   }
 
-  // TODO: add borders, status colors, and secondary background
   render() {
     return(
       <Grid className="style-sections">
