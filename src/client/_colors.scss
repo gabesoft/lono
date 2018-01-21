@@ -47,8 +47,7 @@ $border-color-strong: var(--border-color-strong);
 
     background-color: var(--mdc-theme-#{$theme-background});
     color: var(--mdc-theme-text-#{$foreground}-on-#{$theme-background});
-  }
-  @else {
+  } @else {
     @include icon-color(var(--mdc-theme-text-#{$foreground}-on-background));
 
     background-color: var(--background-color-#{$background});
@@ -62,7 +61,7 @@ $border-color-strong: var(--border-color-strong);
   }
 }
 
-@mixin selection-color() {
+@mixin selection-color {
   ::selection {
     background: var(--selection-color-background);
     color: var(--selection-color-foreground);

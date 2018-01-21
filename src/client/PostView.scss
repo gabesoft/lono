@@ -4,10 +4,8 @@
 @import './typography';
 @import './icons';
 
-// TODO use gutter variables for all space-h, margins, etc
-
 .post-view {
-  padding: 24px 32px;
+  @include padding-large;
 }
 
 .post-view__title {
@@ -17,12 +15,12 @@
   text-transform: capitalize;
 
   a {
-    text-decoration: none;
     color: $foreground-color;
+    text-decoration: none;
 
     &:hover {
-      color: $link-color-hover;
       background-color: $background-color;
+      color: $link-color-hover;
     }
   }
 }
@@ -33,10 +31,8 @@
 
 .post-view__avatar-feed-title {
   @include layout-h($justify-content: left);
-  @include space-h(5px);
+  @include space-h($space-h);
   @include ellipsis-h;
-
-  margin-right: 20px;
 }
 
 .post-view__feed-title {

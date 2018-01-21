@@ -16,7 +16,7 @@
 }
 
 .search__suggestion {
-  @include space-h(10px);
+  @include space-h($space-h);
   @include typography('subheading2');
   @include layout-h($justify-content: left);
 }

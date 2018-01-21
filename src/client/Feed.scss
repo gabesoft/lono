@@ -5,8 +5,8 @@
 @import './typography';
 
 .feed {
-  @include space-v(15px);
-  @include padding(5px 10px);
+  @include space-v;
+  @include padding-small;
 }
 
 .feed__header,
@@ -19,7 +19,7 @@
 }
 
 .feed__content {
-  @include space-v(10px);
+  @include space-v;
 }
 
 .feed__title {
@@ -28,7 +28,7 @@
 
 .feed__avatar-author {
   @include typography('subheading2');
-  @include space-h(10px);
+  @include space-h;
 }
 
 .feed__description {
@@ -48,5 +48,5 @@
 }
 
 .feed__actions_menu-item {
-  @include space-h(5px);
+  @include space-h;
 }

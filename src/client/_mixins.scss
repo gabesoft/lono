@@ -1,6 +1,6 @@
 @import './colors';
 
-@mixin space-v($value) {
+@mixin space-v($value: $space-v) {
   > * {
     margin-top: $value;
 
@@ -10,7 +10,7 @@
   }
 }
 
-@mixin space-h($value) {
+@mixin space-h($value: $space-h) {
   > * {
     margin-left: $value;
 
@@ -20,10 +20,12 @@
   }
 }
 
-@mixin padding($value) {
-  > * {
-    padding: $value;
-  }
+@mixin padding-small {
+  padding: $padding-small-v $padding-small-h;
+}
+
+@mixin padding-large {
+  padding: $padding-large-v $padding-large-h;
 }
 
 @mixin bullet-h {

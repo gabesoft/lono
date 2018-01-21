@@ -8,6 +8,6 @@
   @include typography('avatar');
   @include theme-color($theme-background: primary);
 
-  text-transform: uppercase;
   text-align: center;
+  text-transform: uppercase;
 }

@@ -6,8 +6,6 @@
 
 .post {
   @include layout-v;
-  @include padding(5px 10px);
-  @include space-v(15px);
   @include border-normal;
 
   border-radius: $border-radius;
@@ -16,10 +14,12 @@
     width: 100%;
   }
 
-  a,
-  a:hover {
-    background-color: $background-color;
+  a {
     color: currentColor;
+
+    &:hover {
+      background-color: $background-color;
+    }
   }
 }
 
@@ -31,21 +31,22 @@
 .post__header,
 .post__footer {
   @include layout-h;
+  @include padding-small;
 
   flex: 0 0 auto;
 }
 
 .post__header {
-  @include space-h(5px);
+  @include space-h($space-h);
   @include theme-color($background: secondary);
 }
 
 .post__actions_menu-item {
-  @include space-h(5px);
+  @include space-h($space-h);
 
   a {
     @include layout-h;
-    @include space-h(5px);
+    @include space-h($space-h);
   }
 }
 
@@ -54,7 +55,8 @@
 }
 
 .post__content {
-  @include space-v(10px);
+  @include space-v($space-v);
+  @include padding-small;
 
   color: currentColor;
   display: block;
@@ -66,8 +68,6 @@
 .post__feed-info {
   @include typography('subheading2');
   @include layout-h;
-
-  width: 100%;
 }
 
 .post__avatar,
@@ -83,10 +83,8 @@
 }
 
 .post__title {
-  @include typography('title');
+  @include typography('header5');
   @include ellipsis-v($line-count: 3);
-
-  line-height: 1.6rem;
 }
 
 .post__summary {

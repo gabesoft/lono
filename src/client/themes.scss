@@ -3,10 +3,6 @@
 $black-color: #000;
 $white-color: #FFF;
 
-// all theme maps are keyed by the background color
-
-/* TODO need selection colors also */
-
 $background-color-light: #F5F5F5;
 $background-color-light-secondary: #E0E0E0;
 
@@ -28,43 +24,60 @@ $background-colors: (
 
 $foreground-colors: (
   light: (
-    primary: rgba($black-color, .89),
+    primary: rgba($black-color, .85),
     secondary: rgba($black-color, .54),
     hint: rgba($black-color, .38),
     disabled: rgba($black-color, .38),
-    icon: rgba($black-color, .80)
+    icon: rgba($black-color, .38)
   ),
   dark: (
     primary: rgba($white-color, .7),
     secondary: rgba($white-color, .4),
     hint: rgba($white-color, .2),
     disabled: rgba($white-color, .2),
-    icon: rgba($white-color, .5)
+    icon: rgba($white-color, .2)
   )
 );
 
 $theme-colors: (
   light: (
-    primary: #8d6e63,
-    primary-light: #be9c91,
-    primary-dark: #5f4339,
-    secondary: #00b0ff,
-    secondary-light: #69e2ff,
-    secondary-dark: #0081cb
+    primary: #795548,
+    primary-light: #A98274,
+    primary-dark: #4B2C20,
+    secondary: #00B0FF,
+    secondary-light: #69E2FF,
+    secondary-dark: #0081CB
   ),
   dark: (
-    primary: #00838f,
-    primary-light: #4fb3be,
+    primary: #00838F,
+    primary-light: #4FB3BE,
     primary-dark: #005661,
-    secondary: #ff9100,
-    secondary-light: #ffc246,
-    secondary-dark: #c56200
+    secondary: #FF9100,
+    secondary-light: #FFC246,
+    secondary-dark: #C56200
+  )
+);
+
+$theme-foreground-colors: (
+  light: (
+  primary: rgba($black-color, .87),
+  secondary: rgba($black-color, .54),
+  hint: rgba($black-color, .38),
+  disabled: rgba($black-color, .38),
+  icon: rgba($black-color, .38)
+),
+  dark: (
+    primary: rgba($white-color, 1),
+    secondary: rgba($white-color, .7),
+    hint: rgba($white-color, .5),
+    disabled: rgba($white-color, .5),
+    icon: rgba($white-color, .5)
   )
 );
 
 $theme-foreground-types: (
   light: (
-    primary: light,
+    primary: dark,
     primary-light: light,
     primary-dark: dark,
     secondary: light,
@@ -144,7 +157,7 @@ $selection-colors: (
 @function get-foreground-color-for-theme($theme, $text-style, $background) {
   $foreground-types: map-get($theme-foreground-types, $background);
   $foreground-type: map-get($foreground-types, $theme);
-  $colors: map-get($foreground-colors, $foreground-type);
+  $colors: map-get($theme-foreground-colors, $foreground-type);
   @return map-get($colors, $text-style);
 }
 
@@ -208,7 +221,6 @@ body {
   --light-background: map-get($background-colors-light, primary);
   --dark-background: map-get($background-colors-dark, primary);
 
-  // use light as the default theme
   @include create-theme(light);
 
   &.light-theme {

@@ -32,7 +32,7 @@
 }
 
 .tags-input__title {
-  @include theme-color;
+  @include theme-color($foreground: secondary);
 
   display: inline-block;
   transform: scale(.75);

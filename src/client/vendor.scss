@@ -34,18 +34,22 @@
   transition: transform 400ms ease-in-out;
 }
 
-.mdc-simple-menu {
-  background-color: var(--background-color);
-  color: var(--foreground-color);
+.mdc-simple-menu ,
+.mdc-dialog__surface {
+  @include theme-color;
 }
 
-.mdc-dialog__surface {
-  background-color: var(--background-color);
-  color: var(--foreground-color);
+.mdc-text-field__label {
+  @include theme-color($foreground: secondary);
 }
 
 .mdc-text-field__input {
   @include typography-base;
+  @include border-normal(border-bottom);
+
+  &:hover {
+    @include border-strong(border-bottom);
+  }
 }
 
 .mdc-typography {
