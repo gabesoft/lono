@@ -31,7 +31,7 @@ $foreground-colors: (
     icon: rgba($black-color, .38)
   ),
   dark: (
-    primary: rgba($white-color, .7),
+    primary: rgba($white-color, .72),
     secondary: rgba($white-color, .4),
     hint: rgba($white-color, .2),
     disabled: rgba($white-color, .2),
@@ -96,7 +96,7 @@ $theme-foreground-types: (
 
 $image-opacities: (
   light: 1,
-  dark: 0.7
+  dark: 0.8
 );
 
 $theme-colors-light: map-get($theme-colors, light);

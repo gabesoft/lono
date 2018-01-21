@@ -89,3 +89,19 @@ h4 {
 h5 {
   @include typography('header5');
 }
+
+hr {
+  background: $border-color-normal;
+  border: 0;
+  color: $foreground-color;
+  font-size: 0;
+  height: 1px;
+}
+
+tr,
+td,
+table {
+  border: 1px solid transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
