@@ -29,6 +29,10 @@ export default class PostView extends React.Component<Props, State> {
     const images = document.getElementsByTagName('img');
     const allElements = document.body && document.body.querySelectorAll('*') || [];
 
+    for (let element of allElements) {
+      element.removeAttribute('style');
+    }
+
     for (let img of images) {
       const dataSrc = img.getAttribute('data-src');
 
@@ -39,10 +43,8 @@ export default class PostView extends React.Component<Props, State> {
       if (img.hasAttribute('src')) {
         img.removeAttribute('srcset');
       }
-    }
 
-    for (let element of allElements) {
-      element.removeAttribute('style');
+      img.setAttribute('onerror', 'this.style.display=\'none\';');
     }
 
     return document;
