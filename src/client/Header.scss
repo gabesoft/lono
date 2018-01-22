@@ -13,18 +13,31 @@
   position: relative;
 }
 
-.header__logo {
+.header__left {
   display: flex;
   flex: 1;
 }
 
-.header__search {
+.header__center {
   flex: 3;
 }
 
-.header__user-info {
+.header__right {
+  @include layout-v;
+  @include space-v;
+
   flex: 1;
-  text-align: right;
+}
+
+.header__user-info {
+  @include layout-h($justify-content: flex-end);
+  @include space-h;
+
+  align-self: flex-end;
+}
+
+.header__theme-switch {
+  align-self: flex-end;
 }
 
 .logo {
@@ -37,19 +50,15 @@
   display: none;
 }
 
-.header__username {
-  margin-bottom: $space-v;
-}
-
-.header__subscribed-count,
-.header__new-post-count {
-  @include typography('caption');
-}
-
 .header__new-post-count {
   color: $unread-color;
 }
 
 .header_logged-out {
   height: $logo-size;
+}
+
+.header__subscription-info {
+  @include layout-h;
+  @include bullet-h;
 }

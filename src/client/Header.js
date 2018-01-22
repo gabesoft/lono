@@ -4,6 +4,8 @@ import Headroom from 'react-headroom';
 
 import Search from 'client/Search';
 import Optional from 'client/Optional';
+import ThemeSwitch from 'client/ThemeSwitch';
+
 import { Button } from 'rmwc';
 
 type Props = {
@@ -27,25 +29,36 @@ export default class Header extends React.Component<Props, State> {
   renderUserInfo() {
     if (this.props.username) {
       return (
-        <div className="header__user-info">
-          <div className="header__username">
-            {this.props.username}
+        <div className="header__right">
+          <div className="header__user-info">
+            <div className="header__username">
+              {this.props.username}
+            </div>
+            <Optional canRender={!!(this.props.subscribedCount || this.props.newPostCount)}>
+              <div className="header__subscription-info">
+                (
+                <Optional canRender={!!this.props.subscribedCount}>
+                  <div className="header__subscribed-count">
+                    {this.props.subscribedCount}
+                  </div>
+                </Optional>
+                <Optional canRender={!!this.props.newPostCount}>
+                  <div className="header__new-post-count">
+                    {this.props.newPostCount}
+                  </div>
+                </Optional>
+                )
+              </div>
+            </Optional>
           </div>
-          <Optional canRender={!!this.props.subscribedCount}>
-            <div className="header__subscribed-count">
-              {this.props.subscribedCount} Subscriptions
-            </div>
-          </Optional>
-          <Optional canRender={!!this.props.newPostCount}>
-            <div className="header__new-post-count">
-              {this.props.newPostCount} Unread Posts
-            </div>
-          </Optional>
+          <div className="header__theme-switch">
+            <ThemeSwitch />
+          </div>
         </div>
       );
     } else {
       return (
-        <div className="header__user-info">
+        <div className="header__right">
           <div className="header__username header_logged-out">
             <Button onClick={this.props.onLoginClick}>Log in</Button>
           </div>
@@ -58,10 +71,10 @@ export default class Header extends React.Component<Props, State> {
     return (
       <Headroom disableInlineStyles>
         <div className="header">
-          <div className="header__logo">
+          <div className="header__left">
             <img className="logo" alt="logo" src="https://via.placeholder.com/128x128"/>
           </div>
-          <Search className="header__search" value="" />
+          <Search className="header__center" value="" />
           {this.renderUserInfo()}
         </div>
       </Headroom>
