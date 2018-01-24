@@ -27,10 +27,11 @@ export default class ThemeSwitch extends React.Component<Props, State> {
 
   componentDidMount() {
     const body = document.body;
-    const theme = window.localStorage.getItem(USER_THEME);
+    const theme = window.localStorage.getItem(USER_THEME) || LIGHT_THEME;
 
     if (body) {
-      body.classList.toggle(DARK_THEME, theme && theme === DARK_THEME);
+      body.classList.toggle(DARK_THEME, theme === DARK_THEME);
+      body.classList.toggle(LIGHT_THEME, theme !== DARK_THEME);
 
       const isDark = body.classList.contains(DARK_THEME);
       this.setState({ theme: isDark ? DARK_THEME : LIGHT_THEME });

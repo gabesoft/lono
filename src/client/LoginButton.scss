@@ -1,0 +1,14 @@
+@import './mixins';
+@import './colors';
+@import './variables';
+
+.login-button {
+  @include layout-h;
+
+  height: 46px;
+  padding: 0;
+}
+
+.login-button__title {
+  padding: 0 #{$padding-small-h + 1px} 0 $padding-small-h;
+}

@@ -24,6 +24,13 @@
 @import './EditFeedDialog';
 @import './DeleteFeedDialog';
 @import './EditPostDialog';
+@import './Loader';
+@import './LoginButton';
+@import './LoginPage';
+
+.app {
+  min-height: 100%;
+}
 
 .app__content {
   background-color: var(--background-color);

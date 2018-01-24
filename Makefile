@@ -126,8 +126,13 @@ setup:
 	@npm install . -d
 
 
+# Kill all running servers
+kill:
+	-lsof -i:3000 | grep node | awk '{print $$2}' | xargs kill -9
+	-lsof -i:3001 | grep node | awk '{print $$2}' | xargs kill -9
+
 # Run all processes needed for development
-dev: all
+dev: all kill
 	@sh -c "$(MAKE) run-watch & \
 				  $(MAKE) build-cli-watch & \
 				  $(MAKE) webpack-watch & \

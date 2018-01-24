@@ -64,5 +64,6 @@ flow-typed
 # dotenv environment variables file
 .env
 
+src/config/google-client-secret.json
 
 # End of https://www.gitignore.io/api/node

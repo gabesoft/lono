@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/gabesoft/lono#readme",
   "dependencies": {
+    "google-auth-library": "^1.1.0",
     "koa": "^2.4.1",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
@@ -38,14 +39,15 @@
     "react-router-dom": "^4.2.2",
     "react-tagsinput": "^3.19.0",
     "redux": "^3.7.2",
-    "rmwc": "1.0.1",
-    "uuid": "^3.2.1"
+    "rmwc": "1.0.2",
+    "uuid": "^3.2.1",
+    "wolfy87-eventemitter": "^5.2.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-preset-react": "^6.24.1",
-    "eslint": "^4.15.0",
+    "eslint": "^4.16.0",
     "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",

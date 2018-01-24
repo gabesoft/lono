@@ -1,0 +1,10 @@
+@import './mixins';
+@import './colors';
+@import './variables';
+
+.login-page {
+  @include layout-v($justify-content: center);
+  @include space-v;
+
+  height: 50vh;
+}

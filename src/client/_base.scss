@@ -1,6 +1,12 @@
 @import './typography';
 @import './variables';
+@import './mixins';
 @import './colors';
+
+html,
+body {
+  min-height: 100%;
+}
 
 body {
   @include typography-base;
@@ -46,22 +52,32 @@ mark {
   text-decoration: underline;
 }
 
+pre {
+  @include padding-large;
+
+  background-color: $background-color-secondary;
+
+  code {
+    color: $foreground-color;
+  }
+}
+
 pre,
 xmp,
 plaintext,
 listing,
 code {
-  background-color: $background-color-secondary;
   font-family: 'CamingoCode-Regular';
   overflow: auto;
+  white-space: pre;
+}
+
+code {
+  color: $foreground-color-secondary;
 }
 
 figure {
   margin: 0;
-}
-
-pre {
-  padding: 5px 10px;
 }
 
 ul {

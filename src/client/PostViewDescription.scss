@@ -12,6 +12,7 @@
   margin: auto;
   max-width: 100%;
   overflow: auto;
+  text-rendering: optimizeLegibility;
   width: $width;
 
   img {
@@ -32,7 +33,7 @@
     opacity: var(--image-opacity);
   }
 
-  img,
+  img:not(.latex),
   div {
     padding: 0;
     margin: 10px auto;

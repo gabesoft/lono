@@ -23,6 +23,7 @@ type State = {
 export default class PostView extends React.Component<Props, State> {
   componentDidMount() {
     window.scrollTo(0, 0);
+    document.title = this.props.userPost.post.title;
   }
 
   processDescription(document: Document) {
@@ -45,6 +46,10 @@ export default class PostView extends React.Component<Props, State> {
       }
 
       img.setAttribute('onerror', 'this.style.display=\'none\';');
+
+      if (!img.hasAttribute('src')) {
+        img.setAttribute('style', 'display:none');
+      }
     }
 
     return document;

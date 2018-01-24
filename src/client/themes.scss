@@ -9,6 +9,8 @@ $background-color-light-secondary: #E0E0E0;
 $background-color-dark: #303030;
 $background-color-dark-secondary: #424242;
 
+$foreground-color-dark: rgb(150, 150, 150);
+
 $background-colors: (
   light: (
     primary: $background-color-light,
@@ -31,11 +33,11 @@ $foreground-colors: (
     icon: rgba($black-color, .38)
   ),
   dark: (
-    primary: rgba($white-color, .72),
-    secondary: rgba($white-color, .4),
-    hint: rgba($white-color, .2),
-    disabled: rgba($white-color, .2),
-    icon: rgba($white-color, .2)
+    primary: $foreground-color-dark,
+    secondary: darken($foreground-color-dark, 15),
+    hint: darken($foreground-color-dark, 25),
+    disabled: darken($foreground-color-dark, 25),
+    icon: darken($foreground-color-dark, 25),
   )
 );
 
@@ -96,7 +98,7 @@ $theme-foreground-types: (
 
 $image-opacities: (
   light: 1,
-  dark: 0.8
+  dark: 0.7
 );
 
 $theme-colors-light: map-get($theme-colors, light);
@@ -221,7 +223,7 @@ body {
   --light-background: map-get($background-colors-light, primary);
   --dark-background: map-get($background-colors-dark, primary);
 
-  @include create-theme(light);
+  // @include create-theme(light);
 
   &.light-theme {
     @include create-theme(light);

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import icon from 'client/Icons';
+import pageService from 'client/PageService';
 
 import Avatar from 'client/Avatar';
 import AuthorDate from 'client/AuthorDate';
@@ -101,7 +102,7 @@ export default class Post extends React.Component<Props, State> {
           </div>
         </div>
 
-        <Link to={`/post/${userPost._id}`} className="post__content">
+        <Link to={pageService.postPath(userPost._id)} className="post__content">
           <div className="post__title">
             {post.title}
           </div>

@@ -1,0 +1,42 @@
+@import './typography';
+@import './colors';
+@import './mixins';
+@import './themes';
+
+$text-color: rgba($white-color, .5);
+$spinner-track-color: rgba($white-color, .2);
+$outer-spinner-color: map-get($theme-colors-dark, primary);
+$inner-spinner-color: map-get($theme-colors-dark, secondary);
+
+.loader {
+  @include layout-v;
+
+  background-color: $black-color;
+  height: 100vh;
+  margin: auto;
+  width: 100%;
+
+  svg {
+    height: 300px;
+    margin: auto;
+    width: 300px;
+  }
+
+  text {
+    fill: $text-color;
+    font-size: 3px;
+  }
+}
+
+.loader__outer-track,
+.loader__inner-track {
+  fill: $spinner-track-color;
+}
+
+.loader__outer-spinner {
+  stroke: $outer-spinner-color;
+}
+
+.loader__inner-spinner {
+  stroke: $inner-spinner-color;
+}
