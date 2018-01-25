@@ -4,11 +4,11 @@
 @import './icons';
 @import './typography';
 
-.posts {
+.post-list {
   background-color: $background-color;
 }
 
-.posts__post {
+.post-list__post {
   height: 260px;
 
   > * {

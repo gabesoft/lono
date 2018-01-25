@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import BaseComponent from 'client/BaseComponent';
 import posts from 'client/data-posts';
 
 import {
@@ -21,7 +22,7 @@ type State = {
   posts: Array<UserPost>
 };
 
-export default class Posts extends React.Component<Props, State> {
+export default class PostList extends BaseComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -32,7 +33,7 @@ export default class Posts extends React.Component<Props, State> {
   renderPosts() {
     return this.state.posts.map((userPost, i) => {
       return (
-        <GridCell key={i} className="posts__post" phone="4" tablet="4" desktop="3">
+        <GridCell key={i} className="post-list__post" phone="4" tablet="4" desktop="3">
           <Post
             userPost={userPost}
             onOpenClick={() => undefined}
@@ -45,7 +46,7 @@ export default class Posts extends React.Component<Props, State> {
 
   render () {
     return (
-      <Grid className="posts">
+      <Grid className="post-list">
         {this.renderPosts()}
       </Grid>
     );

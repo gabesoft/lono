@@ -10,13 +10,13 @@ import pageService from 'client/PageService';
 import { updateTheme } from 'client/ThemeSwitch';
 
 import BaseComponent from 'client/BaseComponent';
-import Feeds from 'client/Feeds';
+import FeedList from 'client/FeedList';
 import Header from 'client/Header';
 import Home from 'client/Home';
 import Loader from 'client/Loader';
 import LoginPage from 'client/LoginPage';
 import PostPage from 'client/PostPage';
-import Posts from 'client/Posts';
+import PostList from 'client/PostList';
 import PrivateRoute from 'client/PrivateRoute';
 import Styles from 'client/Styles';
 
@@ -84,12 +84,12 @@ export default class App extends BaseComponent<Props, State> {
           <PrivateRoute
             isAuthenticated={this.state.isAuthenticated}
             path={pageService.feeds}
-            component={Feeds}
+            component={FeedList}
           />
           <PrivateRoute
             isAuthenticated={this.state.isAuthenticated}
             path={pageService.posts}
-            component={Posts}
+            component={PostList}
           />
           <PrivateRoute
             isAuthenticated={this.state.isAuthenticated}
