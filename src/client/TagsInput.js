@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Autosuggest, { filterSuggestions } from 'client/Autosuggest';
+import BaseComponent from 'client/BaseComponent';
 import ReactTagsInput from 'react-tagsinput';
 import Tag from 'client/Tag';
 
@@ -30,7 +31,7 @@ import type {
   BaseSuggestion
 } from 'client/Autosuggest';
 
-export default class TagsInput extends React.Component<Props, State> {
+export default class TagsInput extends BaseComponent<Props, State> {
   tagsInput: ?HTMLElement
   prevInput: ?HTMLElement
   titleInput: ?HTMLElement
@@ -67,7 +68,7 @@ export default class TagsInput extends React.Component<Props, State> {
     this.setState({ value: '' });
   }
 
-  renderTagsLayout(tagComponents: React.Node, inputComponents: React.Node) {
+  onRenderTagsLayout(tagComponents: React.Node, inputComponents: React.Node) {
     return (
       <div className="tags-input__tags">
         {tagComponents}
@@ -84,7 +85,7 @@ export default class TagsInput extends React.Component<Props, State> {
     this.tagsInput = input;
   }
 
-  renderInput(props: Object) {
+  onRenderInput(props: Object) {
     if (this.props.tags.length > 0) {
       return (
         <input {...props}
@@ -101,7 +102,7 @@ export default class TagsInput extends React.Component<Props, State> {
     }
   }
 
-  renderAutosuggestInput() {
+  onRenderAutosuggestInput() {
     const onChange = (event, { method }) => {
       if (method === ENTER) {
         event.preventDefault();
@@ -133,9 +134,9 @@ export default class TagsInput extends React.Component<Props, State> {
         inputLabel={this.props.inputLabel}
         onInputChange={onChange}
         onInputKeyDown={onKeyDown}
-        onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-        onFreeFormSelected={this.onFreeFormSelected.bind(this)}
-        renderInputComponent={this.renderInput.bind(this)}
+        onSuggestionSelected={this.onSuggestionSelected}
+        onFreeFormSelected={this.onFreeFormSelected}
+        renderInputComponent={this.onRenderInput}
         value={this.state.value}
       />
     );
@@ -153,7 +154,7 @@ export default class TagsInput extends React.Component<Props, State> {
     );
   }
 
-  renderTag(props: Object) {
+  onRenderTag(props: Object) {
     const { key, tag, disabled, onRemove, getTagDisplayValue, classNameRemove } = props;
 
     return (
@@ -173,10 +174,10 @@ export default class TagsInput extends React.Component<Props, State> {
         {this.renderTagsLabel()}
         <ReactTagsInput
           value={this.props.tags}
-          renderInput={this.renderAutosuggestInput.bind(this)}
-          renderTag={this.renderTag.bind(this)}
-          renderLayout={this.renderTagsLayout.bind(this)}
-          onChange={(tags) => this.onTagsChange(tags)}
+          renderInput={this.onRenderAutosuggestInput}
+          renderTag={this.onRenderTag}
+          renderLayout={this.onRenderTagsLayout}
+          onChange={this.onTagsChange}
         />
       </div>
     );

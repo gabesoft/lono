@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-const PATTERN = /^on[A-Z]/;
+const PATTERN = /^(on|do)[A-Z]/;
 
 const bindKeys = (instance: Object, prototype: Object, rootClass: Function) => {
   Object.getOwnPropertyNames(prototype).forEach(key => {

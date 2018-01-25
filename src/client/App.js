@@ -70,8 +70,8 @@ export default class App extends BaseComponent<Props, State> {
           <Header
             profileName={this.state.profileName}
             isAuthenticated={this.state.isAuthenticated}
-            subscribedCount={35}
-            newPostCount={12}
+            subscribedCount={34}
+            newPostCount={18}
           />
 
           <Route path={pageService.login} component={LoginPage} />

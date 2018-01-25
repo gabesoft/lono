@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import ReactAutosuggest from 'react-autosuggest';
 
+import BaseComponent from 'client/BaseComponent';
+
 import {
   REASON_FOCUSED,
   REASON_CHANGED,
@@ -85,7 +87,7 @@ const THEME = Object.freeze({
   sectionTitle: 'autosuggest__section-title'
 });
 
-export default class Autosuggest<Suggestion: BaseSuggestion> extends React.Component<Props<Suggestion>, State<Suggestion>> {
+export default class Autosuggest<Suggestion: BaseSuggestion> extends BaseComponent<Props<Suggestion>, State<Suggestion>> {
   suggestionSelected: boolean
 
   constructor(props: Props<Suggestion>) {
@@ -136,7 +138,7 @@ export default class Autosuggest<Suggestion: BaseSuggestion> extends React.Compo
     this.props.onInputChange && this.props.onInputChange(event, props);
   }
 
-  renderSuggestion(suggestion: Suggestion): React.Node {
+  doRenderSuggestion(suggestion: Suggestion): React.Node {
     const name = React.createElement('span', {
       dangerouslySetInnerHTML: { __html: suggestion.name }
     });
@@ -156,8 +158,8 @@ export default class Autosuggest<Suggestion: BaseSuggestion> extends React.Compo
       id: this.props.inputId,
       value: this.props.value,
       className: this.props.inputClassName,
-      onChange: this.onChange.bind(this),
-      onKeyDown: this.onKeyDown.bind(this)
+      onChange: this.onChange,
+      onKeyDown: this.onKeyDown
     };
 
     return (
@@ -165,11 +167,11 @@ export default class Autosuggest<Suggestion: BaseSuggestion> extends React.Compo
         getSuggestionValue={(item) => item.title}
         highlightFirstSuggestion={this.props.highlightFirstSuggestion}
         inputProps={inputProps}
-        onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+        onSuggestionSelected={this.onSuggestionSelected}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         renderInputComponent={this.props.renderInputComponent}
-        renderSuggestion={this.renderSuggestion.bind(this)}
+        renderSuggestion={this.doRenderSuggestion}
         suggestions={this.state.suggestions}
         shouldRenderSuggestions={value => value.trim().length > 0}
         theme={this.getTheme()}

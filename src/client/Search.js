@@ -3,6 +3,7 @@ import * as React from 'react';
 import icon from 'client/Icons';
 
 import Autosuggest, { filterSuggestions } from 'client/Autosuggest';
+import BaseComponent from 'client/BaseComponent';
 
 import { TextField } from 'rmwc';
 
@@ -61,7 +62,7 @@ const SUGGESTIONS: Array<Suggestion> = Object.freeze([
   { title: "@all-confirmation-bias", type: FEED }
 ]);
 
-export default class Search extends React.Component<Props, State> {
+export default class Search extends BaseComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -70,7 +71,7 @@ export default class Search extends React.Component<Props, State> {
     };
   }
 
-  getSuggestions(value: string = ''): Array<Suggestion> {
+  doGetSuggestions(value: string = ''): Array<Suggestion> {
     const input = value.toLowerCase();
     const length = input.length;
     const parts = input.replace(/[()]/g, '').split(/[|&!]/);
@@ -85,7 +86,7 @@ export default class Search extends React.Component<Props, State> {
     this.setState({ value });
   }
 
-  renderSuggestion(suggestion: Suggestion, name: React.Node) {
+  doRenderSuggestion(suggestion: Suggestion, name: React.Node) {
     return (
       <div className="search__suggestion">
         {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
@@ -94,7 +95,7 @@ export default class Search extends React.Component<Props, State> {
     );
   }
 
-  renderInput(props: Object) {
+  doRenderInput(props: Object) {
     return (
       <TextField {...props} />
     );
@@ -106,14 +107,14 @@ export default class Search extends React.Component<Props, State> {
     return (
       <div className={className}>
         <Autosuggest
-          getSuggestions={this.getSuggestions.bind(this)}
+          getSuggestions={this.doGetSuggestions}
           highlightFirstSuggestion={true}
           inputClassName="search__input"
           inputName="search"
           onInputChange={event => this.setState({ value: event.target.value })}
-          onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-          renderInputComponent={this.renderInput.bind(this)}
-          renderSuggestion={this.renderSuggestion.bind(this)}
+          onSuggestionSelected={this.onSuggestionSelected}
+          renderInputComponent={this.doRenderInput}
+          renderSuggestion={this.doRenderSuggestion}
           value={this.state.value}
         />
       </div>
