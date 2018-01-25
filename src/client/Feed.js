@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import icon from 'client/Icons';
 import Avatar from 'client/Avatar';
 import Elevated from 'client/Elevated';
 import Optional from 'client/Optional';
+import getIcon from 'client/services/icon';
 
 import {
   Button,
@@ -45,7 +45,7 @@ export default class Feed extends React.Component<Props, State> {
   renderMenuItem(iconName: string, text: string, onClick: Function) {
     return (
       <MenuItem className="feed__actions_menu-item" onClick={onClick}>
-        {icon(iconName)}
+        {getIcon(iconName)}
         <span>{text}</span>
       </MenuItem>
     );
@@ -80,7 +80,7 @@ export default class Feed extends React.Component<Props, State> {
           <div className="feed__actions">
             <MenuAnchor>
               <Button onClick={() => this.setState({ actionsOpen: true })}>
-                {icon('dots-vertical')}
+                {getIcon('dots-vertical')}
               </Button>
 
               <SimpleMenu

@@ -41,7 +41,7 @@
   @include theme-color($background: secondary);
 }
 
-.post__actions_menu-item {
+.post__menu-item {
   @include space-h($space-h);
 
   a {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import icon from 'client/Icons';
 import BaseComponent from 'client/BaseComponent';
+import getIcon from 'client/services/icon';
 
 import {
   Button
@@ -19,7 +19,7 @@ export default class LoginButton extends BaseComponent<Props, State> {
   render() {
     return (
       <Button raised className="login-button" onClick={this.props.onClick}>
-        {icon('google')}
+        {getIcon('google')}
         <span className="login-button__title">Sign in with Google</span>
       </Button>
     );

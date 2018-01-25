@@ -6,8 +6,8 @@
 .header {
   @include layout-h;
   @include padding-small;
+  @include theme-color($background: faded);
 
-  background-color: $background-color-faded;
   margin: auto;
   max-width: $body-max-width;
   position: relative;
@@ -30,6 +30,17 @@
   white-space: nowrap;
 }
 
+.header__menu-item {
+  @include space-h;
+}
+
+.header__menu-button {
+  @include typography('subheading2');
+  @include theme-color($background: faded);
+
+  border: 0;
+  padding: 0;
+}
 
 .header__logged-out,
 .header__user-info {

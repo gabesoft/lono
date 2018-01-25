@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import icon from 'client/Icons';
+import getIcon from 'client/services/icon';
 
 import AddFeedDialog from 'client/AddFeedDialog';
 import EditFeedDialog from 'client/EditFeedDialog';
@@ -339,10 +339,10 @@ export default class Styles extends React.Component<Props, State> {
 
             <Button raised>Raised</Button>
             <Button raised className="icon_warning">
-              {icon('pin')}
+              {getIcon('pin')}
             </Button>
             <Button raised className="icon_success icon_size-16">
-              {icon('pin')} Pin Query
+              {getIcon('pin')} Pin Query
             </Button>
 
             <Button dense>Dense</Button>
@@ -351,15 +351,15 @@ export default class Styles extends React.Component<Props, State> {
             <Button stroked>Stroked</Button>
             <Button raised theme={['secondary-bg', 'text-primary-on-secondary']}>With Theme</Button>
 
-            <Fab className="icon_white">{icon('heart')}</Fab>
-            <Fab mini>{icon('heart')}</Fab>
-            <Fab mini>{icon('dots-vertical')}</Fab>
+            <Fab className="icon_white">{getIcon('heart')}</Fab>
+            <Fab mini>{getIcon('heart')}</Fab>
+            <Fab mini>{getIcon('dots-vertical')}</Fab>
 
-            <Icon className="icon_success">{icon('heart')}</Icon>
-            <Icon className="icon_warning">{icon('heart')}</Icon>
-            <Icon className="icon_error">{icon('heart')}</Icon>
+            <Icon className="icon_success">{getIcon('heart')}</Icon>
+            <Icon className="icon_warning">{getIcon('heart')}</Icon>
+            <Icon className="icon_error">{getIcon('heart')}</Icon>
             <Icon className="icon_size-32" style={{ background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px' }}>
-              {icon('heart-outline')}
+              {getIcon('heart-outline')}
             </Icon>
           </section>
         </GridCell>
@@ -390,7 +390,7 @@ export default class Styles extends React.Component<Props, State> {
           <section className="style-sections__menus">
             <MenuAnchor>
               <Button onClick={() => this.setState({'menu1IsOpen': !this.state.menu1IsOpen})} >
-                <Icon>{icon('dots-vertical')}</Icon>
+                <Icon>{getIcon('dots-vertical')}</Icon>
               </Button>
 
               <SimpleMenu

@@ -1,27 +1,89 @@
 import * as React from 'react';
 
 import Headroom from 'react-headroom';
+import { connect } from 'react-redux';
 
+import {
+  withRouter
+} from 'react-router-dom';
+
+import {
+  MenuAnchor,
+  SimpleMenu,
+  MenuItem
+} from 'rmwc';
+
+import BaseComponent from 'client/BaseComponent';
 import Optional from 'client/Optional';
 import Search from 'client/Search';
 import ThemeSwitch from 'client/ThemeSwitch';
-import BaseComponent from 'client/BaseComponent';
+import getIcon from 'client/services/icon';
+
+import type { UserProfile } from 'client/services/auth';
 
 type Props = {
-  profileName: ?string,
+  user: ?UserProfile,
   isAuthenticated: boolean,
-  subscribedCount?: number,
-  newPostCount?: number
+  subscribedCount: number,
+  newPostCount: number,
+  onSignOutClick: Function
 };
 
 type State = {
-
+  isMenuOpen: boolean
 };
 
-export default class Header extends BaseComponent<Props, State> {
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
+    subscribedCount: 37,
+    newPostCount: 14
+  };
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onSignOutClick: props.onSignOutClick
+  }
+};
+
+class Header extends BaseComponent<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isMenuOpen: false
+    };
+  }
+
+  onMenuClick() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  }
+
+  onMenuClose() {
+    this.setState({ isMenuOpen: false });
+  }
+
+  onSignOut() {
+    this.setState({ isMenuOpen: false });
+    this.props.onSignOutClick();
+  }
+
+  renderUserMenu() {
+    const name = this.props.user && this.props.user.givenName;
+
+    return (
+      <MenuAnchor>
+        <button className="header__menu-button" onClick={this.onMenuClick}>{name}</button>
+
+        <SimpleMenu open={this.state.isMenuOpen} onClose={this.onMenuClose}>
+          <MenuItem className="header__menu-item" onClick={this.onSignOut}>
+            {getIcon('logout')}
+            <span>Log Out</span>
+          </MenuItem>
+        </SimpleMenu>
+      </MenuAnchor>
+    );
   }
 
   renderUserInfo() {
@@ -36,7 +98,7 @@ export default class Header extends BaseComponent<Props, State> {
     return (
       <div className="header__user-info">
         <div className="header__username">
-          {this.props.profileName}
+          {this.renderUserMenu()}
         </div>
         <Optional canRender={!!(this.props.subscribedCount || this.props.newPostCount)}>
           <div className="header__subscription-info">
@@ -89,3 +151,5 @@ export default class Header extends BaseComponent<Props, State> {
     );
   }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

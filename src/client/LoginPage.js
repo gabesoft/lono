@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import authService from 'client/AuthService';
-import pageService from 'client/PageService';
+import authService from 'client/services/auth';
+import pageService from 'client/services/page';
 
 import BaseComponent from 'client/BaseComponent';
 import LoginButton from 'client/LoginButton';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import icon from 'client/Icons';
+import getIcon from 'client/services/icon';
 
 import Autosuggest, { filterSuggestions } from 'client/Autosuggest';
 import BaseComponent from 'client/BaseComponent';
@@ -89,7 +89,7 @@ export default class Search extends BaseComponent<Props, State> {
   doRenderSuggestion(suggestion: Suggestion, name: React.Node) {
     return (
       <div className="search__suggestion">
-        {icon(ICONS[suggestion.type] || ICONS[suggestion.title])}
+        {getIcon(ICONS[suggestion.type] || ICONS[suggestion.title])}
         {name}
       </div>
     );

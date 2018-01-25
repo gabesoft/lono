@@ -33,6 +33,11 @@ a {
   }
 }
 
+button {
+  cursor: pointer;
+  outline: none;
+}
+
 svg {
   > path {
     fill: $foreground-color;

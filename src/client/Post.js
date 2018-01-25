@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import icon from 'client/Icons';
-import pageService from 'client/PageService';
+import getIcon from 'client/services/icon';
+import pageService from 'client/services/page';
 
 import Avatar from 'client/Avatar';
 import AuthorDate from 'client/AuthorDate';
@@ -42,9 +42,9 @@ export default class Post extends React.Component<Props, State> {
   renderTagsMenuItem() {
     return (
       <MenuItem
-        className="post__actions_menu-item"
+        className="post__menu-item"
         onClick={this.props.onEditTagsClick}>
-        {icon('tag')}
+        {getIcon('tag')}
         <span>Edit tags</span>
       </MenuItem>
     );
@@ -53,11 +53,11 @@ export default class Post extends React.Component<Props, State> {
   renderOpenMenuItem() {
     return (
       <MenuItem
-        className="post__actions_menu-item"
+        className="post__menu-item"
         onClick={() => this.setState({ actionsOpen: false })}
       >
         <a href={this.props.userPost.post.link} target="_blank">
-          {icon('open-in-new')}
+          {getIcon('open-in-new')}
           <span>Open in new window</span>
         </a>
       </MenuItem>
@@ -88,7 +88,7 @@ export default class Post extends React.Component<Props, State> {
           <div className="post__actions">
             <MenuAnchor>
               <Button onClick={() => this.setState({ actionsOpen: true })}>
-                {icon('dots-vertical')}
+                {getIcon('dots-vertical')}
               </Button>
 
               <SimpleMenu

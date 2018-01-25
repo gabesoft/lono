@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import icon from 'client/Icons';
+import getIcon from 'client/services/icon';
 import Elevated from 'client/Elevated';
 
 type Props = {
@@ -23,7 +23,7 @@ export default class Tag extends React.Component<Props, State> {
 
     return (
       <button className={removeClass} onClick={this.props.onRemoveClick}>
-        {icon('close')}
+        {getIcon('close')}
       </button>
     );
   }

@@ -2,11 +2,20 @@ import * as React from 'react';
 
 import {
   BrowserRouter as Router,
-  Route,
+  Route
 } from 'react-router-dom';
 
-import authService from 'client/AuthService';
-import pageService from 'client/PageService';
+import { connect } from 'react-redux';
+
+import {
+  authSetAuthenticated,
+  authSetInitialized,
+  authSetUser,
+  authClear
+} from 'client/actions/auth';
+
+import authService from 'client/services/auth';
+import pageService from 'client/services/page';
 import { updateTheme } from 'client/ThemeSwitch';
 
 import BaseComponent from 'client/BaseComponent';
@@ -15,43 +24,62 @@ import Header from 'client/Header';
 import Home from 'client/Home';
 import Loader from 'client/Loader';
 import LoginPage from 'client/LoginPage';
-import PostPage from 'client/PostPage';
 import PostList from 'client/PostList';
+import PostPage from 'client/PostPage';
 import PrivateRoute from 'client/PrivateRoute';
 import Styles from 'client/Styles';
 
-type Props = {};
+
+type Props = {
+  dispatch: Function
+};
 
 type State = {
   isAuthenticated: boolean,
-  isInitialized: boolean,
-  profileName: ?string
+  isInitialized: boolean
 };
 
-export default class App extends BaseComponent<Props, State> {
+class App extends BaseComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
       isAuthenticated: authService.isSignedIn,
-      isInitialized: false,
-      profileName: null
+      isInitialized: false
     };
 
     authService.once('init-success', this.onAuthInitSuccess);
     authService.once('init-failure', this.onAuthInitFailure);
+
+    // TODO: maybe do this in the login page
+    //       or remove the handler on componentWillUnmount
+    authService.on('signin-success', this.onAuthInitSuccess);
   }
 
   onAuthInitFailure() {
+    this.props.dispatch(authSetInitialized());
     this.setState({ isInitialized: true });
   }
 
   onAuthInitSuccess() {
+    this.props.dispatch(authSetInitialized());
+    this.props.dispatch(authSetAuthenticated(authService.isSignedIn));
+    this.props.dispatch(authSetUser(authService.userProfile));
+
     this.setState({
       isAuthenticated: authService.isSignedIn,
-      isInitialized: true,
-      profileName: authService.profileGivenName
+      isInitialized: true
     });
+  }
+
+  onSignOutSuccess() {
+    this.props.dispatch(authClear());
+    this.setState({ isAuthenticated: authService.isSignedIn });
+  }
+
+  onSignOutClick() {
+    authService.once('signout-success', this.onSignOutSuccess);
+    authService.signOut();
   }
 
   componentDidMount() {
@@ -67,12 +95,7 @@ export default class App extends BaseComponent<Props, State> {
     return(
       <Router>
         <div className="app__content">
-          <Header
-            profileName={this.state.profileName}
-            isAuthenticated={this.state.isAuthenticated}
-            subscribedCount={34}
-            newPostCount={18}
-          />
+          <Header onSignOutClick={this.onSignOutClick} />
 
           <Route path={pageService.login} component={LoginPage} />
 
@@ -106,3 +129,5 @@ export default class App extends BaseComponent<Props, State> {
     );
   }
 }
+
+export default connect()(App);
