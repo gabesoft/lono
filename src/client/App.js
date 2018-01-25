@@ -7,23 +7,25 @@ import {
 
 import authService from 'client/AuthService';
 import pageService from 'client/PageService';
+import { updateTheme } from 'client/ThemeSwitch';
 
 import BaseComponent from 'client/BaseComponent';
 import Feeds from 'client/Feeds';
+import Header from 'client/Header';
 import Home from 'client/Home';
+import Loader from 'client/Loader';
+import LoginPage from 'client/LoginPage';
 import PostPage from 'client/PostPage';
 import Posts from 'client/Posts';
-import Styles from 'client/Styles';
-import Header from 'client/Header';
-import LoginPage from 'client/LoginPage';
 import PrivateRoute from 'client/PrivateRoute';
-import Loader from 'client/Loader';
+import Styles from 'client/Styles';
 
 type Props = {};
 
 type State = {
   isAuthenticated: boolean,
-  isInitialized: boolean
+  isInitialized: boolean,
+  profileName: ?string
 };
 
 export default class App extends BaseComponent<Props, State> {
@@ -32,7 +34,8 @@ export default class App extends BaseComponent<Props, State> {
 
     this.state = {
       isAuthenticated: authService.isSignedIn,
-      isInitialized: false
+      isInitialized: false,
+      profileName: null
     };
 
     authService.once('init-success', this.onAuthInitSuccess);
@@ -46,11 +49,13 @@ export default class App extends BaseComponent<Props, State> {
   onAuthInitSuccess() {
     this.setState({
       isAuthenticated: authService.isSignedIn,
-      isInitialized: true
+      isInitialized: true,
+      profileName: authService.profileGivenName
     });
   }
 
   componentDidMount() {
+    updateTheme();
     authService.init();
   }
 
@@ -63,10 +68,10 @@ export default class App extends BaseComponent<Props, State> {
       <Router>
         <div className="app__content">
           <Header
-            username="gabesoft"
+            profileName={this.state.profileName}
+            isAuthenticated={this.state.isAuthenticated}
             subscribedCount={35}
             newPostCount={12}
-            onLoginClick={() => undefined}
           />
 
           <Route path={pageService.login} component={LoginPage} />

@@ -26,7 +26,7 @@ export default class LoginPage extends BaseComponent<Props, State> {
     };
   }
 
-  login() {
+  onLoginClick() {
     authService.once('signin-success', () => this.setState({
       redirectToReferrer: authService.isSignedIn
     }));
@@ -48,7 +48,7 @@ export default class LoginPage extends BaseComponent<Props, State> {
       <div className="login-page">
         <h1>Welcome to the ultimate feed reader</h1>
         <h3>Sign in to continue...</h3>
-        <LoginButton onClick={this.login} />
+        <LoginButton onClick={this.onLoginClick} />
       </div>
     );
   }

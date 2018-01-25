@@ -1,9 +1,12 @@
 import { Component } from 'react';
 
+const PATTERN = /^on[A-Z]/;
+
 const bindKeys = (instance: Object, prototype: Object, rootClass: Function) => {
   Object.getOwnPropertyNames(prototype).forEach(key => {
-    let property = instance[key];
-    if (typeof property === 'function') {
+    const shouldBind = PATTERN.test(key);
+    const property = instance[key];
+    if (shouldBind && typeof property === 'function') {
       instance[key] = property.bind(instance);
     }
   });

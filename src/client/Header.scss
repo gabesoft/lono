@@ -27,13 +27,20 @@
   @include space-v;
 
   flex: 1;
+  white-space: nowrap;
 }
 
+
+.header__logged-out,
 .header__user-info {
   @include layout-h($justify-content: flex-end);
   @include space-h;
 
   align-self: flex-end;
+}
+
+.header__username {
+  white-space: nowrap;
 }
 
 .header__theme-switch {

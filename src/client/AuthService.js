@@ -22,9 +22,25 @@ class AuthService extends EventEmitter {
     return this._isSignedIn;
   }
 
+  get profileName(): ?string {
+    return this._getProfileData('name');
+  }
+
+  get profileEmail(): ?string {
+    return this._getProfileData('email');
+  }
+
+  get profileGivenName(): ?string {
+    return this._getProfileData('givenName');
+  }
+
   constructor() {
     super();
     this._clear();
+  }
+
+  _getProfileData(name: string): ?string {
+    return this._profileData && this._profileData[name];
   }
 
   _log(data: Object) {
