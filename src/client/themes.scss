@@ -1,5 +1,3 @@
-@import '@material/theme/color-palette';
-
 $black-color: #000;
 $white-color: #FFF;
 
@@ -10,6 +8,10 @@ $background-color-dark: #303030;
 $background-color-dark-secondary: #424242;
 
 $foreground-color-dark: rgb(150, 150, 150);
+
+$success-color: #43A047;
+$error-color: #E53935;
+$warning-color: #FDD835;
 
 $background-colors: (
   light: (
@@ -123,14 +125,14 @@ $border-colors-dark: map-get($border-colors, dark);
 
 $foreground-status-colors: (
   light: (
-    success: $material-color-green-600,
-    warning: $material-color-yellow-700,
-    error: $material-color-red-600
+    success: $success-color,
+    warning: #FBC02D,
+    error: $error-color
   ),
   dark: (
-    success: $material-color-green-600,
-    warning: $material-color-yellow-600,
-    error: $material-color-red-600
+    success: $success-color,
+    warning: $warning-color,
+    error: $error-color
   )
 );
 
@@ -222,8 +224,6 @@ $selection-colors: (
 body {
   --light-background: map-get($background-colors-light, primary);
   --dark-background: map-get($background-colors-dark, primary);
-
-  // @include create-theme(light);
 
   &.light-theme {
     @include create-theme(light);

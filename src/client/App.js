@@ -35,7 +35,6 @@ type Props = {
 };
 
 type State = {
-  isAuthenticated: boolean,
   isInitialized: boolean
 };
 
@@ -44,16 +43,16 @@ class App extends BaseComponent<Props, State> {
     super(props);
 
     this.state = {
-      isAuthenticated: authService.isSignedIn,
       isInitialized: false
     };
 
     authService.once('init-success', this.onAuthInitSuccess);
     authService.once('init-failure', this.onAuthInitFailure);
+  }
 
-    // TODO: maybe do this in the login page
-    //       or remove the handler on componentWillUnmount
-    authService.on('signin-success', this.onAuthInitSuccess);
+  componentDidMount() {
+    updateTheme();
+    authService.init();
   }
 
   onAuthInitFailure() {
@@ -67,14 +66,17 @@ class App extends BaseComponent<Props, State> {
     this.props.dispatch(authSetUser(authService.userProfile));
 
     this.setState({
-      isAuthenticated: authService.isSignedIn,
       isInitialized: true
     });
   }
 
+  onSignInClick() {
+    authService.once('signin-success', this.onAuthInitSuccess);
+    authService.signIn();
+  }
+
   onSignOutSuccess() {
     this.props.dispatch(authClear());
-    this.setState({ isAuthenticated: authService.isSignedIn });
   }
 
   onSignOutClick() {
@@ -82,9 +84,10 @@ class App extends BaseComponent<Props, State> {
     authService.signOut();
   }
 
-  componentDidMount() {
-    updateTheme();
-    authService.init();
+  doRenderLoginPage() {
+    return (
+      <LoginPage onLoginClick={this.onSignInClick} />
+    );
   }
 
   render() {
@@ -97,33 +100,16 @@ class App extends BaseComponent<Props, State> {
         <div className="app__content">
           <Header onSignOutClick={this.onSignOutClick} />
 
-          <Route path={pageService.login} component={LoginPage} />
+          <Route
+            path={pageService.login}
+            render={this.doRenderLoginPage}
+          />
 
-          <PrivateRoute
-            isAuthenticated={this.state.isAuthenticated}
-            exact path={pageService.home}
-            component={Home}
-          />
-          <PrivateRoute
-            isAuthenticated={this.state.isAuthenticated}
-            path={pageService.feeds}
-            component={FeedList}
-          />
-          <PrivateRoute
-            isAuthenticated={this.state.isAuthenticated}
-            path={pageService.posts}
-            component={PostList}
-          />
-          <PrivateRoute
-            isAuthenticated={this.state.isAuthenticated}
-            path={pageService.post}
-            component={PostPage}
-          />
-          <PrivateRoute
-            isAuthenticated={this.state.isAuthenticated}
-            path={pageService.styles}
-            component={Styles}
-          />
+          <PrivateRoute path={pageService.home} component={Home} exact />
+          <PrivateRoute path={pageService.feeds} component={FeedList} />
+          <PrivateRoute path={pageService.posts} component={PostList} />
+          <PrivateRoute path={pageService.post} component={PostPage} />
+          <PrivateRoute path={pageService.styles} component={Styles} />
         </div>
       </Router>
     );

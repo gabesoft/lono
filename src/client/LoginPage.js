@@ -1,44 +1,49 @@
 import * as React from 'react';
 
-import authService from 'client/services/auth';
 import pageService from 'client/services/page';
 
 import BaseComponent from 'client/BaseComponent';
 import LoginButton from 'client/LoginButton';
 
+import { connect } from 'react-redux';
+
 import {
-  Redirect
+  Redirect,
+  withRouter
 } from 'react-router-dom';
 
 type Props = {
-  location: Object
+  location: Object,
+  isAuthenticated: boolean,
+  onLoginClick: Function
 };
 
-type State = {
-  redirectToReferrer: boolean,
+type State = {};
+
+const mapStateToProps = (state, props) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    location: props.location
+  };
 };
 
-export default class LoginPage extends BaseComponent<Props, State> {
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onLoginClick: props.onLoginClick
+  }
+};
+
+class LoginPage extends BaseComponent<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      redirectToReferrer: false
-    };
-  }
-
-  onLoginClick() {
-    authService.once('signin-success', () => this.setState({
-      redirectToReferrer: authService.isSignedIn
-    }));
-
-    authService.signIn();
+    this.state = {};
   }
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: pageService.home } };
-    const { redirectToReferrer } = this.state;
+    const { isAuthenticated } = this.props;
 
-    if (redirectToReferrer) {
+    if (isAuthenticated) {
       return (
         <Redirect to={from} />
       );
@@ -48,8 +53,10 @@ export default class LoginPage extends BaseComponent<Props, State> {
       <div className="login-page">
         <h1>Welcome to the ultimate feed reader</h1>
         <h3>Sign in to continue...</h3>
-        <LoginButton onClick={this.onLoginClick} />
+        <LoginButton onClick={this.props.onLoginClick} />
       </div>
     );
   }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));

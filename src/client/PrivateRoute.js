@@ -2,19 +2,37 @@ import * as React from 'react';
 
 import {
   Redirect,
-  Route
+  Route,
+  withRouter
 } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
+import type {
+  RouterHistory,
+  Match,
+  Location
+} from 'react-router-dom';
 
 type Props = {
   component: React.ComponentType<*>,
   isAuthenticated: boolean,
-  [string]: string | boolean
+  [string]: string | boolean | RouterHistory | Match | Location
 };
 
 type State = {};
 
-export default class PrivateRoute extends React.Component<Props, State> {
+const mapStateToProps = (state, { component, ...rest }) => {
+  return {
+    ...rest,
+    component,
+    isAuthenticated: state.auth.isAuthenticated
+  };
+};
+
+const mapDispatchToProps = () => ({});
+
+class PrivateRoute extends React.Component<Props, State> {
   renderRoute(props: Object) {
     const loginRoute = { pathname: '/login', state: { from: props.location } }
     const { component: Component, isAuthenticated } = this.props;
@@ -34,3 +52,6 @@ export default class PrivateRoute extends React.Component<Props, State> {
     );
   }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PrivateRoute));
+
