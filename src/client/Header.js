@@ -75,13 +75,26 @@ class Header extends BaseComponent<UiProps, UiState> {
   }
 
   renderUserMenu() {
-    const name = this.props.user && this.props.user.givenName;
+    const user = this.props.user || {};
+    const name = user.givenName || user.email;
+    const fullName = user.name;
+    const email = user.email;
+    const image = user.imageUrl;
 
     return (
       <MenuAnchor>
         <button className="header__menu-button" onClick={this.onMenuClick}>{name}</button>
 
         <SimpleMenu open={this.state.isMenuOpen} onClose={this.onMenuClose}>
+          <MenuItem
+            className="header__menu-item header__user-detail"
+            onClick={() => this.setState({ isMenuOpen: false })}
+          >
+            <Optional canRender={!!image}>
+              <img className="header__user-image" alt="" src={image} />
+            </Optional>
+            <span className="header__user-fullname">{fullName || email}</span>
+          </MenuItem>
           <MenuItem className="header__menu-item" onClick={this.onSignOut}>
             {getIcon('logout')}
             <span>Log Out</span>
