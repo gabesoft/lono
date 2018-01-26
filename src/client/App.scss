@@ -5,21 +5,18 @@
 @import './themes';
 @import './typography';
 @import './vendor';
-@import './Styles';
 @import './icons';
+
+@import './Styles';
 @import './Avatar';
 @import './Buttons';
 @import './AuthorDate';
-@import './Autosuggest';
 @import './Post';
 @import './PostView';
 @import './PostViewDescription';
 @import './PostList';
 @import './Feed';
 @import './Header';
-@import './Search';
-@import './Tag';
-@import './TagsInput';
 @import './AddFeedDialog';
 @import './EditFeedDialog';
 @import './DeleteFeedDialog';
@@ -27,6 +24,11 @@
 @import './Loader';
 @import './LoginButton';
 @import './LoginPage';
+
+@import './Search';
+@import './Autosuggest';
+@import './Tag';
+@import './TagsInput';
 
 .app {
   min-height: 100%;

@@ -98,6 +98,7 @@ flow-watch:
 
 # Install flow types for npm dependencies
 flow-typed:
+	@$(RM) -r flow-typed
 	@flow-typed install
 
 

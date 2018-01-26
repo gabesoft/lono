@@ -41,23 +41,35 @@ $border-color-strong: var(--border-color-strong);
   color: var(--status-color-#{$status});
 }
 
-@mixin theme-color($background: primary, $foreground: primary, $theme-background: null, $theme-foreground: null) {
+@mixin theme-color($background: primary, $foreground: primary, $theme-background: null, $theme-foreground: null, $color-icons: false) {
   @if ($theme-background) {
-    @include icon-color(var(--mdc-theme-text-#{$foreground}-on-#{$theme-background}));
+    $color: var(--mdc-theme-text-#{$foreground}-on-#{$theme-background});
 
     background-color: var(--mdc-theme-#{$theme-background});
-    color: var(--mdc-theme-text-#{$foreground}-on-#{$theme-background});
+    color: $color;
+
+    @if ($color-icons) {
+      @include icon-color($color);
+    }
   } @else {
-    @include icon-color(var(--mdc-theme-text-#{$foreground}-on-background));
+    $color: var(--mdc-theme-text-#{$foreground}-on-background);
 
     background-color: var(--background-color-#{$background});
-    color: var(--mdc-theme-text-#{$foreground}-on-background);
+    color: $color;
+
+    @if ($color-icons) {
+      @include icon-color($color);
+    }
   }
 
   @if ($theme-foreground) {
-    @include icon-color(var(--mdc-theme-#{$theme-foreground}));
+    $color: var(--mdc-theme-#{$theme-foreground});
 
     color: var(--mdc-theme-#{$theme-foreground});
+
+    @if ($color-icons) {
+      @include icon-color($color);
+    }
   }
 }
 
