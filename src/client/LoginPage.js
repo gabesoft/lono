@@ -12,33 +12,34 @@ import {
   withRouter
 } from 'react-router-dom';
 
-type Props = {
+import type { Location } from 'react-router-dom';
+import type { ReduxState } from 'client/types/ReduxState';
+
+type UiProps = {
   location: Object,
   isAuthenticated: boolean,
   onLoginClick: Function
 };
 
-type State = {};
+type ContainerProps = {
+  onLoginClick: Function,
+  location: Location
+}
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state: ReduxState, props: ContainerProps) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     location: props.location
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch, props: ContainerProps) => {
   return {
     onLoginClick: props.onLoginClick
   }
 };
 
-class LoginPage extends BaseComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {};
-  }
-
+class LoginPage extends BaseComponent<UiProps, {}> {
   render() {
     const { from } = this.props.location.state || { from: { pathname: pageService.home } };
     const { isAuthenticated } = this.props;

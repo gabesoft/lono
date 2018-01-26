@@ -14,6 +14,8 @@ import type {
   Location
 } from 'react-router-dom';
 
+import type { ReduxState } from 'client/types/ReduxState';
+
 type Props = {
   component: React.ComponentType<*>,
   isAuthenticated: boolean,
@@ -22,7 +24,7 @@ type Props = {
 
 type State = {};
 
-const mapStateToProps = (state, { component, ...rest }) => {
+const mapStateToProps = (state: ReduxState, { component, ...rest }) => {
   return {
     ...rest,
     component,

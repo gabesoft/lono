@@ -4,8 +4,8 @@ $white-color: #FFF;
 $background-color-light: #F5F5F5;
 $background-color-light-secondary: #E0E0E0;
 
-$background-color-dark: #303030;
-$background-color-dark-secondary: #424242;
+$background-color-dark: darken(#303030, 2);
+$background-color-dark-secondary: darken(#424242, 3);
 
 $foreground-color-dark: rgb(150, 150, 150);
 
@@ -36,7 +36,7 @@ $foreground-colors: (
   ),
   dark: (
     primary: $foreground-color-dark,
-    secondary: darken($foreground-color-dark, 15),
+    secondary: darken($foreground-color-dark, 10),
     hint: darken($foreground-color-dark, 25),
     disabled: darken($foreground-color-dark, 25),
     icon: darken($foreground-color-dark, 25),

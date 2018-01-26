@@ -12,7 +12,7 @@ import Post from 'client/Post';
 
 import type {
   UserPost
-} from 'client/CommonTypes';
+} from 'client/types/Post';
 
 type Props = {
 

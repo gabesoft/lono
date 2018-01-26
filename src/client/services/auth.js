@@ -2,14 +2,7 @@ const CLIENT_ID = '966662239339-nco06tr9j08nfq9krrsmj6jfdlop5185.apps.googleuser
 
 import EventEmitter from 'wolfy87-eventemitter';
 
-export type UserProfile= {
-  id: string,
-  name: string,
-  email: string,
-  givenName: string,
-  familyName: string,
-  imageUrl: string
-};
+import type { UserProfile } from 'client/types/UserProfile';
 
 class AuthService extends EventEmitter {
   _isSignedIn: boolean

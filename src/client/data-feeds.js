@@ -1,7 +1,7 @@
 import type {
   Feed,
   Subscription
-} from 'client/CommonTypes';
+} from 'client/types/Feed';
 
 const feeds: Array<Feed> = [
     {

@@ -1,11 +1,4 @@
-import type { UserProfile} from 'client/services/auth';
-
-export type AuthAction = {
-  isAuthenticated: boolean,
-  isInitialized: boolean,
-  user: UserProfile,
-  type: string
-};
+import type { UserProfile} from 'client/types/UserProfile';
 
 export const authSetInitialized = () => ({ type: 'AUTH_SET_INITIALIZED' });
 export const authClear = () => ({ type: 'AUTH_CLEAR' });

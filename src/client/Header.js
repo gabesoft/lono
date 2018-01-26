@@ -19,9 +19,10 @@ import Search from 'client/Search';
 import ThemeSwitch from 'client/ThemeSwitch';
 import getIcon from 'client/services/icon';
 
-import type { UserProfile } from 'client/services/auth';
+import type { ReduxState } from 'client/types/ReduxState';
+import type { UserProfile } from 'client/types/UserProfile';
 
-type Props = {
+type UiProps = {
   user: ?UserProfile,
   isAuthenticated: boolean,
   subscribedCount: number,
@@ -29,11 +30,15 @@ type Props = {
   onSignOutClick: Function
 };
 
-type State = {
+type UiState = {
   isMenuOpen: boolean
 };
 
-const mapStateToProps = state => {
+type ContainerProps = {
+  onSignOutClick: Function
+};
+
+const mapStateToProps = (state: ReduxState) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
@@ -42,14 +47,14 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch, props: ContainerProps) => {
   return {
     onSignOutClick: props.onSignOutClick
   }
 };
 
-class Header extends BaseComponent<Props, State> {
-  constructor(props: Props) {
+class Header extends BaseComponent<UiProps, UiState> {
+  constructor(props: UiProps) {
     super(props);
     this.state = {
       isMenuOpen: false

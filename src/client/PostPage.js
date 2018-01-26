@@ -7,7 +7,7 @@ import PostView from 'client/PostView';
 
 import type {
   UserPost
-} from 'client/CommonTypes';
+} from 'client/types/Post';
 
 type Props = {
   match: Match
