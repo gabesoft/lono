@@ -6,7 +6,7 @@ import Optional from 'client/Optional';
 
 type Props = {
   author?: ?string,
-  date: string,
+  date?: string,
   className?: string
 };
 

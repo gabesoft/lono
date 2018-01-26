@@ -69,31 +69,33 @@ export default class PostView extends React.Component<Props, State> {
 
     // TODO make the feed title a link to the feed
     return (
-      <Grid className="post-view">
-        <GridCell className="post-view__header" span="12">
-          <div className="post-view__avatar-feed-title">
-            <Avatar className="post-view__avatar" text={userPost.title} />
-            <span className="post-view__feed-title">
-              {userPost.title}
-            </span>
-          </div>
-          <AuthorDate
-            className="post-view__author-date"
-            author={post.author}
-            date={post.date}
-          />
-        </GridCell>
+      <article className="post-view" role="main">
+        <Grid>
+          <GridCell className="post-view__header" span="12">
+            <div className="post-view__avatar-feed-title">
+              <Avatar className="post-view__avatar" text={userPost.title} />
+              <span className="post-view__feed-title">
+                {userPost.title}
+              </span>
+            </div>
+            <AuthorDate
+              className="post-view__author-date"
+              author={post.author}
+              date={post.date}
+            />
+          </GridCell>
 
-        <GridCell className="post-view__title" span="12">
-          <a rel="canonical" href={post.link}>
-            {post.title}
-          </a>
-        </GridCell>
+          <GridCell className="post-view__title" span="12">
+            <a rel="canonical" href={post.link}>
+              <h1>{post.title}</h1>
+            </a>
+          </GridCell>
 
-        <GridCell className="post-view__description" span="12">
-          {description}
-        </GridCell>
-      </Grid>
+          <GridCell className="post-view__description" span="12">
+            {description}
+          </GridCell>
+        </Grid>
+      </article>
     );
   }
 }

@@ -4,7 +4,7 @@ export type Post = {
 
   __v?: number,
   author?: ?string,
-  date: string,
+  date?: string,
   description: string,
   guid: string,
   link: string,
