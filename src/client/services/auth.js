@@ -3,6 +3,7 @@ const CLIENT_ID = '966662239339-nco06tr9j08nfq9krrsmj6jfdlop5185.apps.googleuser
 import EventEmitter from 'wolfy87-eventemitter';
 
 import type { UserProfile } from 'client/types/UserProfile';
+import type { AuthInfo } from 'client/types/AuthInfo';
 
 class AuthService extends EventEmitter {
   _isSignedIn: boolean
@@ -29,6 +30,18 @@ class AuthService extends EventEmitter {
 
   get userProfile(): ?UserProfile{
     return this._userProfile;
+  }
+
+  get idToken(): ?string {
+    return this._idToken;
+  }
+
+  get authInfo(): AuthInfo {
+    return {
+      idToken: this.idToken,
+      isAuthenticated: this.isSignedIn,
+      userProfile: this.userProfile
+    };
   }
 
   constructor() {

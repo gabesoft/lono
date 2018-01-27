@@ -40,4 +40,15 @@
     float: none;
     display: block;
   }
+
+  video,
+  iframe {
+    border: 1px solid $border-color-normal;
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+    min-height: 50vh;
+    padding: 0 1px;
+    width: 100%;
+  }
 }

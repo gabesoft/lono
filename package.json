@@ -24,8 +24,10 @@
   },
   "homepage": "https://github.com/gabesoft/lono#readme",
   "dependencies": {
+    "@koa/cors": "^2.2.1",
     "google-auth-library": "^1.1.0",
     "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
     "koa-send": "^4.1.2",
@@ -40,6 +42,7 @@
     "react-router-dom": "^4.2.2",
     "react-tagsinput": "^3.19.0",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
     "rmwc": "1.1.0",
     "uuid": "^3.2.1",
     "wolfy87-eventemitter": "^5.2.4"

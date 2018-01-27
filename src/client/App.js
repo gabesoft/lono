@@ -8,9 +8,8 @@ import {
 import { connect } from 'react-redux';
 
 import {
-  authSetAuthenticated,
   authSetInitialized,
-  authSetUser,
+  authSetInfo,
   authClear
 } from 'client/actions/auth';
 
@@ -62,8 +61,7 @@ class App extends BaseComponent<Props, State> {
 
   onAuthInitSuccess() {
     this.props.dispatch(authSetInitialized());
-    this.props.dispatch(authSetAuthenticated(authService.isSignedIn));
-    this.props.dispatch(authSetUser(authService.userProfile));
+    this.props.dispatch(authSetInfo(authService.authInfo));
 
     this.setState({
       isInitialized: true

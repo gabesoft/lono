@@ -23,7 +23,7 @@ import type { ReduxState } from 'client/types/ReduxState';
 import type { UserProfile } from 'client/types/UserProfile';
 
 type UiProps = {
-  user: ?UserProfile,
+  userProfile: ?UserProfile,
   isAuthenticated: boolean,
   subscribedCount: number,
   newPostCount: number,
@@ -41,7 +41,7 @@ type ContainerProps = {
 const mapStateToProps = (state: ReduxState) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    user: state.auth.user,
+    userProfile: state.auth.userProfile,
     subscribedCount: 37,
     newPostCount: 14
   };
@@ -75,7 +75,7 @@ class Header extends BaseComponent<UiProps, UiState> {
   }
 
   renderUserMenu() {
-    const user = this.props.user || {};
+    const user = this.props.userProfile || {};
     const name = user.givenName || user.email;
     const fullName = user.name;
     const email = user.email;

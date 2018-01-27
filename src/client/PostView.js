@@ -3,6 +3,8 @@ import * as React from 'react';
 import Avatar from 'client/Avatar';
 import AuthorDate from 'client/AuthorDate';
 
+const YOUTUBE_URL = /https?:\/\/www.youtube.com\/watch\?v=(.+)$/;
+
 import {
   Grid,
   GridCell
@@ -55,17 +57,35 @@ export default class PostView extends React.Component<Props, State> {
     return document;
   }
 
-  render() {
-    const userPost = this.props.userPost;
-    const post = userPost.post;
+  renderYoutube(path: string) {
+    const post = this.props.userPost.post;
+    const src = `https://youtube.com/embed/${path}`;
 
-    const descriptionDocument = (new DOMParser).parseFromString(post.description, 'text/html');
+    return (
+      <iframe title={post.title} src={src} allowFullScreen />
+    );
+  }
+
+  renderDescription() {
+    const post = this.props.userPost.post;
+    const youtubeMatch = post.link.match(YOUTUBE_URL);
+
+    if (youtubeMatch) {
+      return this.renderYoutube(youtubeMatch[1]);
+    }
+
+    const descriptionDocument = (new DOMParser).parseFromString(post.description || '', 'text/html');
     const cleanedDocument = this.processDescription(descriptionDocument);
     const html = (new XMLSerializer).serializeToString(cleanedDocument);
 
-    const description = React.createElement('div', {
+    return React.createElement('div', {
       dangerouslySetInnerHTML: { __html: html }
     });
+  }
+
+  render() {
+    const userPost = this.props.userPost;
+    const post = userPost.post;
 
     // TODO make the feed title a link to the feed
     return (
@@ -92,7 +112,7 @@ export default class PostView extends React.Component<Props, State> {
           </GridCell>
 
           <GridCell className="post-view__description" span="12">
-            {description}
+            {this.renderDescription()}
           </GridCell>
         </Grid>
       </article>

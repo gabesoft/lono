@@ -24,7 +24,7 @@
 .tag__remove {
   @include layout-h(true);
   @include icon-size(16px);
-  @include theme-color($theme-background: primary);
+  @include theme-color($theme-background: primary, $color-icons: true);
 
   border: 0;
   border-radius: 50%;
@@ -34,6 +34,6 @@
 
   &:hover,
   &:focus {
-    @include theme-color($theme-background: primary-off);
+    @include theme-color($theme-background: secondary, $color-icons: true);
   }
 }

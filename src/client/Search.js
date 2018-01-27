@@ -108,7 +108,7 @@ export default class Search extends BaseComponent<Props, State> {
       <div className={className}>
         <Autosuggest
           getSuggestions={this.doGetSuggestions}
-          highlightFirstSuggestion={true}
+          highlightFirstSuggestion
           inputClassName="search__input"
           inputName="search"
           onInputChange={event => this.setState({ value: event.target.value })}

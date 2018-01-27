@@ -62,6 +62,11 @@ pre {
 
   background-color: $background-color-secondary;
 
+  a,
+  a:hover {
+    background-color: $background-color-secondary;
+  }
+
   code {
     color: $foreground-color;
   }
