@@ -1,11 +1,8 @@
 import * as React from 'react';
 
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-
-import BaseComponent from 'client/BaseComponent';
 import AuthorDate from 'client/AuthorDate';
 import Avatar from 'client/Avatar';
+import BaseComponent from 'client/BaseComponent';
 
 import {
   Grid,
@@ -13,44 +10,15 @@ import {
 } from 'rmwc';
 
 
-import type { Match } from 'react-router-dom';
-import type { ReduxState } from 'client/types/ReduxState';
 import type { UserPost } from 'client/types/Post';
 
 const YOUTUBE_URL = /https?:\/\/www.youtube.com\/watch\?v=(.+)$/;
 
-type ContainerProps = {
-  match: Match
+type Props = {
+  userPost: UserPost
 };
 
-type UiProps = {
-  userPost: ?UserPost,
-  userPostId: string
-};
-
-const mapDispatchToProps = () => ({});
-
-const mapStateToProps = (state: ReduxState, props: ContainerProps) => {
-  const userPostId = props.match.params.postId;
-  const posts = state.posts.items;
-  const userPost = posts.find(p => p._id === userPostId);
-  return { userPostId, userPost };
-};
-
-class PostView extends BaseComponent<UiProps, {}> {
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    this.updateTitle();
-  }
-
-  componentDidUpdate() {
-    this.updateTitle();
-  }
-
-  updateTitle() {
-    document.title = (this.props.userPost && this.props.userPost.title) || '';
-  }
-
+export default class PostView extends BaseComponent<Props, {}> {
   processDescription(document: Document) {
     const images = document.getElementsByTagName('img');
     const allElements = document.body && document.body.querySelectorAll('*') || [];
@@ -107,14 +75,6 @@ class PostView extends BaseComponent<UiProps, {}> {
   }
 
   render() {
-    if (!this.props.userPost) {
-      return (
-        <div>
-          A post with id {this.props.userPostId} was not found
-        </div>
-      );
-    }
-
     const userPost = this.props.userPost;
     const post = userPost.post;
 
@@ -150,5 +110,3 @@ class PostView extends BaseComponent<UiProps, {}> {
     );
   }
 }
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostView));

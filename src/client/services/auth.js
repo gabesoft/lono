@@ -133,7 +133,6 @@ class AuthService extends EventEmitter {
   }
 
   refresh() {
-    console.log('refresh', this._user);
     if (this._user) {
       this._user
         .reloadAuthResponse()
