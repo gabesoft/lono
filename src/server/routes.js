@@ -4,13 +4,13 @@ import feeds from './data-feeds';
 import posts from './data-posts';
 
 export default (router: Router) => {
-  router.get('/api/users', (ctx) => {
+  router.get('/api/user', (ctx) => {
     const auth = ctx.state.auth;
     ctx.body = { name: auth.name, email: auth.email };
   });
 
   router.get('/api/posts', (ctx) => {
-    ctx.body = posts.slice(0,20);
+    ctx.body = posts.slice(0,30);
   });
 
   router.get('/api/feeds', (ctx) => {

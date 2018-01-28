@@ -1,19 +1,19 @@
 import type { AuthInfo } from 'client/types/AuthInfo';
 
-type SetInitializedAction = {
-  type: 'AUTH_SET_INITIALIZED'
+type SetAuthInitialized = {
+  type: 'SET_AUTH_INITIALIZED'
 }
 
 type SetAuthInfo = {
-  type: 'AUTH_SET_INFO',
+  type: 'SET_AUTH_INFO',
   info: AuthInfo
 }
 
-type ClearAction = {
-  type: 'AUTH_CLEAR'
+type ClearAuth = {
+  type: 'CLEAR_AUTH'
 }
 
 export type AuthAction =
-  | SetInitializedAction
+  | SetAuthInitialized
   | SetAuthInfo
-  | ClearAction;
+  | ClearAuth;

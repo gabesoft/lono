@@ -4,17 +4,18 @@ import type { AuthState} from 'client/types/AuthState';
 const defaultState = (isInitialized: boolean) => {
   return {
     isAuthenticated: false,
+    idToken: null,
     isInitialized
   };
 };
 
 const auth = (state: AuthState = defaultState(false), action: AuthAction): AuthState => {
   switch (action.type) {
-    case 'AUTH_SET_INITIALIZED':
+    case 'SET_AUTH_INITIALIZED':
       return Object.assign({}, state, { isInitialized: true });
-    case 'AUTH_CLEAR':
+    case 'CLEAR_AUTH':
       return defaultState(state.isInitialized);
-    case 'AUTH_SET_INFO':
+    case 'SET_AUTH_INFO':
       return Object.assign({}, state, action.info);
     default:
       return state;

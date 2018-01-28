@@ -2,8 +2,8 @@ const CLIENT_ID = '966662239339-nco06tr9j08nfq9krrsmj6jfdlop5185.apps.googleuser
 
 import EventEmitter from 'wolfy87-eventemitter';
 
-import type { UserProfile } from 'client/types/UserProfile';
 import type { AuthInfo } from 'client/types/AuthInfo';
+import type { UserProfile } from 'client/types/UserProfile';
 
 class AuthService extends EventEmitter {
   _isSignedIn: boolean
@@ -133,6 +133,7 @@ class AuthService extends EventEmitter {
   }
 
   refresh() {
+    console.log('refresh', this._user);
     if (this._user) {
       this._user
         .reloadAuthResponse()

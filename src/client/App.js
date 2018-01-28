@@ -13,6 +13,10 @@ import {
   authClear
 } from 'client/actions/auth';
 
+import {
+  fetchPostsIfNeeded
+} from 'client/actions/posts';
+
 import authService from 'client/services/auth';
 import pageService from 'client/services/page';
 import { updateTheme } from 'client/ThemeSwitch';
@@ -52,6 +56,10 @@ class App extends BaseComponent<Props, State> {
   componentDidMount() {
     updateTheme();
     authService.init();
+  }
+
+  componentDidUpdate() {
+    this.props.dispatch(fetchPostsIfNeeded());
   }
 
   onAuthInitFailure() {

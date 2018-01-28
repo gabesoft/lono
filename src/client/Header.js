@@ -2,10 +2,7 @@ import * as React from 'react';
 
 import Headroom from 'react-headroom';
 import { connect } from 'react-redux';
-
-import {
-  withRouter
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import {
   MenuAnchor,

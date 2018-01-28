@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
 import auth from 'client/reducers/auth';
+import posts from 'client/reducers/posts';
 
 const reducers = {
-  auth
+  auth,
+  posts
 };
 
 export type Reducers = typeof reducers;

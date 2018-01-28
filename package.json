@@ -43,6 +43,7 @@
     "react-tagsinput": "^3.19.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "rmwc": "1.1.0",
     "uuid": "^3.2.1",
     "wolfy87-eventemitter": "^5.2.4"
@@ -50,6 +51,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.16.0",
