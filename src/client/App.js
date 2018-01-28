@@ -28,7 +28,7 @@ import Home from 'client/Home';
 import Loader from 'client/Loader';
 import LoginPage from 'client/LoginPage';
 import PostList from 'client/PostList';
-import PostPage from 'client/PostPage';
+import PostView from 'client/PostView';
 import PrivateRoute from 'client/PrivateRoute';
 import Styles from 'client/Styles';
 
@@ -114,7 +114,7 @@ class App extends BaseComponent<Props, State> {
           <PrivateRoute path={pageService.home} component={Home} exact />
           <PrivateRoute path={pageService.feeds} component={FeedList} />
           <PrivateRoute path={pageService.posts} component={PostList} />
-          <PrivateRoute path={pageService.post} component={PostPage} />
+          <PrivateRoute path={pageService.post} component={PostView} />
           <PrivateRoute path={pageService.styles} component={Styles} />
         </div>
       </Router>

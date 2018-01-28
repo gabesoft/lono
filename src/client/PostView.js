@@ -1,31 +1,53 @@
 import * as React from 'react';
 
-import Avatar from 'client/Avatar';
-import AuthorDate from 'client/AuthorDate';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-const YOUTUBE_URL = /https?:\/\/www.youtube.com\/watch\?v=(.+)$/;
+import AuthorDate from 'client/AuthorDate';
+import Avatar from 'client/Avatar';
 
 import {
   Grid,
   GridCell
 } from 'rmwc';
 
-import type {
-  UserPost
-} from 'client/types/Post';
 
-type Props = {
-  userPost: UserPost
+import type { Match } from 'react-router-dom';
+import type { ReduxState } from 'client/types/ReduxState';
+import type { UserPost } from 'client/types/Post';
+
+const YOUTUBE_URL = /https?:\/\/www.youtube.com\/watch\?v=(.+)$/;
+
+type ContainerProps = {
+  match: Match
+};
+
+type UiProps = {
+  userPost: ?UserPost,
+  userPostId: string
 };
 
 type State = {
 
 };
 
-export default class PostView extends React.Component<Props, State> {
+const mapDispatchToProps = () => ({});
+
+const mapStateToProps = (state: ReduxState, props: ContainerProps) => {
+  const userPostId = props.match.params.postId;
+  const posts = state.posts.items;
+  return {
+    userPostId,
+    userPost: posts.find(p => p._id === userPostId)
+  };
+};
+
+class PostView extends React.Component<UiProps, State> {
   componentDidMount() {
     window.scrollTo(0, 0);
-    document.title = this.props.userPost.post.title;
+
+    const post = this.props.userPost && this.props.userPost.post;
+    document.title = (post && post.title) || '';
   }
 
   processDescription(document: Document) {
@@ -58,7 +80,7 @@ export default class PostView extends React.Component<Props, State> {
   }
 
   renderYoutube(path: string) {
-    const post = this.props.userPost.post;
+    const post = (this.props.userPost && this.props.userPost.post) || {};
     const src = `https://youtube.com/embed/${path}`;
 
     return (
@@ -67,7 +89,7 @@ export default class PostView extends React.Component<Props, State> {
   }
 
   renderDescription() {
-    const post = this.props.userPost.post;
+    const post = (this.props.userPost && this.props.userPost.post) || {};
     const youtubeMatch = post.link.match(YOUTUBE_URL);
 
     if (youtubeMatch) {
@@ -84,6 +106,14 @@ export default class PostView extends React.Component<Props, State> {
   }
 
   render() {
+    if (!this.props.userPost) {
+      return (
+        <div>
+          A post with id {this.props.userPostId} was not found
+        </div>
+      );
+    }
+
     const userPost = this.props.userPost;
     const post = userPost.post;
 
@@ -119,3 +149,5 @@ export default class PostView extends React.Component<Props, State> {
     );
   }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostView));
