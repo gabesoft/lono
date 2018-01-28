@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import BaseComponent from 'client/BaseComponent';
 import AuthorDate from 'client/AuthorDate';
 import Avatar from 'client/Avatar';
 
@@ -27,27 +28,27 @@ type UiProps = {
   userPostId: string
 };
 
-type State = {
-
-};
-
 const mapDispatchToProps = () => ({});
 
 const mapStateToProps = (state: ReduxState, props: ContainerProps) => {
   const userPostId = props.match.params.postId;
   const posts = state.posts.items;
-  return {
-    userPostId,
-    userPost: posts.find(p => p._id === userPostId)
-  };
+  const userPost = posts.find(p => p._id === userPostId);
+  return { userPostId, userPost };
 };
 
-class PostView extends React.Component<UiProps, State> {
+class PostView extends BaseComponent<UiProps, {}> {
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.updateTitle();
+  }
 
-    const post = this.props.userPost && this.props.userPost.post;
-    document.title = (post && post.title) || '';
+  componentDidUpdate() {
+    this.updateTitle();
+  }
+
+  updateTitle() {
+    document.title = (this.props.userPost && this.props.userPost.title) || '';
   }
 
   processDescription(document: Document) {
