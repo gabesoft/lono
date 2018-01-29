@@ -64,7 +64,8 @@ class PostList extends BaseComponent<Props, State> {
 
   renderLoadMore() {
     const hasPosts = this.props.posts.length > 0;
-    const className = `post-list__more-loader ${hasPosts ? '' : 'post-list__more-loader_hidden'}`;
+    const hasMore = this.props.hasMore;
+    const className = `post-list__more-loader ${hasPosts && hasMore ? '' : 'post-list__more-loader_hidden'}`;
 
     return (
       <div key="load-more" className={className}>
