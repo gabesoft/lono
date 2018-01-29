@@ -11,8 +11,6 @@ const defaultState = (isInitialized: boolean) => {
 
 const auth = (state: AuthState = defaultState(false), action: AuthAction): AuthState => {
   switch (action.type) {
-    case 'SET_AUTH_INITIALIZED':
-      return Object.assign({}, state, { isInitialized: true });
     case 'CLEAR_AUTH':
       return defaultState(state.isInitialized);
     case 'SET_AUTH_INFO':

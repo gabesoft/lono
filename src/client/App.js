@@ -8,16 +8,15 @@ import {
 import { connect } from 'react-redux';
 
 import {
-  authSetInitialized,
-  authSetInfo,
-  authClear
+  initializeAuth,
+  signIn,
+  signOut
 } from 'client/actions/auth';
 
 import {
   fetchPostsIfNeeded
 } from 'client/actions/posts';
 
-import authService from 'client/services/auth';
 import pageService from 'client/services/page';
 import { updateTheme } from 'client/ThemeSwitch';
 
@@ -32,79 +31,50 @@ import PostPage from 'client/PostPage';
 import PrivateRoute from 'client/PrivateRoute';
 import Styles from 'client/Styles';
 
+import type { AuthState } from 'client/types/AuthState';
+import type { ReduxState } from 'client/types/ReduxState';
 
 type Props = {
-  dispatch: Function
+  dispatch: Function,
+  auth: AuthState
 };
 
-type State = {
-  isInitialized: boolean
-};
-
-class App extends BaseComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      isInitialized: false
-    };
-
-    authService.once('init-success', this.onAuthInitSuccess);
-    authService.once('init-failure', this.onAuthInitFailure);
+const mapDispatchToProps = dispatch => ({ dispatch });
+const mapStateToProps = (state: ReduxState) => {
+  return {
+    auth: state.auth
   }
+};
 
+class App extends BaseComponent<Props, {}> {
   componentDidMount() {
     updateTheme();
-    authService.init();
+    this.props.dispatch(initializeAuth());
   }
 
   componentDidUpdate() {
     this.props.dispatch(fetchPostsIfNeeded());
   }
 
-  onAuthInitFailure() {
-    this.props.dispatch(authSetInitialized());
-    this.setState({ isInitialized: true });
-  }
-
-  onAuthInitSuccess() {
-    this.props.dispatch(authSetInitialized());
-    this.props.dispatch(authSetInfo(authService.authInfo));
-
-    this.setState({
-      isInitialized: true
-    });
-  }
-
-  onSignInClick() {
-    authService.once('signin-success', this.onAuthInitSuccess);
-    authService.signIn();
-  }
-
-  onSignOutSuccess() {
-    this.props.dispatch(authClear());
-  }
-
-  onSignOutClick() {
-    authService.once('signout-success', this.onSignOutSuccess);
-    authService.signOut();
-  }
-
   doRenderLoginPage() {
+    const { dispatch } = this.props;
+
     return (
-      <LoginPage onLoginClick={this.onSignInClick} />
+      <LoginPage onLoginClick={() => dispatch(signIn())} />
     );
   }
 
   render() {
-    if (!this.state.isInitialized) {
+    if (!this.props.auth.isInitialized) {
       return <Loader />;
     }
+
+    const { dispatch } = this.props;
 
     return(
       <Router>
         <div className="app__content">
-          <Header onSignOutClick={this.onSignOutClick} />
+          <Header onSignOutClick={() => dispatch(signOut())} />
 
           <Route
             path={pageService.login}
@@ -122,4 +92,4 @@ class App extends BaseComponent<Props, State> {
   }
 }
 
-export default connect()(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

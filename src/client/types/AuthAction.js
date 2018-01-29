@@ -1,9 +1,5 @@
 import type { AuthInfo } from 'client/types/AuthInfo';
 
-type SetAuthInitialized = {
-  type: 'SET_AUTH_INITIALIZED'
-}
-
 type SetAuthInfo = {
   type: 'SET_AUTH_INFO',
   info: AuthInfo
@@ -14,6 +10,5 @@ type ClearAuth = {
 }
 
 export type AuthAction =
-  | SetAuthInitialized
   | SetAuthInfo
   | ClearAuth;

@@ -1,173 +1,78 @@
 const CLIENT_ID = '966662239339-nco06tr9j08nfq9krrsmj6jfdlop5185.apps.googleusercontent.com';
 
-import EventEmitter from 'wolfy87-eventemitter';
-
 import type { AuthInfo } from 'client/types/AuthInfo';
-import type { UserProfile } from 'client/types/UserProfile';
 
-class AuthService extends EventEmitter {
-  _isSignedIn: boolean
-  _user: ?Object
-  _profile: ?Object
-  _userProfile: ?UserProfile
-  _idToken: ?string
-
-  get isSignedIn(): boolean {
-    return this._isSignedIn;
+class AuthService {
+  init(): Promise<AuthInfo> {
+    return this._run(() => new Promise((resolve, reject) => {
+      window.gapi.load('client', () => {
+        window.gapi.client
+          .init({ clientId: CLIENT_ID, scope: 'profile' })
+          .then(resolve, reject);
+      });
+    }));
   }
 
-  get profileName(): ?string {
-    return this._getProfileData('name');
+  signIn(): Promise<AuthInfo> {
+    return this._run(() => this._getAuthInstance().signIn());
   }
 
-  get profileEmail(): ?string {
-    return this._getProfileData('email');
+  signOut(): Promise<AuthInfo> {
+    return this._run(() => this._getAuthInstance().signOut());
   }
 
-  get profileGivenName(): ?string {
-    return this._getProfileData('givenName');
+  refresh(): Promise<AuthInfo> {
+    const auth = this._getAuthInstance();
+    const user = auth && auth.currentUser.get();
+    if (user) {
+      return this._run(() => user.reloadAuthResponse());
+    } else {
+      return this._run(() => Promise.reject(new Error('No logged in user found')));
+    }
   }
 
-  get userProfile(): ?UserProfile{
-    return this._userProfile;
+  _getAuthInstance() {
+    return window.gapi && window.gapi.auth2 && window.gapi.auth2.getAuthInstance();
   }
 
-  get idToken(): ?string {
-    return this._idToken;
-  }
+  _getAuthInfo(error?: Error): AuthInfo {
+    const auth = this._getAuthInstance();
+    const isSignedIn = auth && auth.isSignedIn.get();
 
-  get authInfo(): AuthInfo {
+    if (!isSignedIn) {
+      return {
+        isInitialized: !!auth,
+        isAuthenticated: false,
+        idToken: null,
+        userProfile: null,
+        error: error || null
+      };
+    }
+
+    const user = auth.currentUser.get();
+    const profile = user.getBasicProfile();
+
     return {
-      idToken: this.idToken,
-      isAuthenticated: this.isSignedIn,
-      userProfile: this.userProfile
-    };
-  }
-
-  constructor() {
-    super();
-    this._clear();
-  }
-
-  _getProfileData(name: string): ?string {
-    return this._userProfile && this._userProfile[name];
-  }
-
-  _log(data: Object) {
-    // eslint-disable-next-line no-console
-    console.log(data);
-  }
-
-  _clear() {
-    this._isSignedIn = false;
-    this._user = null;
-    this._profile = null;
-    this._userProfile = null;
-    this._idToken = null;
-  }
-
-  _init() {
-    const auth = this.getAuthInstance();
-    this._isSignedIn = auth && auth.isSignedIn.get();
-
-    if (this._isSignedIn) {
-      const user = auth.currentUser.get();
-      const profile = user.getBasicProfile();
-
-      this._user = user;
-      this._profile = profile;
-      this._idToken = user.getAuthResponse().id_token;
-      this._userProfile = {
+      isInitialized: true,
+      isAuthenticated: true,
+      idToken: user.getAuthResponse().id_token,
+      error: error || null,
+      userProfile: {
         id: profile.getId(),
-        email: profile.getEmail(),
         name: profile.getName(),
+        email: profile.getEmail(),
         givenName: profile.getGivenName(),
         familyName: profile.getFamilyName(),
         imageUrl: profile.getImageUrl()
       }
-    }
+    };
   }
 
-  onInitSuccess() {
-    this._init();
-    this.emitEvent('init-success');
-  }
-
-  onSignInSuccess() {
-    this._init();
-    this.emitEvent('signin-success');
-  }
-
-  onSignOutSuccess() {
-    this._clear();
-    this.emitEvent('signout-success');
-  }
-
-  onRefreshSuccess() {
-    this._init();
-    this.emitEvent('refresh-success');
-  }
-
-  onSignInFailure(reason: Object) {
-    this._log(reason);
-    this._clear();
-    this.emitEvent('signin-failure');
-  }
-
-  onInitFailure(reason: Object) {
-    this._log(reason);
-    this._clear();
-    this.emitEvent('init-failure');
-  }
-
-  onSignOutFailure(reason: Object) {
-    this._log(reason);
-    this._clear();
-    this.emitEvent('signout-failure');
-  }
-
-  onRefreshFailure(reason: Object) {
-    this._log(reason);
-    this._clear();
-    this.emitEvent('refresh-failure');
-  }
-
-  refresh() {
-    if (this._user) {
-      this._user
-        .reloadAuthResponse()
-        .then(this.onRefreshSuccess.bind(this), this.onRefreshFailure.bind(this));
-    }
-  }
-
-  signIn() {
-    this.getAuthInstance()
-      .signIn()
-      .then(this.onSignInSuccess.bind(this), this.onSignInFailure.bind(this));
-  }
-
-  signOut() {
-    this.getAuthInstance()
-      .signOut()
-      .then(this.onSignOutSuccess.bind(this), this.onSignOutFailure.bind(this));
-  }
-
-  getAuthInstance() {
-    return window.gapi && window.gapi.auth2 && window.gapi.auth2.getAuthInstance();
-  }
-
-  onStart() {
-    window.gapi.client
-      .init({ clientId: CLIENT_ID, scope: 'profile' })
-      .then(this.onInitSuccess.bind(this), this.onInitFailure.bind(this));
-  }
-
-  init() {
-    if (this.getAuthInstance()) {
-      this.onInitSuccess();
-    } else {
-      window.gapi.load('client', this.onStart.bind(this));
-    }
+  _run(fn: () => Promise<any>): Promise<AuthInfo> {
+    return fn().then(
+      () => this._getAuthInfo(),
+      (err) => this._getAuthInfo(err)
+    );
   }
 }
 

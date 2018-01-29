@@ -49,7 +49,7 @@ export default class PostView extends BaseComponent<Props, {}> {
   }
 
   renderYoutube(path: string) {
-    const post = (this.props.userPost && this.props.userPost.post) || {};
+    const post = this.props.userPost.post;
     const src = `https://youtube.com/embed/${path}`;
 
     return (
@@ -58,7 +58,7 @@ export default class PostView extends BaseComponent<Props, {}> {
   }
 
   renderDescription() {
-    const post = (this.props.userPost && this.props.userPost.post) || {};
+    const post = this.props.userPost.post;
     const youtubeMatch = post.link.match(YOUTUBE_URL);
 
     if (youtubeMatch) {

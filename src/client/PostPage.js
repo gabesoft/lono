@@ -48,8 +48,10 @@ class PostPage extends BaseComponent<UiProps, {}> {
 
     if (!userPost) {
       return (
-        <div>
-          A post with id {userPostId} was not found
+        <div className="post-view">
+          <h3>
+            A post with id {userPostId} was not found
+          </h3>
         </div>
       );
     }

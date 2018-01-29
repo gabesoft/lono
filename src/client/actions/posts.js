@@ -1,9 +1,4 @@
-import authService from 'client/services/auth';
-
-import {
-  authSetInfo,
-  authClear
-} from 'client/actions/auth';
+import { refreshAuth } from 'client/actions/auth';
 
 import type { Post } from 'client/types/Post';
 import type { ReduxState } from 'client/types/ReduxState';
@@ -25,11 +20,14 @@ export const receivePosts = (json: Array<Post>) => {
 };
 
 const fetchPosts = () => {
-  const doFetchPosts = async (dispatch: Function, getState: () => ReduxState, tryCount: number = 0) => {
-    dispatch(requestPosts());
-
+  const doFetchPosts = async (dispatch: Function, getState: () => ReduxState) => {
     const state = getState();
-    const idToken = state.auth.idToken;
+    const auth = state.auth;
+    if (!auth.isAuthenticated) {
+      return;
+    }
+
+    const idToken = auth.idToken;
     const url = '/api/posts';
     const headers = new Headers({
       Authorization: `Bearer ${idToken || ''}`
@@ -39,27 +37,20 @@ const fetchPosts = () => {
       headers: headers
     };
 
+    dispatch(requestPosts());
+
     const response = await fetch(url, options);
     if (response.ok) {
       const json = await response.json();
       dispatch(receivePosts(json));
-    } else if (response.status === 401 && tryCount < 5) {
-      // TODO: maybe move this to the auth actions (create anothe action)
-
-      // TODO: clear auth on refresh-failure
-
-      authService.once('refresh-success', () => {
-        dispatch(authSetInfo(authService.authInfo));
-        // TODO: try only invalidating posts here, if so we need to add the try count to state
-        doFetchPosts(dispatch, getState, tryCount + 1);
-      });
-
-      authService.refresh();
+    } else if (response.status === 401 && auth.isAuthenticated) {
+      dispatch(refreshAuth());
+      dispatch(invalidatePosts());
     }
   };
 
   return doFetchPosts;
-};
+}
 
 const shouldFetchPosts = (state: ReduxState) => {
   const posts = state.posts;
