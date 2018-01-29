@@ -6,8 +6,19 @@ type ReceivePosts = {
   receivedAt: Date
 };
 
+type ReceiveMorePosts = {
+  type: 'RECEIVE_MORE_POSTS',
+  posts: Array<UserPost>,
+  receivedAt: Date,
+  page: number
+};
+
 type RequestPosts = {
   type: 'REQUEST_POSTS'
+};
+
+type RequestMorePosts = {
+  type: 'REQUEST_MORE_POSTS'
 };
 
 type InvalidatePosts = {
@@ -16,5 +27,7 @@ type InvalidatePosts = {
 
 export type PostsAction =
   | ReceivePosts
+  | ReceiveMorePosts
   | RequestPosts
+  | RequestMorePosts
   | InvalidatePosts;

@@ -10,7 +10,13 @@ export default (router: Router) => {
   });
 
   router.get('/api/posts', (ctx) => {
-    ctx.body = posts.slice(0,30);
+    const pageSize = 30;
+    const page = (ctx.query || {}).page || 1;
+    const start = (page - 1) * pageSize;
+    const withinRange = start < posts.length;
+    ctx.body = withinRange
+             ? posts.slice(start, start + pageSize)
+             : [];
   });
 
   router.get('/api/feeds', (ctx) => {

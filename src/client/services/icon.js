@@ -22,6 +22,11 @@ const icons = {
       <path fill="#000000" d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z" />
     </svg>
   ),
+  'download': (
+    <svg width="24px" height="24px" viewBox="0 0 24 24">
+      <path fill="#000000" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+    </svg>
+  ),
   'google': (
     <svg width="46px" height="46px" viewBox="0 0 46 46">
       <defs>

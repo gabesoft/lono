@@ -5,3 +5,8 @@ export type ItemsState<T> = {
   lastUpdated?: Date,
   items: Array<T>
 };
+
+export type Paginated = {
+  hasMore: boolean,
+  page: number
+};

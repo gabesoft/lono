@@ -8,8 +8,12 @@ import {
   GridCell
 } from 'rmwc';
 
+import InfiniteScroll from 'react-infinite-scroller';
+
 import BaseComponent from 'client/BaseComponent';
 import Post from 'client/Post';
+import { fetchMorePosts } from 'client/actions/posts';
+import getIcon from 'client/services/icon';
 
 import type { ReduxState } from 'client/types/ReduxState';
 import type { UserPost } from 'client/types/Post';
@@ -17,26 +21,33 @@ import type { UserPost } from 'client/types/Post';
 type Props = {
   isFetching: boolean,
   lastUpdated: Date,
-  posts: Array<UserPost>
+  posts: Array<UserPost>,
+  hasMore: boolean,
+  loadMorePosts: (page: number) => void
 };
 
 type State = {
 
 };
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    loadMorePosts: page => dispatch(fetchMorePosts(page))
+  };
+};
 
 const mapStateToProps = (state: ReduxState) => {
   return {
     isFetching: state.posts.isFetching,
     lastUpdated: state.posts.lastUpdated,
+    hasMore: state.posts.hasMore,
     posts: state.posts.items
   };
 };
 
 class PostList extends BaseComponent<Props, State> {
   renderPosts() {
-    const posts = this.props.posts;
+    const { posts } = this.props;
 
     return posts.map((userPost, i) => {
       return (
@@ -51,11 +62,31 @@ class PostList extends BaseComponent<Props, State> {
     });
   }
 
+  renderLoadMore() {
+    const hasPosts = this.props.posts.length > 0;
+    const className = `post-list__more-loader ${hasPosts ? '' : 'post-list__more-loader_hidden'}`;
+
+    return (
+      <div key="load-more" className={className}>
+        {getIcon('download')}
+        <span>Loading...</span>
+      </div>
+    );
+  }
+
   render () {
     return (
-      <Grid className="post-list">
-        {this.renderPosts()}
-      </Grid>
+      <InfiniteScroll
+        initialLoad={false}
+        pageStart={1}
+        loadMore={this.props.loadMorePosts}
+        hasMore={this.props.hasMore}
+        loader={this.renderLoadMore()}
+      >
+        <Grid className="post-list">
+          {this.renderPosts()}
+        </Grid>
+      </InfiniteScroll>
     );
   }
 }
