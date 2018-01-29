@@ -10,12 +10,14 @@ import {
 } from 'rmwc';
 
 
+import type { Feed } from 'client/types/Feed';
 import type { UserPost } from 'client/types/Post';
 
 const YOUTUBE_URL = /https?:\/\/www.youtube.com\/watch\?v=(.+)$/;
 
 type Props = {
-  userPost: UserPost
+  userPost: UserPost,
+  feed?: Feed
 };
 
 export default class PostView extends BaseComponent<Props, {}> {
@@ -75,19 +77,18 @@ export default class PostView extends BaseComponent<Props, {}> {
   }
 
   render() {
-    const userPost = this.props.userPost;
+    const { userPost, feed } = this.props;
     const post = userPost.post;
 
-    // TODO make the feed title a link to the feed
     return (
       <article className="post-view" role="main">
         <Grid>
           <GridCell className="post-view__header" span="12">
             <div className="post-view__avatar-feed-title">
               <Avatar className="post-view__avatar" text={userPost.title} />
-              <span className="post-view__feed-title">
+              <a href={feed && feed.link} className="post-view__feed-title">
                 {userPost.title}
-              </span>
+              </a>
             </div>
             <AuthorDate
               className="post-view__author-date"

@@ -2,6 +2,18 @@ import type { ReduxState } from 'client/types/ReduxState';
 
 import { refreshAuth } from 'client/actions/auth';
 
+export const fetchItemsIfNeeded = (shouldFetch: ReduxState => boolean, fetchItems: Function) => {
+  return (dispatch: Function, getState: () => ReduxState) => {
+    if (shouldFetch(getState())) {
+      return dispatch(fetchItems());
+    }
+  };
+}
+
+export const shouldFetchItems = (items: Array<any>, isFetching: boolean, didInvalidate: boolean) => {
+  return !isFetching && (items.length == 0 || didInvalidate);
+}
+
 export const apiGet = (path: string, request: Function, receive: Function, invalidate?: Function) => {
   return async (dispatch: Function, getState: () => ReduxState,) => {
     const state = getState();

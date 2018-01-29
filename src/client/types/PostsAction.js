@@ -17,4 +17,4 @@ type InvalidatePosts = {
 export type PostsAction =
   | ReceivePosts
   | RequestPosts
-  | InvalidatePosts
+  | InvalidatePosts;

@@ -1,13 +1,13 @@
 import type { PostsAction } from 'client/types/PostsAction';
 import type { PostsState } from 'client/types/PostsState';
 
-const defaultState: PostsState = {
+const initialState = {
   isFetching: false,
   didInvalidate: false,
   items: []
 };
 
-const post = (state: PostsState = defaultState, action: PostsAction) => {
+const post = (state: PostsState = initialState, action: PostsAction) => {
   switch (action.type) {
     case 'RECEIVE_POSTS':
       return Object.assign({}, state, {

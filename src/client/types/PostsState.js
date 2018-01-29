@@ -1,8 +1,4 @@
 import type { UserPost } from 'client/types/Post';
+import type { ItemsState } from 'client/types/ItemsState';
 
-export type PostsState = {
-  isFetching: boolean,
-  didInvalidate: boolean,
-  lastUpdated?: Date,
-  items: Array<UserPost>
-};
+export type PostsState = ItemsState<UserPost>;

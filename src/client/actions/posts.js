@@ -1,4 +1,8 @@
-import { apiGet } from 'client/actions/apiHelper';
+import {
+  apiGet,
+  shouldFetchItems,
+  fetchItemsIfNeeded
+} from 'client/actions/apiHelper';
 
 import type { Post } from 'client/types/Post';
 import type { ReduxState } from 'client/types/ReduxState';
@@ -19,26 +23,10 @@ export const receivePosts = (json: Array<Post>) => {
   };
 };
 
-const fetchPosts = () => apiGet('posts', requestPosts, receivePosts, invalidatePosts);
-
 const shouldFetchPosts = (state: ReduxState) => {
-  const posts = state.posts;
-  const auth = state.auth;
-
-  if (!auth.isInitialized) {
-    return false;
-  } else if (!posts || !posts.items.length) {
-    return true;
-  } else if (posts.isFetching) {
-    return false;
-  }
-  return posts.didInvalidate;
-}
-
-export const fetchPostsIfNeeded = () => {
-  return (dispatch: Function, getState: () => ReduxState) => {
-    if (shouldFetchPosts(getState())) {
-      return dispatch(fetchPosts());
-    }
-  };
+  const { items, isFetching, didInvalidate } = state.posts;
+  return shouldFetchItems(items, isFetching, didInvalidate);
 };
+
+const fetchPosts = () => apiGet('posts', requestPosts, receivePosts, invalidatePosts);
+export const maybeFetchPosts = () => fetchItemsIfNeeded(shouldFetchPosts, fetchPosts);

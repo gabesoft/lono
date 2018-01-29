@@ -14,8 +14,13 @@ import {
 } from 'client/actions/auth';
 
 import {
-  fetchPostsIfNeeded
+  maybeFetchPosts
 } from 'client/actions/posts';
+
+import {
+  maybeFetchFeeds,
+  maybeFetchSubscriptions
+} from 'client/actions/feeds';
 
 import pageService from 'client/services/page';
 import { updateTheme } from 'client/ThemeSwitch';
@@ -53,7 +58,9 @@ class App extends BaseComponent<Props, {}> {
   }
 
   componentDidUpdate() {
-    this.props.dispatch(fetchPostsIfNeeded());
+    this.props.dispatch(maybeFetchPosts());
+    this.props.dispatch(maybeFetchFeeds());
+    this.props.dispatch(maybeFetchSubscriptions());
   }
 
   doRenderLoginPage() {

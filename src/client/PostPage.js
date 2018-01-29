@@ -9,6 +9,7 @@ import PostView from 'client/PostView';
 import type { Match } from 'react-router-dom';
 import type { ReduxState } from 'client/types/ReduxState';
 import type { UserPost } from 'client/types/Post';
+import type { Feed } from 'client/types/Feed';
 
 type Props = {
   match: Match
@@ -16,7 +17,8 @@ type Props = {
 
 type UiProps = {
   userPost: ?UserPost,
-  userPostId: string
+  userPostId: string,
+  feed: Feed
 };
 
 const mapDispatchToProps = () => ({});
@@ -24,8 +26,10 @@ const mapDispatchToProps = () => ({});
 const mapStateToProps = (state: ReduxState, props: Props) => {
   const userPostId = props.match.params.postId;
   const posts = state.posts.items;
+  const feeds = state.feeds.items;
   const userPost = posts.find(p => p._id === userPostId);
-  return { userPostId, userPost };
+  const feed = userPost ? feeds.find(f => f._id === userPost.feedId) : null;
+  return { userPostId, userPost, feed };
 };
 
 class PostPage extends BaseComponent<UiProps, {}> {
