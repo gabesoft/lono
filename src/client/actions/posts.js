@@ -1,4 +1,4 @@
-import { refreshAuth } from 'client/actions/auth';
+import { apiGet } from 'client/actions/apiHelper';
 
 import type { Post } from 'client/types/Post';
 import type { ReduxState } from 'client/types/ReduxState';
@@ -19,38 +19,7 @@ export const receivePosts = (json: Array<Post>) => {
   };
 };
 
-const fetchPosts = () => {
-  const doFetchPosts = async (dispatch: Function, getState: () => ReduxState) => {
-    const state = getState();
-    const auth = state.auth;
-    if (!auth.isAuthenticated) {
-      return;
-    }
-
-    const idToken = auth.idToken;
-    const url = '/api/posts';
-    const headers = new Headers({
-      Authorization: `Bearer ${idToken || ''}`
-    });
-    const options = {
-      method: 'GET',
-      headers: headers
-    };
-
-    dispatch(requestPosts());
-
-    const response = await fetch(url, options);
-    if (response.ok) {
-      const json = await response.json();
-      dispatch(receivePosts(json));
-    } else if (response.status === 401 && auth.isAuthenticated) {
-      dispatch(refreshAuth());
-      dispatch(invalidatePosts());
-    }
-  };
-
-  return doFetchPosts;
-}
+const fetchPosts = () => apiGet('posts', requestPosts, receivePosts, invalidatePosts);
 
 const shouldFetchPosts = (state: ReduxState) => {
   const posts = state.posts;

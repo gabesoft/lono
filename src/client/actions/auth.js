@@ -4,6 +4,7 @@ import type { AuthInfo } from 'client/types/AuthInfo';
 export const clearAuth = () => {
   return { type: 'CLEAR_AUTH' };
 };
+
 export const setAuthInfo = (info: AuthInfo) => {
   return { type: 'SET_AUTH_INFO', info };
 };
