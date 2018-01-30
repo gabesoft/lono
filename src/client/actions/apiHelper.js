@@ -2,6 +2,8 @@ import type { ReduxState } from 'client/types/ReduxState';
 
 import { refreshAuth } from 'client/actions/auth';
 
+const MAX_RETRY = 2
+
 export const fetchItemsIfNeeded = (shouldFetch: ReduxState => boolean, fetchItems: Function) => {
   return (dispatch: Function, getState: () => ReduxState) => {
     if (shouldFetch(getState())) {
@@ -14,7 +16,7 @@ export const shouldFetchItems = (items: Array<any>, isFetching: boolean, didInva
   return !isFetching && (items.length == 0 || didInvalidate);
 }
 
-export const apiGet = (path: string, request: Function, receive: Function, invalidate?: Function) => {
+export const apiGet = (path: string, request: Function, receive: Function, retryCount: number = 0) => {
   return async (dispatch: Function, getState: () => ReduxState,) => {
     const state = getState();
     const auth = state.auth;
@@ -40,11 +42,11 @@ export const apiGet = (path: string, request: Function, receive: Function, inval
     if (response.ok) {
       const json = await response.json();
       dispatch(receive(json));
-    } else if (response.status === 401) {
+    } else if (response.status === 401 && idToken && retryCount < MAX_RETRY) {
       dispatch(refreshAuth());
-      if (invalidate) {
-        dispatch(invalidate());
-      }
+      dispatch(apiGet(path, request, receive, retryCount + 1));
+    } else {
+      dispatch(receive(null));
     }
 
   };

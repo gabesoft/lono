@@ -41,7 +41,7 @@ const shouldFetchPosts = (state: ReduxState) => {
   return shouldFetchItems(items, isFetching, didInvalidate);
 };
 
-const fetchPosts = () => apiGet('posts', requestPosts, receivePosts, invalidatePosts);
+const fetchPosts = () => apiGet('posts', requestPosts, receivePosts);
 export const maybeFetchPosts = () => fetchItemsIfNeeded(shouldFetchPosts, fetchPosts);
 
 export const fetchMorePosts = (page: number) => {

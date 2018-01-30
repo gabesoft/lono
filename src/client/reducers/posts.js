@@ -11,33 +11,39 @@ const initialState = {
 
 const post = (state: PostsState = initialState, action: PostsAction) => {
   switch (action.type) {
-    case 'RECEIVE_POSTS':
+    case 'RECEIVE_POSTS': {
+      const posts = action.posts || [];
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
         page: 1,
-        hasMore: action.posts.length > 0,
-        items: action.posts,
+        hasMore: posts.length > 0,
+        items: posts,
         lastUpdate: action.receivedAt
       });
-    case 'RECEIVE_MORE_POSTS':
+    }
+    case 'RECEIVE_MORE_POSTS': {
+      const posts = action.posts || [];
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
-        hasMore: action.posts.length > 0,
-        items: state.items.concat(action.posts),
+        hasMore: posts.length > 0,
+        items: state.items.concat(posts),
         page: action.page,
         lastUpdate: action.receivedAt
       });
-    case 'REQUEST_POSTS':
+    }
+    case 'REQUEST_POSTS': {
       return Object.assign({}, state, {
         isFetching: true,
         didInvalidate: false
       });
-    case 'INVALIDATE_POSTS':
+    }
+    case 'INVALIDATE_POSTS': {
       return Object.assign({}, state, {
         didInvalidate: true
       });
+    }
     default:
       return state;
   }
