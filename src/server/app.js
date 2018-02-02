@@ -6,24 +6,27 @@ import cors from '@koa/cors';
 import koaBody from 'koa-body';
 import logger from 'koa-logger';
 import serve from 'koa-static';
+import config from 'config';
 
 import auth from './middleware/auth';
 import errorHandling from './middleware/errorHandling';
-import responseTime from './middleware/responseTime';
 import renderIndex from './middleware/renderIndex';
+import responseTime from './middleware/responseTime';
 import setupRoutes from './routes';
+import setupUser from './middleware/user';
 
 
 const app = new Koa();
 const router = new Router();
 const publicDir = 'build/public';
-const port = 3000;
+const port = config.get('port');
 
 setupRoutes(router);
 
 app.use(errorHandling());
 app.use(responseTime());
 app.use(auth());
+app.use(setupUser());
 app.use(koaBody());
 app.use(logger());
 app.use(cors());

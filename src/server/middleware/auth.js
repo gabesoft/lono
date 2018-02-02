@@ -3,10 +3,9 @@ import gauth from 'google-auth-library';
 
 import type { Context } from 'koa';
 
-const CLIENT_ID = config.get('google.clientId');
-const API_PATTERN = /^\/api\//;
-
-const auth = new gauth.OAuth2Client(CLIENT_ID, '', '');
+const clientId = config.get('google.clientId');
+const apiPattern = /^\/api\//;
+const auth = new gauth.OAuth2Client(clientId, '', '');
 
 const getIdToken = (ctx: Context) => {
   if (!ctx.header || !ctx.header.authorization) {
@@ -29,7 +28,7 @@ const getIdToken = (ctx: Context) => {
 export default () => {
   return async (ctx: Context, next: () => Promise<void>) => {
     const idToken = getIdToken(ctx);
-    const requiresAuth = API_PATTERN.test(ctx.url);
+    const requiresAuth = apiPattern.test(ctx.url);
 
     if (requiresAuth && !idToken) {
       ctx.throw(401, 'Authorization header not found or bad format.');
