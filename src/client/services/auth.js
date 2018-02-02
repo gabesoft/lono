@@ -1,13 +1,13 @@
-const CLIENT_ID = '966662239339-nco06tr9j08nfq9krrsmj6jfdlop5185.apps.googleusercontent.com';
-
 import type { AuthInfo } from 'client/types/AuthInfo';
+import util from 'client/services/util';
 
 class AuthService {
   init(): Promise<AuthInfo> {
     return this._run(() => new Promise((resolve, reject) => {
+      const clientId = util.readMeta('client-id');
       window.gapi.load('client', () => {
         window.gapi.client
-          .init({ clientId: CLIENT_ID, scope: 'profile' })
+          .init({ clientId, scope: 'profile' })
           .then(resolve, reject);
       });
     }));

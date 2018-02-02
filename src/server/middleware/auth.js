@@ -1,9 +1,9 @@
+import config from 'config';
 import gauth from 'google-auth-library';
 
 import type { Context } from 'koa';
 
-// TODO: get from config (same for client/services/auth)
-const CLIENT_ID = '966662239339-nco06tr9j08nfq9krrsmj6jfdlop5185.apps.googleusercontent.com';
+const CLIENT_ID = config.get('google.clientId');
 const API_PATTERN = /^\/api\//;
 
 const auth = new gauth.OAuth2Client(CLIENT_ID, '', '');
