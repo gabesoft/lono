@@ -36,8 +36,8 @@ import PostPage from 'client/PostPage';
 import PrivateRoute from 'client/PrivateRoute';
 import Styles from 'client/Styles';
 
-import type { AuthState } from 'client/types/AuthState';
-import type { ReduxState } from 'client/types/ReduxState';
+import type { AuthState } from 'types/AuthState';
+import type { ReduxState } from 'types/ReduxState';
 
 type Props = {
   dispatch: Function,

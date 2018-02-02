@@ -5,8 +5,8 @@ import {
   fetchItemsIfNeeded
 } from 'client/actions/apiHelper';
 
-import type { Feed, Subscription } from 'client/types/Feed';
-import type { ReduxState } from 'client/types/ReduxState';
+import type { Feed, Subscription } from 'types/Feed';
+import type { ReduxState } from 'types/ReduxState';
 
 export const invalidateFeeds = () => {
   return { type: 'INVALIDATE_FEEDS' };

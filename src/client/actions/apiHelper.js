@@ -1,4 +1,4 @@
-import type { ReduxState } from 'client/types/ReduxState';
+import type { ReduxState } from 'types/ReduxState';
 
 import { refreshAuth } from 'client/actions/auth';
 

@@ -16,8 +16,8 @@ import Search from 'client/Search';
 import ThemeSwitch from 'client/ThemeSwitch';
 import getIcon from 'client/services/icon';
 
-import type { ReduxState } from 'client/types/ReduxState';
-import type { UserProfile } from 'client/types/UserProfile';
+import type { ReduxState } from 'types/ReduxState';
+import type { UserProfile } from 'types/UserProfile';
 
 type UiProps = {
   userProfile: ?UserProfile,

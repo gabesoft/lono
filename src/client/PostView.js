@@ -10,8 +10,8 @@ import {
 } from 'rmwc';
 
 
-import type { Feed } from 'client/types/Feed';
-import type { UserPost } from 'client/types/Post';
+import type { Feed } from 'types/Feed';
+import type { UserPost } from 'types/Post';
 
 const YOUTUBE_URL = /https?:\/\/www.youtube.com\/watch\?v=(.+)$/;
 

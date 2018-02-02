@@ -1,4 +1,4 @@
-import type { AuthInfo } from 'client/types/AuthInfo';
+import type { AuthInfo } from 'types/AuthInfo';
 import util from 'client/services/util';
 
 class AuthService {

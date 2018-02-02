@@ -15,8 +15,8 @@ import Post from 'client/Post';
 import { fetchMorePosts } from 'client/actions/posts';
 import getIcon from 'client/services/icon';
 
-import type { ReduxState } from 'client/types/ReduxState';
-import type { UserPost } from 'client/types/Post';
+import type { ReduxState } from 'types/ReduxState';
+import type { UserPost } from 'types/Post';
 
 type Props = {
   isFetching: boolean,

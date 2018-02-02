@@ -4,8 +4,8 @@ import {
   fetchItemsIfNeeded
 } from 'client/actions/apiHelper';
 
-import type { Post } from 'client/types/Post';
-import type { ReduxState } from 'client/types/ReduxState';
+import type { Post } from 'types/Post';
+import type { ReduxState } from 'types/ReduxState';
 
 export const invalidatePosts = () => {
   return { type: 'INVALIDATE_POSTS' };

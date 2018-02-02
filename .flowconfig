@@ -20,3 +20,4 @@ module.file_ext=.mjs
 module.name_mapper='^/\(.*\)$' -> '<PROJECT_ROOT>/\1'
 module.name_mapper='^client/\(.*\)$' -> '<PROJECT_ROOT>/src/client/\1'
 module.name_mapper='^server/\(.*\)$' -> '<PROJECT_ROOT>/src/server/\1'
+module.name_mapper='^types/\(.*\)$' -> '<PROJECT_ROOT>/src/types/\1'

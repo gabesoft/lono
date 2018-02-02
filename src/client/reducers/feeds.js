@@ -1,5 +1,5 @@
-import type { FeedsAction, SubscriptionsAction } from 'client/types/FeedsAction';
-import type { FeedsState, SubscriptionsState } from 'client/types/FeedsState';
+import type { FeedsAction, SubscriptionsAction } from 'types/FeedsAction';
+import type { FeedsState, SubscriptionsState } from 'types/FeedsState';
 
 const initialFeedsState: FeedsState = {
   isFetching: false,

@@ -14,7 +14,7 @@ import type {
   Location
 } from 'react-router-dom';
 
-import type { ReduxState } from 'client/types/ReduxState';
+import type { ReduxState } from 'types/ReduxState';
 
 type Props = {
   component: React.ComponentType<*>,

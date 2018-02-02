@@ -1,5 +1,5 @@
-import type { PostsAction } from 'client/types/PostsAction';
-import type { PostsState } from 'client/types/PostsState';
+import type { PostsAction } from 'types/PostsAction';
+import type { PostsState } from 'types/PostsState';
 
 const initialState = {
   isFetching: false,

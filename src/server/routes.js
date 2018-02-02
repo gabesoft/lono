@@ -15,17 +15,19 @@ export default (router: Router) => {
     const page = parseInt((ctx.query || {}).page || '1', 10);
     const start = (page - 1) * pageSize;
     const withinRange = start < posts.length;
-    ctx.body = withinRange
-             ? posts.slice(start, start + pageSize)
-             : [];
+
+    if (withinRange) {
+      ctx.body = (posts.slice(start, start + pageSize): Array<any>);
+    } else {
+      ctx.body = [];
+    }
   });
 
   router.get('/api/feeds', (ctx: Context) => {
-    console.log(ctx.state.user);
-    ctx.body = feeds.feeds;
+    ctx.body = (feeds.feeds: Array<any>);
   });
 
   router.get('/api/subscriptions', (ctx: Context) => {
-    ctx.body = feeds.subscriptions;
+    ctx.body = (feeds.subscriptions: Array<any>);
   });
 };

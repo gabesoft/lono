@@ -1,5 +1,5 @@
 import authService from 'client/services/auth';
-import type { AuthInfo } from 'client/types/AuthInfo';
+import type { AuthInfo } from 'types/AuthInfo';
 
 export const clearAuth = () => {
   return { type: 'CLEAR_AUTH' };

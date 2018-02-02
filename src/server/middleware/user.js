@@ -1,54 +1,54 @@
 import config from 'config';
-import redis from 'redis';
 import request from 'request-promise-native';
-import util from 'util';
 
+import RedisService from '../services/redis';
+
+import type { Auth } from 'types/Auth';
 import type { Context } from 'koa';
-
-const redisPort = config.get('redis.port');
-const redisHost = config.get('redis.host');
+import type { User } from 'types/User';
 
 const apiHost = config.get('api.host');
 const userttl = config.get('user.ttl');
 
-export default () => {
-  const client = redis.createClient(redisPort, redisHost)
-  const redisGet = util.promisify(client.get).bind(client);
-  const redisSet = util.promisify(client.set).bind(client);
+const usersUri = `${apiHost}/users`;
 
-  const getUser = async (email: string) => {
+export default () => {
+  const redis = new RedisService();
+
+  const getAndCache = async (email: string): Promise<User> => {
     const opts = {
-      uri: `${apiHost}/users?where=(email eq "${email}")`,
+      uri: `${usersUri}?where=(email eq "${email}")`,
       json: true
     };
 
     const users = await request(opts);
     if (users.length > 0) {
-      await redisSet(email, JSON.stringify(users[0]), 'EX', userttl);
+      await redis.setVal(email, users[0], userttl);
     }
 
     return users[0];
   };
 
-  const createUser = async (auth) => {
+  const createAndCache = async (auth: Auth): Promise<User> => {
+    const body = {
+      email: auth.email,
+      disabled: false,
+      admin: false,
+      name: auth.name,
+      givenName: auth.given_name,
+      familyName: auth.family_name,
+      locale: auth.locale,
+      imageUrl: auth.picture
+    };
     const opts = {
-      uri: `${apiHost}/users?where=(email eq "${auth.email}")`,
+      uri: usersUri,
       method: 'POST',
       json: true,
-      body: {
-        email: auth.email,
-        disabled: false,
-        admin: false,
-        name: auth.name,
-        givenName: auth.given_name,
-        familyName: auth.family_name,
-        locale: auth.locale,
-        imageUrl: auth.picture
-      }
+      body
     };
 
     const user = await request(opts);
-    await redisSet(auth.email, JSON.stringify(user), 'EX', userttl);
+    await redis.setVal(auth.email, user, userttl);
     return user;
   };
 
@@ -57,22 +57,21 @@ export default () => {
       return await next();
     }
 
-    const auth = ctx.state.auth;
-    const email = auth.email;
-    const userFromCacheRaw = await redisGet(email);
-    const userFromCache = JSON.parse(userFromCacheRaw);
+    const auth: Auth = ctx.state.auth;
+    const email: string = auth.email;
+    const userFromCache: User = await redis.getVal(email);
     if (userFromCache) {
       ctx.state.user = userFromCache;
       return await next();
     }
 
-    const userFromDb = await getUser(email);
+    const userFromDb: User = await getAndCache(email);
     if (userFromDb) {
       ctx.state.user = userFromDb;
       return await next();
     }
 
-    const newUser = await createUser(auth);
+    const newUser: User = await createAndCache(auth);
     ctx.state.user = newUser;
 
     await next();

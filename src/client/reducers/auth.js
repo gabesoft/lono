@@ -1,5 +1,5 @@
-import type { AuthAction } from 'client/types/AuthAction';
-import type { AuthState} from 'client/types/AuthState';
+import type { AuthAction } from 'types/AuthAction';
+import type { AuthState} from 'types/AuthState';
 
 const defaultState = (isInitialized: boolean) => {
   return {

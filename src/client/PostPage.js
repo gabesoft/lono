@@ -7,9 +7,9 @@ import BaseComponent from 'client/BaseComponent';
 import PostView from 'client/PostView';
 
 import type { Match } from 'react-router-dom';
-import type { ReduxState } from 'client/types/ReduxState';
-import type { UserPost } from 'client/types/Post';
-import type { Feed } from 'client/types/Feed';
+import type { ReduxState } from 'types/ReduxState';
+import type { UserPost } from 'types/Post';
+import type { Feed } from 'types/Feed';
 
 type Props = {
   match: Match
@@ -48,13 +48,13 @@ class PostPage extends BaseComponent<UiProps, {}> {
   }
 
   render() {
-    const { userPost, userPostId, ...rest } = this.props;
+    const { userPost, ...rest } = this.props;
 
     if (!userPost) {
       return (
         <div className="post-view">
           <h3>
-            A post with id {userPostId} was not found
+            Post not found
           </h3>
         </div>
       );

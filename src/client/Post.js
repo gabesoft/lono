@@ -18,7 +18,7 @@ import {
   MenuItem
 } from 'rmwc';
 
-import type { UserPost } from 'client/types/Post';
+import type { UserPost } from 'types/Post';
 
 type Props = {
   userPost: UserPost,

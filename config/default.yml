@@ -3,8 +3,7 @@ port: 3000
 google:
   clientId: 966662239339-nco06tr9j08nfq9krrsmj6jfdlop5185.apps.googleusercontent.com
 redis:
-  host: 127.0.0.1
-  port: 6379
+  url: redis://127.0.0.1:6379 # TLS socket connection if the redis server is on the same box
 user:
   ttl: 86400 # seconds (24 hours)
 api:
