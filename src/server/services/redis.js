@@ -4,7 +4,7 @@ import util from 'util';
 
 const redisUrl = config.get('redis.url');
 
-export default class RedisService {
+class RedisService {
   client: Object
   redisGet: Function
   redisSet: Function
@@ -31,3 +31,5 @@ export default class RedisService {
     }
   }
 }
+
+export default new RedisService;
