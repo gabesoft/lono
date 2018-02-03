@@ -47,9 +47,19 @@ export default () => {
       body
     };
 
-    const user = await request(opts);
-    await redis.setVal(auth.email, user, userttl);
-    return user;
+    try {
+      const user = await request(opts);
+      await redis.setVal(auth.email, user, userttl);
+      return user;
+    } catch (err) {
+      const errorPat = /email_unique/
+
+      if (errorPat.test(err.message)) {
+        return await getAndCache(auth.email);
+      }
+
+      throw err;
+    }
   };
 
   return async (ctx: Context, next: () => Promise<void>) => {
