@@ -11,9 +11,9 @@ import {
 import InfiniteScroll from 'react-infinite-scroller';
 
 import BaseComponent from 'client/BaseComponent';
-import Post from 'client/Post';
-import { fetchMorePosts } from 'client/actions/posts';
+import PostItem from 'client/PostItem';
 import getIcon from 'client/services/icon';
+import { fetchMorePosts } from 'client/actions/posts';
 
 import type { ReduxState } from 'types/ReduxState';
 import type { UserPost } from 'types/Post';
@@ -24,10 +24,6 @@ type Props = {
   posts: Array<UserPost>,
   hasMore: boolean,
   loadMorePosts: (page: number) => void
-};
-
-type State = {
-
 };
 
 const mapDispatchToProps = (dispatch: Function) => {
@@ -45,14 +41,14 @@ const mapStateToProps = (state: ReduxState) => {
   };
 };
 
-class PostList extends BaseComponent<Props, State> {
+class PostList extends BaseComponent<Props, {}> {
   renderPosts() {
     const { posts } = this.props;
 
     return posts.map((userPost, i) => {
       return (
         <GridCell key={i} className="post-list__post" phone="4" tablet="4" desktop="3">
-          <Post
+          <PostItem
             userPost={userPost}
             onOpenClick={() => undefined}
             onEditTagsClick={() => undefined}

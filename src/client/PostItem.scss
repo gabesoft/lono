@@ -4,7 +4,7 @@
 @import './icons';
 @import './typography';
 
-.post {
+.post-item {
   @include layout-v;
   @include border-normal;
 
@@ -23,38 +23,38 @@
   }
 }
 
-.post_elevated {
+.post-item_elevated {
   border: 0;
   margin: $border-width;
 }
 
-.post__header,
-.post__footer {
+.post-item__menu-item {
+  @include space-h;
+
+  a {
+    @include layout-h;
+    @include space-h;
+  }
+}
+
+.post-item__header,
+.post-item__footer {
   @include layout-h;
   @include padding-small;
 
   flex: 0 0 auto;
 }
 
-.post__header {
-  @include space-h($space-h);
+.post-item__header {
+  @include space-h;
   @include theme-color($background: secondary);
 }
 
-.post__menu-item {
-  @include space-h($space-h);
-
-  a {
-    @include layout-h;
-    @include space-h($space-h);
-  }
-}
-
-.post__footer {
+.post-item__footer {
   @include typography('caption');
 }
 
-.post__content {
+.post-item__content {
   @include space-v($space-v);
   @include padding-small;
 
@@ -65,35 +65,35 @@
   text-decoration: none;
 }
 
-.post__feed-info {
+.post-item__feed-info {
   @include typography('subheading2');
   @include layout-h;
 }
 
-.post__avatar,
-.post__actions {
+.post-item__avatar,
+.post-item__actions {
   flex: 0 0 auto;
 }
 
-.post__feed-title {
+.post-item__feed-title {
   @include typography('subheading2');
   @include ellipsis-h;
 
   flex: 1 1 auto;
 }
 
-.post__title {
+.post-item__title {
   @include typography('header5');
   @include ellipsis-v($line-count: 3);
 }
 
-.post__summary {
+.post-item__summary {
   @include typography('body1');
   @include ellipsis-v($line-count: 3);
   @include theme-color($foreground: secondary);
 }
 
-.post__status {
+.post-item__status {
   color: $unread-color;
   flex: 0 0 auto;
 }

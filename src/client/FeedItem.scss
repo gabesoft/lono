@@ -1,0 +1,101 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import './icons';
+@import './typography';
+
+.feed-item {
+  @include layout-v;
+  @include border-normal;
+
+  border-radius: $border-radius;
+
+  > * {
+    width: 100%;
+  }
+
+  a {
+    color: currentColor;
+
+    &:hover {
+      background-color: $background-color;
+    }
+  }
+}
+
+.feed-item_elevated {
+  border: 0;
+  margin: $border-width;
+}
+
+.feed-item__actions_menu-item {
+  @include space-h;
+
+  a {
+    @include layout-h;
+    @include space-h;
+  }
+}
+
+.feed-item__header,
+.feed-item__footer {
+  @include layout-h;
+  @include padding-small;
+
+  flex: 0 0 auto;
+}
+
+.feed-item__header {
+  @include space-h;
+  @include ellipsis-h;
+}
+
+.feed-item__title {
+  @include typography('headline');
+  @include ellipsis-h;
+
+  flex: 1 1 auto;
+}
+
+.feed-item__actions {
+  flex: 0 0 auto;
+}
+
+.feed-item__footer {
+  @include typography('caption');
+  @include theme-color($background: secondary);
+}
+
+.feed-item__content {
+  @include space-v;
+  @include padding-small;
+
+  color: currentColor;
+  display: block;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.feed-item__author {
+  @include typography('subheading2');
+  @include ellipsis-h;
+
+  flex: 1 1 auto;
+}
+
+.feed-item__description {
+  @include typography('body1');
+  @include ellipsis-v($line-count: 2);
+  @include theme-color($foreground: secondary);
+}
+
+.feed-item__post-counts {
+  @include bullet-h;
+
+  flex: 0 0 auto;
+}
+
+.feed-item__unread-count {
+  color: $unread-color;
+}

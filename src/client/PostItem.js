@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import getIcon from 'client/services/icon';
 import pageService from 'client/services/page';
+import util from 'client/services/util';
 
-import Avatar from 'client/Avatar';
 import AuthorDate from 'client/AuthorDate';
+import Avatar from 'client/Avatar';
 import Elevated from 'client/Elevated';
 
 import {
@@ -40,7 +41,7 @@ export default class Post extends React.Component<Props, State> {
   renderTagsMenuItem() {
     return (
       <MenuItem
-        className="post__menu-item"
+        className="post-item__menu-item"
         onClick={this.props.onEditTagsClick}>
         {getIcon('tag')}
         <span>Edit tags</span>
@@ -51,7 +52,7 @@ export default class Post extends React.Component<Props, State> {
   renderOpenMenuItem() {
     return (
       <MenuItem
-        className="post__menu-item"
+        className="post-item__menu-item"
         onClick={() => this.setState({ actionsOpen: false })}
       >
         <a href={this.props.userPost.post.link} target="_blank">
@@ -71,19 +72,17 @@ export default class Post extends React.Component<Props, State> {
     const userPost = this.props.userPost;
     const post = userPost.post;
     const isNew = !userPost.read;
-    const parser = (new DOMParser).parseFromString(userPost.post.summary || '', 'text/html');
-    const summaryText = parser.documentElement && parser.documentElement.textContent;
-    const summary = (!summaryText || summaryText == 'null') ? '' : summaryText;
+    const summary = util.extractText(userPost.post.summary);
 
     return (
       <Elevated
-        className={this.getClass('post', 'post_new')}
-        elevatedClassName="post_elevated"
+        className={this.getClass('post-item', 'post-item_new')}
+        elevatedClassName="post-item_elevated"
       >
-        <div className={this.getClass('post__header', 'post__header_new')}>
-          <Avatar className="post__avatar" text={userPost.title} />
-          <span className="post__feed-title">{userPost.title}</span>
-          <div className="post__actions">
+        <div className={this.getClass('post-item__header', 'post-item__header_new')}>
+          <Avatar className="post-item__avatar" text={userPost.title} />
+          <span className="post-item__feed-title">{userPost.title}</span>
+          <div className="post-item__actions">
             <MenuAnchor>
               <Button onClick={() => this.setState({ actionsOpen: true })}>
                 {getIcon('dots-vertical')}
@@ -100,22 +99,22 @@ export default class Post extends React.Component<Props, State> {
           </div>
         </div>
 
-        <Link to={pageService.postPath(userPost._id)} className="post__content">
-          <div className="post__title">
+        <Link to={pageService.postPath(userPost._id)} className="post-item__content">
+          <div className="post-item__title">
             {post.title}
           </div>
-          <div className="post__summary">
+          <div className="post-item__summary">
             {summary}
           </div>
         </Link>
 
-        <div className="post__footer">
+        <div className="post-item__footer">
           <AuthorDate
-            className="post__author-date"
+            className="post-item__author-date"
             date={post.date}
             author={post.author}
           />
-          <div className="post__status">
+          <div className="post-item__status">
             {isNew ? 'new' : null}
           </div>
         </div>

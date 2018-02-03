@@ -1,0 +1,17 @@
+@import './variables';
+@import './colors';
+@import './mixins';
+@import './icons';
+@import './typography';
+
+.feed-list {
+  background-color: $background-color;
+}
+
+.feed-list__feed {
+  height: 152px;
+
+  > * {
+    height: 100%;
+  }
+}
