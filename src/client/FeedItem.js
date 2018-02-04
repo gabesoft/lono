@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import Avatar from 'client/Avatar';
 import Elevated from 'client/Elevated';
 import Optional from 'client/Optional';
 import getIcon from 'client/services/icon';
@@ -113,7 +112,7 @@ export default class FeedItem extends React.Component<Props, State> {
     const { feed, subscription } = this.props;
     const title = subscription && subscription.title || feed.title;
     const unreadCount = subscription && subscription.unreadCount;
-    const description = util.extractText(feed.description);
+    const description = util.extractText(feed.description || '');
 
     return (
       <Elevated className="feed-item" elevatedClassName="feed-item_elevated">

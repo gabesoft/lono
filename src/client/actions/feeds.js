@@ -50,7 +50,7 @@ const shouldFetchSubscriptions = (state: ReduxState) => {
   return shouldFetchItems(items, isFetching, didInvalidate);
 };
 
-const fetchFeeds = () => apiGet('feeds', requestFeeds, receiveFeeds);
+const fetchFeeds = () => apiGet('feeds?sort=-lastPostDate', requestFeeds, receiveFeeds);
 const fetchSubscriptions = () => apiGet('subscriptions', requestSubscriptions, receiveSubscriptions);
 
 export const maybeFetchFeeds = () => fetchItemsIfNeeded(shouldFetchFeeds, fetchFeeds);

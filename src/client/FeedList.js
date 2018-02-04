@@ -8,6 +8,8 @@ import {
   GridCell
 } from 'rmwc';
 
+import InfiniteScroll from 'react-infinite-scroller';
+
 import BaseComponent from 'client/BaseComponent';
 import FeedItem from 'client/FeedItem';
 
@@ -17,7 +19,9 @@ import type { ReduxState } from 'types/ReduxState';
 type Props = {
   isFetching: boolean,
   feeds: Array<Feed>,
-  subscriptions: Array<Subscription>
+  subscriptions: Array<Subscription>,
+  hasMore: boolean,
+  loadMoreFeeds: (page: number) => void
 };
 
 const mapDispatchToProps = (dispatch: Function) => {

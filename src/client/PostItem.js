@@ -72,7 +72,7 @@ export default class Post extends React.Component<Props, State> {
     const userPost = this.props.userPost;
     const post = userPost.post;
     const isNew = !userPost.read;
-    const summary = util.extractText(userPost.post.summary);
+    const summary = util.extractText(userPost.post.summary || '');
 
     return (
       <Elevated
