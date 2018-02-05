@@ -73,6 +73,6 @@ export const maybeFetchSubscriptions = () => fetchItemsIfNeeded(shouldFetchSubsc
 
 export const fetchMoreFeeds = (page: number) => {
   const receive = (json: Array<Feed>, hasMore: boolean) => receiveMoreFeeds(json, page, hasMore);
-  return apiGet(`posts?sort=-lastPostDate&per_page=20&page=${page}`, requestMoreFeeds, receive);
+  return apiGet(`feeds?sort=-lastPostDate&per_page=20&page=${page}`, requestMoreFeeds, receive);
 };
 
