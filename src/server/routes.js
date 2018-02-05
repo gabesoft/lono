@@ -19,16 +19,6 @@ const addUserIfNeeded = (path: string, query: Object, userId: string): Object =>
 };
 
 export default (router: Router) => {
-  router.get('/api/:path', async (ctx: Context) => {
-    const path = ctx.params.path;
-    const user = ctx.state.user;
-    const query = addUserIfNeeded(path, ctx.query, user && user._id);
-    const { body, headers } = await api.get(`/${path}`, query);
-
-    Object.keys(headers).forEach(key => ctx.set(key, headers[key]));
-    ctx.body = body;
-  });
-
   // TODO: remove
   router.get('/api/posts', (ctx: Context) => {
     const pageSize = 30;
@@ -41,5 +31,15 @@ export default (router: Router) => {
     } else {
       ctx.body = [];
     }
+  });
+
+  router.get('/api/:path', async (ctx: Context) => {
+    const path = ctx.params.path;
+    const user = ctx.state.user;
+    const query = addUserIfNeeded(path, ctx.query, user && user._id);
+    const { body, headers } = await api.get(`/${path}`, query);
+
+    Object.keys(headers).forEach(key => ctx.set(key, headers[key]));
+    ctx.body = body;
   });
 };
