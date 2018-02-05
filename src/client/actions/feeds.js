@@ -65,7 +65,7 @@ export const receiveMoreFeeds = (json: Array<Feed>, page: number, hasMore: boole
   };
 };
 
-const fetchFeeds = () => apiGet('feeds?sort=-lastPostDate', requestFeeds, receiveFeeds);
+const fetchFeeds = () => apiGet('feeds?sort=-lastPostDate&per_page=30', requestFeeds, receiveFeeds);
 const fetchSubscriptions = () => apiGet('subscriptions?per_page=9999', requestSubscriptions, receiveSubscriptions);
 
 export const maybeFetchFeeds = () => fetchItemsIfNeeded(shouldFetchFeeds, fetchFeeds);
@@ -73,6 +73,6 @@ export const maybeFetchSubscriptions = () => fetchItemsIfNeeded(shouldFetchSubsc
 
 export const fetchMoreFeeds = (page: number) => {
   const receive = (json: Array<Feed>, hasMore: boolean) => receiveMoreFeeds(json, page, hasMore);
-  return apiGet(`feeds?sort=-lastPostDate&per_page=20&page=${page}`, requestMoreFeeds, receive);
+  return apiGet(`feeds?sort=-lastPostDate&per_page=30&page=${page}`, requestMoreFeeds, receive);
 };
 
