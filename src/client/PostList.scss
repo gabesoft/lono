@@ -15,15 +15,3 @@
     height: 100%;
   }
 }
-
-.post-list__more-loader {
-  @include typography('title');
-  @include layout-h($justify-content: flex-start);
-  @include space-h;
-
-  padding: 24px;
-}
-
-.post-list__more-loader_hidden {
-  display: none;
-}

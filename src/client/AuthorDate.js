@@ -15,6 +15,22 @@ type State = {
 };
 
 export default class AuthorDate extends React.Component<Props, State> {
+  renderDate() {
+    if (this.props.date) {
+      return (
+        <span className="author-date__date">
+          {moment(this.props.date).fromNow()}
+        </span>
+      );
+    }
+
+    return (
+      <span className="author-date__date">
+        a while ago
+      </span>
+    );
+  }
+
   render() {
     const className = `${this.props.className || ''} author-date`;
 
@@ -25,11 +41,7 @@ export default class AuthorDate extends React.Component<Props, State> {
             {this.props.author}
           </span>
         </Optional>
-        <Optional canRender={!!this.props.date}>
-          <span className="author-date__date">
-            {moment(this.props.date).fromNow()}
-          </span>
-        </Optional>
+        {this.renderDate()}
       </div>
     )
   }

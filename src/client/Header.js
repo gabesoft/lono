@@ -149,7 +149,7 @@ class Header extends BaseComponent<UiProps, UiState> {
   renderLeft() {
     return (
       <div className="header__left">
-        <img className="logo" alt="logo" src="https://via.placeholder.com/128x128"/>
+        <img className="logo" alt="logo" src="lono-dragon-transparent.png"/>
       </div>
     );
   }

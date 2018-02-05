@@ -33,7 +33,8 @@ const post = (state: PostsState = initialState, action: PostsAction) => {
         lastUpdate: action.receivedAt
       });
     }
-    case 'REQUEST_POSTS': {
+    case 'REQUEST_POSTS':
+    case 'REQUEST_MORE_POSTS': {
       return Object.assign({}, state, {
         isFetching: true,
         didInvalidate: false

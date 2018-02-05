@@ -38,10 +38,11 @@ export const apiGet = (path: string, request: Function, receive: Function, retry
     dispatch(request());
 
     const response = await fetch(url, options);
+    const hasMore = response.headers.get('X-Page') !== response.headers.get('X-Page-Count');
 
     if (response.ok) {
       const json = await response.json();
-      dispatch(receive(json));
+      dispatch(receive(json, hasMore));
     } else if (response.status === 401 && idToken && retryCount < MAX_RETRY) {
       dispatch(refreshAuth());
       dispatch(apiGet(path, request, receive, retryCount + 1));

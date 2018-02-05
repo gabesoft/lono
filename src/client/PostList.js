@@ -11,8 +11,8 @@ import {
 import InfiniteScroll from 'react-infinite-scroller';
 
 import BaseComponent from 'client/BaseComponent';
+import MoreLoader from 'client/MoreLoader';
 import PostItem from 'client/PostItem';
-import getIcon from 'client/services/icon';
 import { fetchMorePosts } from 'client/actions/posts';
 
 import type { ReduxState } from 'types/ReduxState';
@@ -59,15 +59,11 @@ class PostList extends BaseComponent<Props, {}> {
   }
 
   renderLoadMore() {
-    const hasPosts = this.props.posts.length > 0;
-    const hasMore = this.props.hasMore;
-    const className = `post-list__more-loader ${hasPosts && hasMore ? '' : 'post-list__more-loader_hidden'}`;
-
     return (
-      <div key="load-more" className={className}>
-        {getIcon('download')}
-        <span>Loading...</span>
-      </div>
+      <MoreLoader
+        key="load-more"
+        hasMore={!!(this.props.hasMore && this.props.posts.length)}
+      />
     );
   }
 

@@ -32,6 +32,11 @@
 .headroom--scrolled {
   padding: 0 $body-padding;
   transition: transform 400ms ease-in-out;
+
+  .logo {
+    height: $logo-size-small;
+    width: $logo-size-small;
+  }
 }
 
 .mdc-simple-menu ,

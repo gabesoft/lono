@@ -4,6 +4,8 @@ import type { FeedsState, SubscriptionsState } from 'types/FeedsState';
 const initialFeedsState: FeedsState = {
   isFetching: false,
   didInvalidate: false,
+  hasMore: false,
+  page: 1,
   items: []
 };
 
@@ -21,10 +23,23 @@ export const feeds = (state: FeedsState = initialFeedsState, action: FeedsAction
         isFetching: false,
         didInvalidate: false,
         items: feeds,
+        hasMore: action.hasMore,
         lastUpdate: action.receivedAt
       });
     }
-    case 'REQUEST_FEEDS': {
+    case 'RECEIVE_MORE_FEEDS': {
+      const feeds = action.feeds || [];
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        hasMore: action.hasMore,
+        items: state.items.concat(feeds),
+        page: action.page,
+        lastUpdate: action.receivedAt
+      });
+    }
+    case 'REQUEST_FEEDS':
+    case 'REQUEST_MORE_FEEDS': {
       return Object.assign({}, state, {
         isFetching: true,
         didInvalidate: false

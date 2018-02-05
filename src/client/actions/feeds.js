@@ -20,15 +20,20 @@ export const requestFeeds = () => {
   return { type: 'REQUEST_FEEDS' };
 };
 
+export const requestMoreFeeds = () => {
+  return { type: 'REQUEST_MORE_FEEDS' };
+};
+
 export const requestSubscriptions = () => {
   return { type: 'REQUEST_SUBSCRIPTIONS' };
 };
 
-export const receiveFeeds = (json: Array<Feed>) => {
+export const receiveFeeds = (json: Array<Feed>, hasMore: boolean) => {
   return {
     type: 'RECEIVE_FEEDS',
     feeds: json,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
+    hasMore
   };
 };
 
@@ -50,10 +55,24 @@ const shouldFetchSubscriptions = (state: ReduxState) => {
   return shouldFetchItems(items, isFetching, didInvalidate);
 };
 
+export const receiveMoreFeeds = (json: Array<Feed>, page: number, hasMore: boolean) => {
+  return {
+    type: 'RECEIVE_MORE_FEEDS',
+    feeds: json,
+    receivedAt: Date.now(),
+    hasMore,
+    page
+  };
+};
+
 const fetchFeeds = () => apiGet('feeds?sort=-lastPostDate', requestFeeds, receiveFeeds);
-const fetchSubscriptions = () => apiGet('subscriptions', requestSubscriptions, receiveSubscriptions);
+const fetchSubscriptions = () => apiGet('subscriptions?per_page=9999', requestSubscriptions, receiveSubscriptions);
 
 export const maybeFetchFeeds = () => fetchItemsIfNeeded(shouldFetchFeeds, fetchFeeds);
 export const maybeFetchSubscriptions = () => fetchItemsIfNeeded(shouldFetchSubscriptions, fetchSubscriptions);
 
+export const fetchMoreFeeds = (page: number) => {
+  const receive = (json: Array<Feed>, hasMore: boolean) => receiveMoreFeeds(json, page, hasMore);
+  return apiGet(`posts?sort=-lastPostDate&per_page=20&page=${page}`, requestMoreFeeds, receive);
+};
 

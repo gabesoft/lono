@@ -62,22 +62,22 @@
   overflow: hidden;
 }
 
-@mixin layout($dir, $inline: false, $justify-content: space-between) {
+@mixin layout($dir, $inline: false, $justify-content: space-between, $align-items: center) {
   @if $inline == true {
     display: inline-flex;
   } @else {
     display: flex;
   }
 
-  align-items: center;
+  align-items: $align-items;
   flex-direction: $dir;
   justify-content: $justify-content;
 }
 
-@mixin layout-h($inline: false, $justify-content: space-between) {
+@mixin layout-h($inline: false, $justify-content: space-between, $align-items: center) {
   @include layout(row, $inline, $justify-content);
 }
 
-@mixin layout-v($inline: false, $justify-content: space-between) {
+@mixin layout-v($inline: false, $justify-content: space-between, $align-items: center) {
   @include layout(column, $inline, $justify-content);
 }

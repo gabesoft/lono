@@ -1,0 +1,11 @@
+@import './variables';
+@import './typography';
+@import './mixins';
+
+.more-loader {
+  @include typography('title');
+  @include layout-h($justify-content: flex-start);
+  @include space-h;
+
+  padding: 24px;
+}

@@ -3,7 +3,16 @@ import type { Feed, Subscription } from 'types/Feed';
 type ReceiveFeeds = {
   type: 'RECEIVE_FEEDS',
   feeds: Array<Feed>,
-  receivedAt: Date
+  receivedAt: Date,
+  hasMore: boolean
+};
+
+type ReceiveMoreFeeds = {
+  type: 'RECEIVE_MORE_FEEDS',
+  feeds: Array<Feed>,
+  receivedAt: Date,
+  hasMore: boolean,
+  page: number
 };
 
 type ReceiveSubscriptions = {
@@ -14,6 +23,10 @@ type ReceiveSubscriptions = {
 
 type RequestFeeds = {
   type: 'REQUEST_FEEDS'
+};
+
+type RequestMoreFeeds = {
+  type: 'REQUEST_MORE_FEEDS'
 };
 
 type RequestSubscriptions = {
@@ -30,7 +43,9 @@ type InvalidateSubscriptions = {
 
 export type FeedsAction =
   | ReceiveFeeds
+  | ReceiveMoreFeeds
   | RequestFeeds
+  | RequestMoreFeeds
   | InvalidateFeeds;
 
 export type SubscriptionsAction =
